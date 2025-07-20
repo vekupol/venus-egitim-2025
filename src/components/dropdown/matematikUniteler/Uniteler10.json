@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "title": "Sayma ve Olasılık",
+      "url": "/matematik/10-sinif/sayma-ve-olasilik"
+    },
+    {
+      "id": 2,
+      "title": "Fonksiyonlar",
+      "url": "/matematik/10-sinif/fonksiyonlar"
+    },
+    {
+      "id": 3,
+      "title": "Polinomlar",
+      "url": "/matematik/10-sinif/polinomlar"
+    },
+    {
+      "id": 4,
+      "title": "İkinci Dereceden Denklemler",
+      "url": "/matematik/10-sinif/ikinci-dereceden-denklemler"
+    },
+    {
+      "id": 5,
+      "title": "Dörtgenler ve Çokgenler",
+      "url": "/matematik/10-sinif/dortgenler-ve-cokgenler"
+    },
+    {
+      "id": 6,
+      "title": "Uzay Geometri",
+      "url": "/matematik/10-sinif/uzay-geometri"
+    }
+  ]
+  

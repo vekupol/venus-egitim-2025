@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="176"
+   height="60"
+   viewBox="0 0 46.566666 15.875"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="websitesName.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="3.6275533"
+     inkscape:cx="102.68629"
+     inkscape:cy="48.104048"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="10.199712"
+       y="12.680723"
+       width="67.262967"
+       height="26.739786"
+       id="rect1" />
+    <rect
+       x="10.199712"
+       y="12.680723"
+       width="67.26297"
+       height="26.739786"
+       id="rect1-1" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="matrix(1.1821247,0,0,1.0159167,-1.9282601,-13.320041)"
+       id="text1"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12px;font-family:'League Spartan';-inkscape-font-specification:'League Spartan, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#000000"><tspan
+         x="10.199219"
+         y="23.312075"
+         id="tspan3">venüs</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.47351424,0,0,0.27502033,25.256679,7.6844746)"
+       id="text1-9"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'League Spartan';-inkscape-font-specification:'League Spartan, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect1-1);display:inline;fill:#000000"><tspan
+         x="10.199219"
+         y="23.312075"
+         id="tspan4">eğitim</tspan></text>
+  </g>
+</svg>

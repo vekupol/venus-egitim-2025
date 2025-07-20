@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Üstel ve Logaritmik Fonksiyonlar",
+    "url": "/matematik/12-sinif/ustel-ve-logaritmik-fonksiyonlar"
+  },
+  {
+    "id": 2,
+    "title": "Diziler",
+    "url": "/matematik/12-sinif/diziler"
+  },
+  {
+    "id": 3,
+    "title": "Trigonometri-II",
+    "url": "/matematik/12-sinif/trigonometri-2"
+  },
+  {
+    "id": 4,
+    "title": "Dönüşümler",
+    "url": "/matematik/12-sinif/donusumler"
+  },
+  {
+    "id": 5,
+    "title": "Limit",
+    "url": "/matematik/12-sinif/limit"
+  },
+  {
+    "id": 6,
+    "title": "Türev",
+    "url": "/matematik/12-sinif/turev"
+  },
+  {
+    "id": 7,
+    "title": "İntegral",
+    "url": "/matematik/12-sinif/integral"
+  },
+  {
+    "id": 8,
+    "title": "Analitik Geometri",
+    "url": "/matematik/12-sinif/analitik-geometri"
+  }
+]

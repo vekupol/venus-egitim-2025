@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Mantık",
+    "url": "/matematik/9-sinif/mantik"
+  },
+  {
+    "id": 2,
+    "title": "Kümeler",
+    "url": "/matematik/9-sinif/kumeler"
+  },
+  {
+    "id": 3,
+    "title": "Denklemler ve Eşitsizlikler",
+    "url": "/matematik/9-sinif/denklemler-ve-esitsizlikler"
+  },
+  {
+    "id": 4,
+    "title": "Üçgenler",
+    "url": "/matematik/9-sinif/ucgenler"
+  },
+  {
+    "id": 5,
+    "title": "Veri",
+    "url": "/matematik/9-sinif/veri"
+  }
+]

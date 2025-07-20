@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.23 131.36">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-3, .cls-4 {
+        fill: #231f20;
+      }
+
+      .cls-4 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 5.93px;
+      }
+
+      .cls-2 {
+        stroke-width: .25px;
+      }
+    </style>
+  </defs>
+  <g>
+    <line class="cls-1" x1="6.53" y1="120.7" x2="123.7" y2="120.7"/>
+    <polygon class="cls-3" points="127.23 120.7 122.25 122.74 123.43 120.7 122.25 118.67 127.23 120.7"/>
+  </g>
+  <line class="cls-2" x1="22.58" y1="116.93" x2="22.58" y2="124.3"/>
+  <line class="cls-2" x1="38.63" y1="116.93" x2="38.63" y2="124.3"/>
+  <line class="cls-2" x1="54.68" y1="116.93" x2="54.68" y2="124.3"/>
+  <line class="cls-2" x1="70.73" y1="116.93" x2="70.73" y2="124.3"/>
+  <line class="cls-2" x1="86.78" y1="116.93" x2="86.78" y2="124.3"/>
+  <line class="cls-2" x1="102.59" y1="117.02" x2="102.59" y2="124.39"/>
+  <line class="cls-2" x1="118.95" y1="117.02" x2="118.95" y2="124.39"/>
+  <g>
+    <path class="cls-1" d="M6.57,3.53v117.17c15.05-2.87,34.46-9.27,52.55-23.62,26.15-20.75,36.57-47.83,42.25-62.58,4.2-10.92,6.57-20.39,7.94-27"/>
+    <polygon class="cls-3" points="6.57 0 4.54 4.97 6.57 3.79 8.6 4.97 6.57 0"/>
+  </g>
+  <line class="cls-2" x1="4.48" y1="104.65" x2="8.48" y2="104.65"/>
+  <line class="cls-2" x1="4.48" y1="88.6" x2="8.48" y2="88.6"/>
+  <line class="cls-2" x1="4.48" y1="72.55" x2="8.48" y2="72.55"/>
+  <line class="cls-2" x1="4.48" y1="56.5" x2="8.48" y2="56.5"/>
+  <line class="cls-2" x1="4.48" y1="40.45" x2="8.48" y2="40.45"/>
+  <line class="cls-2" x1="4.57" y1="24.64" x2="8.57" y2="24.64"/>
+  <line class="cls-2" x1="4.57" y1="8.28" x2="8.57" y2="8.28"/>
+  <text class="cls-4" transform="translate(0 41.97) scale(1.08 1)"><tspan x="0" y="0">5</tspan></text>
+  <text class="cls-4" transform="translate(.27 25.78) scale(1.08 1)"><tspan x="0" y="0">6</tspan></text>
+  <text class="cls-4" transform="translate(.54 9.7) scale(1.08 1)"><tspan x="0" y="0">7</tspan></text>
+  <text class="cls-4" transform="translate(0 90.71) scale(1.08 1)"><tspan x="0" y="0">2</tspan></text>
+  <text class="cls-4" transform="translate(37.59 129.87) scale(1.08 1)"><tspan x="0" y="0">2</tspan></text>
+  <text class="cls-4" transform="translate(0 106.76) scale(1.08 1)"><tspan x="0" y="0">1</tspan></text>
+  <text class="cls-4" transform="translate(20.75 129.87) scale(1.08 1)"><tspan x="0" y="0">1</tspan></text>
+  <text class="cls-4" transform="translate(69.35 129.87) scale(1.08 1)"><tspan x="0" y="0">4</tspan></text>
+  <text class="cls-4" transform="translate(52.51 129.87) scale(1.08 1)"><tspan x="0" y="0">3</tspan></text>
+  <text class="cls-4" transform="translate(102.03 129.87) scale(1.08 1)"><tspan x="0" y="0">6</tspan></text>
+  <text class="cls-4" transform="translate(85.19 129.87) scale(1.08 1)"><tspan x="0" y="0">5</tspan></text>
+  <text class="cls-4" transform="translate(116.95 129.87) scale(1.08 1)"><tspan x="0" y="0">7</tspan></text>
+  <text class="cls-4" transform="translate(.8 123.11) scale(1.08 1)"><tspan x="0" y="0">0</tspan></text>
+  <text class="cls-4" transform="translate(.27 74.52) scale(1.08 1)"><tspan x="0" y="0">3</tspan></text>
+  <text class="cls-4" transform="translate(.54 58.44) scale(1.08 1)"><tspan x="0" y="0">4</tspan></text>
+</svg>

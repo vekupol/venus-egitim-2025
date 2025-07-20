@@ -1,0 +1,587 @@
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import {getDocs, doc, query , collection, where, getDoc,updateDoc, arrayUnion} from 'firebase/firestore';
+import { db, auth } from '../../../firebase';
+import { useNavigate } from 'react-router-dom';
+
+function DrawerSiniflarim() {
+
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+
+  useEffect(() => {
+    // Mevcut kullanıcının uid'sini al
+    const currentUser = auth.currentUser;
+    console.log(currentUser)
+    const currentUserUid = currentUser ? currentUser.uid : null;
+
+    if (currentUserUid) {
+      // Firestore sorgusu oluştur
+      const q = query(collection(db, 'teachers'), where('uid', '==', currentUserUid));
+
+      // Belgeyi al
+      const getUserData = async () => {
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          // İlgili belgeyi alın ve state'e kaydedin
+          setUser(doc.data());
+        });
+      };
+      
+      getUserData();
+    }
+  }, []); // user veya başka bir bağımlılık burada olabilir
+
+  const handleAddClass = async (event) => {
+    event.preventDefault();
+  
+    const form = event.target;
+    const formData = new FormData(form);
+    const className = formData.get('className');
+  
+    const currentUser = auth.currentUser;
+    const currentUserUid = currentUser ? currentUser.uid : null;
+  
+    if (currentUserUid) {
+      const userRef = doc(db, 'teachers', currentUserUid);
+      const userSnap = await getDoc(userRef);
+  
+      if (userSnap.exists()) {
+        try {
+          await updateDoc(userRef, {
+            classes: arrayUnion({
+              className: className,
+              img: '',
+              students: [],
+              homeworks: [],
+            }),
+          });
+  
+          // Sınıf başarıyla eklendi, kullanıcı verisini güncelle
+          const updatedUserRef = await getDoc(userRef);
+          if (updatedUserRef.exists()) {
+            setUser(updatedUserRef.data());
+          }
+        } catch (error) {
+          console.error('Sınıf ekleme hatası:', error);
+        }
+      }
+    }
+  };
+  
+  const handleGoToClass = (className) => {
+  // Seçilen sınıfın adını al ve ClassEdit bileşenine yönlendirme yap
+  navigate(`/ogretmenpaneli/sinifduzenle/${className}`); // useNavigate kullanımı
+}
+  
+
+
+
+    return (
+        <Container>
+            <Title>
+                <Text>Sınıflarım</Text>
+                <form onSubmit={handleAddClass}>
+                    <Input type="text" name="className" placeholder="Sınıfınızın adını giriniz" />
+                    <Button type="submit">Sınıf Ekle +</Button>
+                </form>               
+            </Title>             
+            <Main> 
+                    {user && user.classes && (
+                    <ClassContainer>
+                        <ul>
+                            {user.classes.map((classItem, index) => (
+                                <ClassDiv key={index}>
+                                    <div>
+                                        <Image>Avatar &nbsp; {classItem.img}</Image>
+                                        <Name>{classItem.className}</Name>
+                                    </div>                                    
+                                    <Button1 onClick={() => handleGoToClass(classItem.className)}>Sınıfa Git</Button1>                                                           
+                                    
+                                </ClassDiv>
+                            ))}
+                        </ul>
+                    </ClassContainer>
+                    )}
+            
+            </Main>      
+        </Container>
+)
+}
+
+const Container = styled.div`
+    height: 100%;    
+    
+`
+export const Title = styled.div`
+    
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+`
+
+export const Text = styled.p`
+    font-size: 1.8rem;
+    
+`
+const Input = styled.input`
+    background-color: white;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(15px,1vw,2rem);
+    cursor: pointer;    
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 10px 0px 0px 10px;
+    font-size: 1rem;
+    :focus{
+        ::placeholder{
+            color: white;
+        }
+        
+    }
+
+`
+const Button = styled.button`
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color);
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;    
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 0px 10px 10px 0px;
+    font-size: 1rem;
+    margin-right: 50px;
+
+    &:hover{
+      background-color: #efecf3;
+      color: var(--main-color);
+    }
+`
+
+ export const Main = styled.div`
+    width: 99%;
+    height: 450px;
+    margin-top: 15px;
+    border: 1px solid var(--main-color);
+    
+`
+const ClassContainer = styled.div`
+padding: 10px;
+ul{
+display: grid;
+grid-template-columns: repeat(2, 1fr); /* İki eşit sütun */
+grid-gap: 10px;
+}`
+
+const ClassDiv = styled.div`
+display: flex;
+border: 1px solid var(--main-color);
+padding: 10px;
+justify-content: space-between;
+align-items: center;
+div{
+    display: flex;
+    align-items: center;
+    
+}
+`
+
+const Image = styled.div`
+border: 1px solid var(--main-color);
+height: 60px;
+width: 60px;
+margin-right: 10px;`
+
+const Name = styled.div``
+
+const Button1 = styled.button`
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color);
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;    
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 10px;
+    font-size: .7rem;
+    margin-left: 50px;
+
+    &:hover{
+      background-color: #efecf3;
+      color: var(--main-color);
+    }
+`
+
+
+export default DrawerSiniflarim;
+
+
+
+
+import React,{useState, useEffect} from 'react'
+import Navbar from '../../componets/Navbar'
+import styled from 'styled-components'
+import { useParams, useNavigate } from 'react-router-dom';
+import { db, auth } from '../../firebase';
+import {getDocs, doc, query , collection, where, getDoc,updateDoc, arrayUnion} from 'firebase/firestore';
+
+
+
+
+function ClassEdit() {
+    const { className } = useParams();
+    const [user, setUser] = useState(null);
+    const [textClass, setTextClass] = useState('');
+    const paramClassName = className;
+  
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      // Mevcut kullanıcının uid'sini al
+      const currentUser = auth.currentUser;
+      console.log(currentUser)
+      const currentUserUid = currentUser ? currentUser.uid : null;
+  
+      if (currentUserUid) {
+        // Firestore sorgusu oluştur
+        const q = query(collection(db, 'teachers'), where('uid', '==', currentUserUid));
+  
+        // Belgeyi al
+        const getUserData = async () => {
+          const querySnapshot = await getDocs(q);
+          querySnapshot.forEach((doc) => {
+            // İlgili belgeyi alın ve state'e kaydedin
+            setUser(doc.data());
+          });
+        };
+        
+        getUserData();
+      }
+    }, []); // user veya başka bir bağımlılık burada olabilir
+  
+    const handleClassChange = async (event) => {
+      event.preventDefault();
+      
+      const currentUser = auth.currentUser;
+      const currentUserUid = currentUser ? currentUser.uid : null;
+      
+      if (currentUserUid) {
+        const userRef = doc(db, 'teachers', currentUserUid);
+        const userSnap = await getDoc(userRef);
+        
+        if (userSnap.exists()) {
+          try {
+            const updatedClasses = user.classes.map((classItem) => {
+              if (classItem.className === paramClassName) {
+                return { ...classItem, className: textClass };
+              }
+              return classItem;
+            });
+            
+            await updateDoc(userRef, { classes: updatedClasses });
+      
+            // Sınıf başarıyla güncellendi, kullanıcı verisini güncelle
+            const updatedUserRef = await getDoc(userRef);
+            if (updatedUserRef.exists()) {
+              setUser(updatedUserRef.data());
+            }
+    
+            // Yeni sınıf adına göre yönlendirme yap
+            navigate(`/ogretmenpaneli/sinifduzenle/${textClass}`);
+          } catch (error) {
+            console.error('Sınıf güncelleme hatası:', error);
+          }
+        }
+      }
+    };
+
+    const handleAddStudent = async (event) => {
+      event.preventDefault();
+      
+      const currentUser = auth.currentUser;
+      const currentUserUid = currentUser ? currentUser.uid : null;
+      
+      if (currentUserUid) {
+        const userRef = doc(db, 'teachers', currentUserUid);
+        const userSnap = await getDoc(userRef);
+        
+        if (userSnap.exists()) {
+          try {
+            const updatedClasses = user.classes.map((classItem) => {
+              if (classItem.className === paramClassName) {
+                return { ...classItem, 
+                  students: arrayUnion({
+                    name: className,
+                    img: '',
+                    students: [],
+                    homeworks: [],
+                  }),
+                };
+              }
+              return classItem;
+            });
+            
+            await updateDoc(userRef, { classes: updatedClasses });
+      
+            // Sınıf başarıyla güncellendi, kullanıcı verisini güncelle
+            const updatedUserRef = await getDoc(userRef);
+            if (updatedUserRef.exists()) {
+              setUser(updatedUserRef.data());
+            }
+    
+            // Yeni sınıf adına göre yönlendirme yap
+            navigate(`/ogretmenpaneli/sinifduzenle/${textClass}`);
+          } catch (error) {
+            console.error('Sınıf güncelleme hatası:', error);
+          }
+        }
+      }
+    };
+
+
+    
+    
+
+  
+
+    const data = [
+        { id: 1, name: 'Alice Karamolla', dueDate: "01.01.2024", deadline:  "01.01.2024", puan: 25 },
+        { id: 2, name: 'Bob Karadut', dueDate:  "01.01.2024", deadline:  "01.01.2024", puan: 55 },
+        { id: 3, name: 'Charlie Jack Sparrow', dueDate:  "01.01.2024", deadline:  "01.01.2024", puan: 30},
+        { id: 4, name: 'David Kurşun', dueDate:  "01.01.2024", deadline:  "01.01.2024", puan: 25 },
+      ];
+
+      const data1 = [
+        { id: 1, name: 'Alice', dueDate: "01.01.2024", deadline:  "01.01.2024", puan: 25 },
+        { id: 2, name: 'Bob', dueDate:  "01.01.2024", deadline:  "01.01.2024", puan: 55 },
+        { id: 3, name: 'Charlie', dueDate:  "01.01.2024", deadline:  "01.01.2024", puan: 30},
+        { id: 4, name: 'David ', dueDate:  "01.01.2024", deadline:  "01.01.2024", puan: 25 },
+      ];
+
+  return (
+    <ClassContainer>
+        <Navbar/>
+        <Name> {className} </Name>
+        <Container>            
+            <Students> 
+                <MyStudents>Öğrencilerim</MyStudents>
+                <Aciklama>Sınıfınıza öğrenci eklemek için <span>Öğrenci Ekle</span> butonuna tıklayın.</Aciklama>
+                <ButtonO>Öğrenci Ekle</ButtonO>
+                <Table>
+                    <thead>
+                        <TableRow>
+                            <TableHeader></TableHeader>
+                            <TableHeader>Adı</TableHeader>
+                            <TableHeader>Puanı</TableHeader>
+                            <TableHeader></TableHeader>
+                        </TableRow>
+                    </thead>
+                    <tbody>
+                        {data.map((row) => (
+                        <TableRow key={row.id}>
+                            <TableCell>{row.id}</TableCell>
+                            <TableCell>{row.name}</TableCell>                       
+                            <TableCell>{row.puan}</TableCell>
+                            <TableCell><ButtonO>Öğrenci Seç</ButtonO></TableCell>
+                        </TableRow>
+                        ))}
+                    </tbody>
+                </Table>
+                    
+            </Students>
+            <Homeworks>
+                <MyStudents>Ödevler</MyStudents>
+                <Aciklama>Sınıfın tamamına ödev vermek için <span>Ödev Ekle</span> butonuna tıklayın.   </Aciklama>
+                <ButtonO>Ödev Ekle</ButtonO>
+                <Aciklama>
+                Bireysel ödev vermek için ise öğrencinin yanındaki <span>Ödev Ver</span> butonuna tıklayın.
+                </Aciklama>
+                
+
+                <Table>
+                <thead>
+                    <TableRow>
+                        <TableHeader></TableHeader>
+                        <TableHeader>Ödev</TableHeader>
+                        <TableHeader>Veriliş Tarihi</TableHeader>
+                        <TableHeader>Bitiş Tarhi</TableHeader>
+                        <TableHeader>Puan</TableHeader>
+                        <TableHeader></TableHeader>
+                    </TableRow>
+                </thead>
+                <tbody>
+                    {data1.map((row) => (
+                    <TableRow key={row.id}>
+                        <TableCell>{row.id}</TableCell>
+                        <TableCell>{row.name}</TableCell>
+                        <TableCell>{row.dueDate}</TableCell>
+                        <TableCell>{row.deadline}</TableCell>
+                        <TableCell>{row.puan}</TableCell>
+                        <TableCell><ButtonO>Ödevi Seç</ButtonO></TableCell>
+
+                    </TableRow>
+                    ))}
+                </tbody>
+                </Table>
+                
+            </Homeworks>
+                      
+        </Container>
+
+        <form onSubmit={handleClassChange}>
+            <input type="text" placeholder={className} value={textClass} onChange={(e) => setTextClass(e.target.value)} />
+            <button type="submit">Search</button>
+        </form>
+                
+      
+    </ClassContainer>
+  )
+}
+
+
+const ClassContainer = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+justify-content: center;
+align-items: center;
+`
+
+const Container = styled.div`
+max-width: 1200px;
+border: 1px solid var(--main-color);
+margin: 20px 40px;
+padding: 20px 20px 100px;
+display: grid;
+grid-template-columns: repeat(2, 1fr); /* İki eşit sütun */
+grid-gap: 30px;
+border-radius: 10px;
+`
+
+const Name = styled.div`
+max-width: 1000px;
+width: 100%;
+margin-top: 20px;
+font-size: 2rem;
+text-align: center;
+font-weight: bold;
+text-decoration: underline;
+background-color: var(--main-color);
+color: white;
+border: 1px solid var(--main-color);
+padding: 20px;
+border-radius: 10px;`
+
+const MyStudents = styled.div`
+font-size: 1.5rem;
+text-align: center;
+font-weight: bold;
+border-radius: 0.5em solid var(--main-color);
+margin-bottom: 30px;`
+
+const Students = styled.div`
+display: flex;
+flex-direction: column;
+
+`
+
+const ButtonO = styled.button`
+  padding: 5px 10px;
+  width: 100%;
+  color: white;
+  background-color: var(--main-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* başlangıçta gölge */
+  font-size: 16px;
+
+  &:hover {
+    transform: translateY(-5px); /* yukarı doğru hafif kayma */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* büyütülmüş gölge */
+  }
+`
+
+
+
+const Homeworks = styled.div`
+display: flex;
+flex-direction: column;
+`
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0px;
+  border: 2px solid var(--main-color);
+  
+`;
+
+const TableRow = styled.tr`
+  &:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+`;
+
+const TableHeader = styled.th`
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  
+`;
+
+const TableCell = styled.td`
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+`;
+
+const Aciklama = styled.p`
+margin-bottom: 12px;
+::before{
+    content: "!";
+    color: var(--main-color);
+    margin-right: 6px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+span{
+    color: var(--main-color);
+    font-weight: bold;
+  
+}
+`
+
+const ButtonSil = styled.button`
+  width: 100%;
+  max-width: 1000px;
+  padding: 5px 10px;
+  color: white;
+  background-color: var(--delete-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* başlangıçta gölge */
+  font-size: 16px;
+
+  &:hover {
+    transform: translateY(-5px); /* yukarı doğru hafif kayma */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* büyütülmüş gölge */
+  }
+`
+
+export default ClassEdit

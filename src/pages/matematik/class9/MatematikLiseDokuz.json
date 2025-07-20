@@ -1,0 +1,292 @@
+{
+  "name": "matematikLiseDokuz",
+  "units": [
+    {
+      "comment": "Trigonometri",
+      "aboutUnit": "Öğrencilere temel olasılık kavramlarını ve olayların sayılmasını öğretir. Öğrenciler, farklı olayların olasılıklarını hesaplamayı ve olasılık problemlerini çözmeyi öğrenirler. Bu ünite, gerçek hayattaki olayların olasılığını tahmin etme becerisini geliştirir ve istatistiksel düşünme yeteneğini artırır.",
+      "dersSayisi": 40,
+      "done": 100,
+      "konular": [
+        {
+          "comment": "Sıralama ve Seçme Konusu ",
+          "bolumler": [
+            {
+              "comment": "Bölüm 1",
+              "dersler": [
+                {
+                  "link": "toplama-ve-carpma-yontemlerini-kullanarak-sayma/ders-1",
+                  "name": "Toplama yöntemi kullanarak sayma",
+                  "type": "v",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "toplama-ve-carpma-yontemlerini-kullanarak-sayma/ders-2",
+                  "name": "Alıştırma 1",
+                  "type": "e",
+                  "done": 1,
+                  "total": 12
+                }
+              ],
+              "link": "toplama-ve-carpma-yontemlerini-kullanarak-sayma/ders-1",
+              "name": "Toplama ve Çarpma Yöntemlerini Kullanarak Sayma"
+            },
+            {
+              "comment": "Bölüm 2",
+              "dersler": [
+                {
+                  "link": "permutasyon/ders-1",
+                  "name": "Permütasyon nedir?",
+                  "type": "v",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "permutasyon/ders-2",
+                  "name": "Alıştırma 1",
+                  "type": "e",
+                  "done": 1,
+                  "total": 12
+                }
+              ],
+              "link": "permutasyon/ders-1",
+              "name": "Permütasyon (Sıralama)"
+            }
+          ],
+
+          "done": 12,
+          "kazanimlar": [
+            {
+              "name": "Olayların gerçekleşme sayısını toplama ve çarpma yöntemlerini kullanarak hesaplar."
+            },
+            {
+              "name": "n çeşit nesne ile oluşturulabilecek r li dizilişlerin (permütasyonların) kaç farklı şekilde yapılabileceğini hesaplar."
+            },
+            {
+              "name": "Sınırlı sayıda tekrarlayan nesnelerin dizilişlerini (permütasyonlarını) açıklayarak problemler çözer."
+            },
+            {
+              "name": "n elemanlı bir kümenin r tane elemanının kaç farklı şekilde seçilebileceğini hesaplar."
+            },
+            {
+              "name": "Pascal üçgenini açıklar."
+            },
+            {
+              "name": "Binom açılımını yapar."
+            }
+          ],
+          "link": "siralama-ve-secme",
+          "name": "Sıralama ve Seçme",
+          "total": 20
+        },
+        {
+          "comment": "Basit Olayların Olasılıkları Konusu",
+          "bolumler": [
+            {
+              "comment": "Bölüm 1",
+              "dersler": [
+                {
+                  "link": "terimler-ve-kavramlar/ders-1",
+                  "name": "Örnek uzay, deney, çıktı, bir olayın tümleyeni, kesin olay, imkânsız olay, ayrık olay ve ayrık olmayan olay ",
+                  "type": "v",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "terimler-ve-kavramlar/ders-2",
+                  "name": "Alıştırma 1",
+                  "type": "e",
+                  "done": 10,
+                  "total": 14
+                }
+              ],
+              "link": "terimler-ve-kavramlar/ders-1",
+              "name": "Terimler ve Kavramlar"
+            },
+            {
+              "dersler": [
+                {
+                  "link": "olasilik-kavrami-ile-ilgili-uygulamalar/ders-1",
+                  "name": "Olasılık nedir?",
+                  "type": "a",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "olasilik-kavrami-ile-ilgili-uygulamalar/ders-2",
+                  "name": "Alıştırma 1",
+                  "type": "e",
+                  "done": 10,
+                  "total": 14
+                }
+              ],
+              "link": "olasilik-kavrami-ile-ilgili-uygulamalar/ders-1",
+              "name": "Olasılık Kavramı İle İlgili Uygulamalar"
+            }
+          ],
+          "done": 10,
+          "kazanimlar": [
+            {
+              "name": "Örnek uzay, deney, çıktı, bir olayın tümleyeni, kesin olay, imkânsız olay, ayrık olay ve ayrık olmayan olay kavramlarını açıklar."
+            },
+            {
+              "name": "Olasılık kavramı ile ilgili uygulamalar yapar."
+            }
+          ],
+          "link": "basit-olaylarin-olasiliklari",
+          "name": "Basit Olayların Olasılıkları",
+          "total": 40
+        }
+      ],
+      "link": "sayma-ve-olasilik",
+      "name": "Mantık",
+      "total": 150
+    },
+    {
+      "comment": "Analitik Geometri",
+      "aboutUnit": "Fonksiyonlar öğretilir.",
+      "dersSayisi": 45,
+      "done": 50,
+      "konular": [
+        {
+          "comment": "Sıralama ve Seçme Konusu ",
+          "bolumler": [
+            {
+              "dersler": [
+                {
+                  "link": "a-bolumu/ders-1",
+                  "name": "ders 1 çok geride tatlı bir an çok geri de güneşsiz günler",
+                  "type": "v",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "a-bolumu/ders-2",
+                  "name": "ders 2",
+                  "type": "e",
+                  "done": 10,
+                  "total": 14
+                }
+              ],
+              "link": "a-bolumu/ders-1",
+              "name": "E Bölümü"
+            },
+            {
+              "dersler": [
+                {
+                  "link": "b-bolumu/ders-1",
+                  "name": "ders 14",
+                  "type": "a",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "b-bolumu/ders-2",
+                  "name": "ders 12",
+                  "type": "e",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "b-bolumu/ders-3",
+                  "name": "ders 1212",
+                  "type": "e",
+                  "done": 10,
+                  "total": 14
+                }
+              ],
+              "link": "b-bolumu/ders-1",
+              "name": "F Bölümü"
+            }
+          ],
+          "done": 80,
+          "kazanimlar": [
+            {
+              "name": "Fonksiyonlarla ilgili problemler çözer."
+            },
+            {
+              "name": "Fonksiyonların grafiklerini çizer."
+            },
+            {
+              "name": "Fonksiyonların grafiklerini yorumlar."
+            },
+            {
+              "name": "Gerçek hayat durumlarından doğrusal fonksiyonlarla ifade edilebilenlerin grafik gösterimlerini yapar."
+            }
+          ],
+          "name": "Fonksiyon Kavramı ve Gösterimi",
+          "total": 100
+        },
+        {
+          "comment": "Sıralama ve Seçme Konusu ",
+          "bolumler": [
+            {
+              "dersler": [
+                {
+                  "link": "a-bolumu/ders-1",
+                  "name": "ders 1 çok geride tatlı bir an çok geri de güneşsiz günler",
+                  "type": "v",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "a-bolumu/ders-2",
+                  "name": "ders 2",
+                  "type": "e",
+                  "done": 10,
+                  "total": 14
+                }
+              ],
+              "link": "a-bolumu/ders-1",
+              "name": "G Bölümü"
+            },
+            {
+              "dersler": [
+                {
+                  "link": "b-bolumu/ders-1",
+                  "name": "ders 14",
+                  "type": "a",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "b-bolumu/ders-2",
+                  "name": "ders 12",
+                  "type": "e",
+                  "done": 10,
+                  "total": 14
+                },
+                {
+                  "link": "b-bolumu/ders-3",
+                  "name": "ders 1212",
+                  "type": "e",
+                  "done": 10,
+                  "total": 14
+                }
+              ],
+              "link": "b-bolumu/ders-1",
+              "name": "H Bölümü"
+            }
+          ],
+          "done": 150,
+          "kazanimlar": [
+            {
+              "name": "Bire bir ve örten fonksiyonlar ile ilgili uygulamalar yapar."
+            },
+            {
+              "name": "Fonksiyonlarda bileşke işlemiyle ilgili işlemler yapar."
+            },
+            {
+              "name": "Verilen bir fonksiyonun tersini bulur."
+            }
+          ],
+          "name": "İki Fonksiyonun Bileşkesi ve Bir Fonksiyonun Tersi",
+          "total": 200
+        }
+      ],
+      "link": "fonksiyonlar",
+      "name": "Kümeler",
+      "total": 200
+    }
+  ]
+}

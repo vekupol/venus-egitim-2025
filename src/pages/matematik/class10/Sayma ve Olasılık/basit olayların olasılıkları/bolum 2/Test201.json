@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "soru": "Bir menüde 4 tavuklu, 3 kırmızı etli ve 5 sebzeli yemek bulunmaktadır. Tavuk, kırmızı et veya sebze yemeklerinden birini kaç farklı biçimde seçebiliriz? ",
+    "A": "60",
+    "B": "12",
+    "C": "14",
+    "D": "1",
+    "E": "2",
+    "dogruCevap": "B",
+    "puan": 10
+  },
+  {
+    "id": 2,
+    "soru": "Dolabında 3 mavi,2 siyah ve 1 kırmızı tişörtü bulunan Seda kaç farklı biçimde tişört seçimi yapabilir?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "E": "7",
+    "dogruCevap": "6",
+    "puan": 10
+  },
+  {
+    "id": 3,
+    "soru": "Ali'nin kütüphanesinde 4 kırmızı, 3 mavi ve 2 yeşil kitap var. Ali, kaç farklı şekilde kitap seçebilir?",
+    "A": "9",
+    "B": "10",
+    "C": "11",
+    "D": "12",
+    "E": "24",
+    "dogruCevap": "B",
+    "puan": 10
+  }
+  ,
+  {
+    "id": 4,
+    "soru": "Bir kutuda 5 kırmızı, 4 mavi ve 3 yeşil top var. Kutudan üç top seçildiğinde, kaç farklı seçim yapılabilir?",
+    "A": "8",
+    "B": "9",
+    "C": "10",
+    "D": "11",
+    "E": "12",
+    "dogruCevap": "E",
+    "puan": 10
+  },
+  {
+    "id": 5,
+    "soru": "Bir torbada 2 siyah, 3 beyaz ve 4 kırmızı top var. Torbadan 2 top seçiliyor. Kaç farklı şekilde top seçimi yapılabilir??",
+    "A": "6",
+    "B": "7",
+    "C": "8",
+    "D": "9",
+    "E": "24",
+    "dogruCevap": "D",
+    "puan": 10
+  }
+]
