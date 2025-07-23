@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MainBar } from "../../../courses/course";
-import SiralamaVeSecmeIntro from "./sıralama ve seçme /SiralamaVeSecmeIntro";
+import SiralamaVeSecmeIntro from "./siralama-ve-secme/SiralamaVeSecmeIntro";
 import BasitOlaylarinOlasiliklariIntro from "./basit olayların olasılıkları/BasitOlaylarinOlasiliklariIntro";
 import {
   CustomLink,

@@ -6,7 +6,17 @@ import parent3 from "../images/parent3.svg";
 import parent4 from "../images/parent4.svg";
 import { Btn } from "./buttons/ButtonStudent";
 import { Link } from "react-router-dom";
-import { Container,Menu,Description,StudentImage,Image,Title,Subtitle,ImageContainer,TextContainer } from "./OgrenciMenu";
+import {
+  Container,
+  Menu,
+  Description,
+  StudentImage,
+  Image,
+  Title,
+  Subtitle,
+  ImageContainer,
+  TextContainer,
+} from "./OgrenciMenu";
 
 function VeliMenu() {
   return (
@@ -25,7 +35,10 @@ function VeliMenu() {
             Çocuğunuzun velisi olmaktan daha çok annesi/babası olmanız için
             gereken raporlar elinizin altında.
           </Description>
-          <Link to="/signup" style={{ textDecoration: "none", color: "white" }}>
+          <Link
+            to="/veli-tanitim"
+            style={{ textDecoration: "none", color: "white" }}
+          >
             <Btn
               style={{
                 borderRadius: "15px",
@@ -40,8 +53,6 @@ function VeliMenu() {
     </Container>
   );
 }
-
-
 
 const StudentImage1 = styled(StudentImage)`
   top: 1%;

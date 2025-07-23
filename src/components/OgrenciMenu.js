@@ -24,12 +24,14 @@ function OgrenciMenu() {
             Üniversite yolunda bir öğrencinin aradığı her şey burada. Sizin için
             burası sonsuza kadar ücretsiz.
           </Description>
-          <Link to="/kayit-ol" style={{ textDecoration: "none", color: "white" }}>
+          <Link
+            to="/ogrenci-tanitim"
+            style={{ textDecoration: "none", color: "white" }}
+          >
             <Btn
               style={{
                 borderRadius: "15px",
                 fontSize: "25px",
-                
               }}
             >
               Öğrenci
@@ -131,7 +133,7 @@ export const Subtitle = styled.p`
 export const Description = styled.p`
   color: #000;
   font-family: "Roboto Condensed";
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 300;
   margin-bottom: 2rem;
   @media (max-width: 768px) {

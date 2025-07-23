@@ -35,6 +35,8 @@ function DrawerSiniflarim() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  const [isPremium, setIsPremium] = useState(false);
+
   useEffect(() => {
     const currentUser = auth.currentUser;
     const currentUserUid = currentUser ? currentUser.uid : null;
@@ -54,6 +56,14 @@ function DrawerSiniflarim() {
         });
 
         setUsers(userData);
+
+        // 👇 premium bilgisi çekiliyor
+        const userDocRef = doc(db, "users", currentUserUid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          const userDocData = userDocSnap.data();
+          setIsPremium(userDocData.premium === true); // ✅ EKLENDİ
+        }
       };
 
       getUserData();
@@ -78,42 +88,59 @@ function DrawerSiniflarim() {
 
         if (userDocSnap.exists()) {
           const userDocData = userDocSnap.data();
-          const activationCodes = userDocData.activationCodes || [];
           const addedActivationCodes = userDocData.addedActivationCodes || [];
 
-          if (addedActivationCodes.includes(activationCode)) {
-            setErrorMessage("Bu aktivasyon kodu zaten kullanılmış.");
-          } else if (activationCodes.includes(activationCode)) {
-            const newClassRef = doc(collection(db, "classes"));
-            const newClassUid = newClassRef.id;
+          // Premium değilse aktivasyon kodu istenir
+          if (!userDocData.premium) {
+            const kodDurumuRef = doc(db, "kodlar", "kodlarDurumu");
+            const kodDurumuSnap = await getDoc(kodDurumuRef);
 
-            await setDoc(newClassRef, {
-              className: className,
-              teacherUid: currentUserUid,
-              students: [],
-              classUid: newClassUid,
+            if (!kodDurumuSnap.exists()) {
+              setErrorMessage("Kod veritabanına erişilemedi.");
+              return;
+            }
+
+            const kodlar = kodDurumuSnap.data();
+
+            if (!kodlar[activationCode]) {
+              setErrorMessage("Geçersiz aktivasyon kodu.");
+              return;
+            }
+
+            if (addedActivationCodes.includes(activationCode)) {
+              setErrorMessage("Bu aktivasyon kodu zaten kullanılmış.");
+              return;
+            }
+
+            await updateDoc(kodDurumuRef, { [activationCode]: false });
+            await updateDoc(userDocRef, {
+              addedActivationCodes: arrayUnion(activationCode),
+              premium: true,
             });
+          }
 
-            console.log("Sınıf başarıyla eklendi!");
+          // Sınıfı oluştur
+          const newClassRef = doc(collection(db, "classes"));
+          const newClassUid = newClassRef.id;
 
-            const newClass = {
+          await setDoc(newClassRef, {
+            className: className,
+            teacherUid: currentUserUid,
+            students: [],
+            classUid: newClassUid,
+          });
+
+          setUsers((prev) => [
+            ...prev,
+            {
               className,
               teacherUid: currentUserUid,
               students: [],
               classUid: newClassUid,
-            };
-            setUsers((prevUsers) => [...prevUsers, newClass]);
+            },
+          ]);
 
-            await updateDoc(userDocRef, {
-              addedActivationCodes: arrayUnion(activationCode),
-            });
-
-            setErrorMessage(""); // Hata mesajını sıfırlıyoruz
-          } else {
-            setErrorMessage(
-              "Geçersiz aktivasyon kodu. Lütfen doğru kodu giriniz."
-            );
-          }
+          setErrorMessage("");
         } else {
           console.error("Kullanıcı belgesi bulunamadı.");
         }
@@ -168,11 +195,13 @@ function DrawerSiniflarim() {
               name="className"
               placeholder="Sınıfınızın adını giriniz"
             />
-            <InputText
-              type="text"
-              name="activationCode"
-              placeholder="Aktivasyon kodu"
-            />
+            {!isPremium && (
+              <InputText
+                type="text"
+                name="activationCode"
+                placeholder="Aktivasyon Kodu"
+              />
+            )}
             <InputSave type="submit" value="Sınıf Ekle" />
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           </Form>

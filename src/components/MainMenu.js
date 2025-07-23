@@ -1,48 +1,91 @@
 import React from "react";
 import styled from "styled-components";
 import ChangingText from "./ChangingText";
-import mainPicture from "../images/anaresim11.svg"; 
-import ButtonStudent from "./buttons/ButtonStudent";
+import mainPicture from "../images/anaresim11.svg";
+import { Container } from "./OgrenciMenu";
 
-function MainMenu() {
+function MainMenu({ scrollToOgrenci, scrollToOgretmen, scrollToVeli }) {
   return (
     <Container>
       <Menu>
         <Text>
-          <div>Türkiye'nin </div>
+          <TurkiyeDiv>Türkiye'nin </TurkiyeDiv>
           <div>
-            <ChangingText/>
+            <ChangingText />
           </div>
           <div>Ücretsiz Eğitim</div>
-          <div style={{marginTop:"8px"}}>Platformu</div>
+          <div>Platformu</div>
           <Text2>
             Her öğrencinin eğitime ulaşma hakkı olduğu fikri ile çıktığımız bu
             yolda bize katıl.
           </Text2>
-          <div style={{ marginTop: "3rem" }}>
-            <ButtonStudent />
-          </div>
+          <BtnGroup>
+            <Btn onClick={scrollToOgrenci}>Öğrenciler</Btn>
+            <Btn onClick={scrollToOgretmen}>Öğretmenler</Btn>
+            <Btn onClick={scrollToVeli}>Veliler</Btn>
+          </BtnGroup>
         </Text>
+
         <Picture>
-          <img src={mainPicture} alt="resim"></img>
+          <img src={mainPicture} alt="resim" />
         </Picture>
       </Menu>
     </Container>
   );
 }
 
-const Container = styled.div`
+export default MainMenu;
+
+const TurkiyeDiv = styled.div`
+  margin-bottom: -0.3rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: -0.7rem;
+  }
+`;
+
+const BtnGroup = styled.div`
+  border-radius: 15px;
   display: flex;
   justify-content: center;
-  background-color: #fff;
+  text-align: center;
+  border: 1px solid var(--main-color);
+  background-color: var(--main-color);
+
+  &:hover {
+    background-color: #efecf3;
+  }
+`;
+
+const Btn = styled.button`
+  background-color: var(--main-color);
+  border: none;
+  color: white;
+  padding: 18px 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: clamp(15px, 1vw, 2.5rem);
+  cursor: pointer;
+  width: 34%;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: "MyCustomFont", sans-serif;
+
+  &:hover {
+    background-color: #efecf3;
+    color: var(--main-color);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Menu = styled.div`
   display: flex;
-  width: 1200px;
   background-color: #fff;
   margin: 6rem 4rem;
-  justify-content: space-between;
 
   @media (max-width: 768px) {
     margin: 0.5rem 2rem;
@@ -51,43 +94,26 @@ const Menu = styled.div`
 `;
 
 const Text = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 600px;
   color: #292929;
   font-size: 45px;
-
-  text-shadow: 0px 4px 2px rgba(0, 0, 0, 0.25);
   font-style: normal;
-  font-weight: 700;
   line-height: normal;
-  background-color: white;
-
-  div {
-    margin: 0;
-    padding: 0;
-  }
 
   @media (max-width: 768px) {
     width: 100%;
     font-size: 35px;
-    text-align: center;
   }
 `;
+
 const Text2 = styled.div`
   color: #000;
-  text-align: left;
-
-  font-size: 32px;
-  font-style: normal;
+  font-family: "Roboto Condensed";
+  font-size: 24px;
   font-weight: 300;
-  line-height: normal;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-
+  margin-bottom: 2rem;
   @media (max-width: 768px) {
-    font-size: 25px;
-    text-align: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 `;
 
@@ -112,5 +138,3 @@ const Picture = styled.div`
     }
   }
 `;
-
-export default MainMenu;

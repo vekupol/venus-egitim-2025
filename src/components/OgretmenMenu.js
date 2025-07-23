@@ -6,9 +6,17 @@ import teacher3 from "../images/teacher-3.svg";
 import teacher4 from "../images/teacher-4.svg";
 import { Btn } from "./buttons/ButtonStudent";
 import { Link } from "react-router-dom";
-import { TextContainer,Container,ImageContainer,Title,Subtitle,Description,Menu,StudentImage } from "./OgrenciMenu";
+import {
+  TextContainer,
+  Container,
+  ImageContainer,
+  Title,
+  Subtitle,
+  Description,
+  Menu,
+  StudentImage,
+} from "./OgrenciMenu";
 
- 
 function OgretmenMenu() {
   return (
     <Container>
@@ -20,7 +28,10 @@ function OgretmenMenu() {
             Öğrencinize çok kolay bir şekilde rehberlik edecek ve onların
             ödevlerini kolaylıkla takip edebileceksiniz. Zamanınız size kalacak.
           </Description>
-          <Link to="/signup" style={{ textDecoration: "none", color: "white" }}>
+          <Link
+            to="/ogretmen-tanitim"
+            style={{ textDecoration: "none", color: "white" }}
+          >
             <Btn
               style={{
                 borderRadius: "15px",
@@ -30,7 +41,7 @@ function OgretmenMenu() {
               Öğretmen
             </Btn>
           </Link>
-        </TextContainerLeft> 
+        </TextContainerLeft>
 
         <ImageContainer>
           <Image src={ellipse1} alt="ellipse1" className="img-1" />
@@ -44,17 +55,15 @@ function OgretmenMenu() {
 }
 
 const MenuReverse = styled(Menu)`
-@media (max-width: 768px) {
-  flex-direction: column-reverse;
-}
-`
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
+`;
 
 const Image = styled.img`
   max-width: 100%;
   transform: scaleX(-1);
 `;
-
-
 
 const StudentImage1 = styled(StudentImage)`
   top: 3%;

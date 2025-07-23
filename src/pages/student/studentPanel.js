@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import styled from "styled-components";
 import DrawerKonularim from "./Drawers/studentDrawerKonularim";
 import DrawerBasarilarim from "./Drawers/studentDrawerBasarilarim";
+import StudentDrawerOdevlerim from "./Drawers/studentDrawerOdevlerim";
 import { useState, useEffect } from "react";
 import DrawerOgretmenlerim from "./Drawers/studentDrawerOgretmenlerim";
 import DrawerSiniflarim from "./Drawers/studentDrawerSiniflarim";
@@ -101,6 +102,9 @@ function StudentPanel() {
           <DivFlex onClick={() => handleButtonClick(1)}>
             <Button>Konularım</Button>
           </DivFlex>
+          <DivFlex onClick={() => handleButtonClick(6)}>
+            <Button>Ödevlerim</Button>
+          </DivFlex>
           <DivFlex onClick={() => handleButtonClick(2)}>
             <Button>Başarılarım</Button>
           </DivFlex>
@@ -123,6 +127,7 @@ function StudentPanel() {
           {activeDiv === 3 && <DrawerOgretmenlerim />}
           {activeDiv === 4 && <DrawerSiniflarim />}
           {activeDiv === 5 && <DrawerDokumanAra />}
+          {activeDiv === 6 && <StudentDrawerOdevlerim />}
         </ObjectBar>
       </Main>
     </Container>
@@ -142,7 +147,6 @@ export const NameBar = styled.div`
   width: 90%;
   display: flex;
   max-width: var(--main-width);
-  
 `;
 
 export const Avatar = styled.div`
@@ -211,8 +215,7 @@ export const DivFlex1 = styled.div`
 export const ButtonBar = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem ;
-
+  margin: 1rem;
 
   @media (max-width: 768px) {
     flex-direction: row;
@@ -233,7 +236,7 @@ export const Button = styled.button`
   min-width: 150px;
   border: 1px solid var(--main-color);
   border-radius: 5px;
-  font-family: 'MyCustomFont', sans-serif;
+  font-family: "MyCustomFont", sans-serif;
 
   :hover {
     background-color: var(--main-color);

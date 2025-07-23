@@ -113,8 +113,11 @@ function Navbar() {
           )}
         </Menu>
       </Nav>
-      <DropdownMenuContainer undisplay={undisplay}  onClick={() => setUndisplay(false)}>
-        <DropdownMenu/>
+      <DropdownMenuContainer
+        undisplay={undisplay}
+        onClick={() => setUndisplay(false)}
+      >
+        <DropdownMenu />
       </DropdownMenuContainer>
     </Header>
   );
@@ -188,8 +191,6 @@ const SearchBar = styled.div`
     width: 100%;
     padding: 0.3rem 0rem;
   }
-
-
 `;
 
 const SearchForm = styled.form`
@@ -207,7 +208,7 @@ const SearchForm = styled.form`
     border: none;
     outline: none;
     box-shadow: none;
-    font-family: 'MyCustomFont', sans-serif;
+    font-family: "MyCustomFont", sans-serif;
 
     ::placeholder {
       font-size: 0.9rem;
@@ -289,6 +290,7 @@ const Logo = styled.a`
   text-decoration: none;
   font-family: "MyCustomFont", sans-serif;
   font-weight: bold;
+  line-height: 1.4;
 `;
 const Menu = styled.div`
   display: flex;
@@ -358,7 +360,7 @@ const MenuLinkExit = styled.button`
   text-align: center;
   color: #efecf3;
   padding: 0.6rem 0rem;
-  font-family: 'MyCustomFont', sans-serif;
+  font-family: "MyCustomFont", sans-serif;
   font-size: 1rem;
   margin-right: 0.7rem;
 

@@ -41,7 +41,7 @@ const Btn = styled.button`
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  font-family: 'MyCustomFont', sans-serif;
+  font-family: "MyCustomFont", sans-serif;
 
   &:hover {
     background-color: #efecf3;

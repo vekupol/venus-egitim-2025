@@ -486,42 +486,6 @@ function StudentEdit() {
             </FormGroup>
             <ButtonO type="submit">Ödev Gönder</ButtonO>
           </Form>
-
-          <StyledTable>
-            <thead>
-              <TableRow>
-                <TableHeader>No</TableHeader>
-                <TableHeader>Ödev Kazanımı</TableHeader>
-                <TableHeader>Puanı</TableHeader>
-                <TableHeader>Veriliş Tarihi</TableHeader>
-                <TableHeader>Bitiş Tarihi</TableHeader>
-                <TableHeader>İlerleme Durumu</TableHeader>
-                <TableHeader></TableHeader>
-              </TableRow>
-            </thead>
-            <tbody>
-              {myHomework &&
-                myHomework.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>{item.kazanim}</TableCell>
-                    <TableCell>100</TableCell>
-                    <TableCell>{item.startDate}</TableCell>
-                    <TableCell>{item.endDate}</TableCell>
-                    <TableCell>Tamamlandı</TableCell>
-                    <TableCell>
-                      <ButtonSil
-                        onClick={(event) =>
-                          handleHomeworkDelete(event, item.id)
-                        }
-                      >
-                        Ödevi Sil
-                      </ButtonSil>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </tbody>
-          </StyledTable>
         </Students>
         <Homeworks>
           <Form onSubmit={handleFormSubmit2}>
@@ -640,7 +604,47 @@ function StudentEdit() {
             </FormGroup>
             <ButtonO type="submit">Ödev Gönder</ButtonO>
           </Form>
-
+        </Homeworks>
+        <Homeworks>
+          <StyledTable>
+            <thead>
+              <TableRow>
+                <TableHeader>No</TableHeader>
+                <TableHeader>Ödev Kazanımı</TableHeader>
+                <TableHeader>Puanı</TableHeader>
+                <TableHeader>Veriliş Tarihi</TableHeader>
+                <TableHeader>Bitiş Tarihi</TableHeader>
+                <TableHeader>İlerleme Durumu</TableHeader>
+                <TableHeader></TableHeader>
+              </TableRow>
+            </thead>
+            <tbody>
+              {myHomework &&
+                myHomework.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{item.kazanim}</TableCell>
+                    <TableCell>100</TableCell>
+                    <TableCell>{item.startDate}</TableCell>
+                    <TableCell>{item.endDate}</TableCell>
+                    <TableCell>
+                      {item.bittiMi === 1 ? "Tamamlandı" : "Tamamlanmadı"}
+                    </TableCell>
+                    <TableCell>
+                      <ButtonSil
+                        onClick={(event) =>
+                          handleHomeworkDelete(event, item.id)
+                        }
+                      >
+                        Ödevi Sil
+                      </ButtonSil>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </tbody>
+          </StyledTable>
+        </Homeworks>
+        <Homeworks>
           <Students>
             <MyStudents>Tüm Ödevleri</MyStudents>
             <Aciklama>
@@ -668,7 +672,9 @@ function StudentEdit() {
                       <TableCell>100</TableCell>
                       <TableCell>{item.startDate}</TableCell>
                       <TableCell>{item.endDate}</TableCell>
-                      <TableCell>Tamamlanmadı</TableCell>
+                      <TableCell>
+                        {item.bittiMi === 1 ? "Tamamlandı" : "Tamamlanmadı"}
+                      </TableCell>
                     </TableRow>
                   ))}
               </tbody>

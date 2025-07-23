@@ -1,0 +1,64 @@
+[debug] [2025-07-23T01:33:12.839Z] ----------------------------------------------------------------------
+[debug] [2025-07-23T01:33:12.841Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Veli\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-07-23T01:33:12.841Z] CLI Version:   14.9.0
+[debug] [2025-07-23T01:33:12.841Z] Platform:      win32
+[debug] [2025-07-23T01:33:12.841Z] Node Version:  v20.15.1
+[debug] [2025-07-23T01:33:12.841Z] Time:          Wed Jul 23 2025 04:33:12 GMT+0300 (GMT+03:00)
+[debug] [2025-07-23T01:33:12.842Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-23T01:33:12.844Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-07-23T01:33:13.019Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-23T01:33:13.019Z] > authorizing via signed-in user (vkursun6@gmail.com)
+[debug] [2025-07-23T01:33:13.020Z] [iam] checking project venus-c8e41 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-23T01:33:13.020Z] Checked if tokens are valid: false, expires at: 1753135197803
+[debug] [2025-07-23T01:33:13.020Z] Checked if tokens are valid: false, expires at: 1753135197803
+[debug] [2025-07-23T01:33:13.021Z] > refreshing access token with scopes: []
+[debug] [2025-07-23T01:33:13.021Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-07-23T01:33:13.021Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-23T01:33:13.303Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-07-23T01:33:13.303Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-23T01:33:13.313Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/venus-c8e41:testIamPermissions [none]
+[debug] [2025-07-23T01:33:13.314Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/venus-c8e41:testIamPermissions x-goog-quota-user=projects/venus-c8e41
+[debug] [2025-07-23T01:33:13.314Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/venus-c8e41:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-23T01:33:13.486Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-07-23T01:33:13.487Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-07-23T01:33:14.381Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/venus-c8e41:testIamPermissions 200
+[debug] [2025-07-23T01:33:14.382Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/venus-c8e41:testIamPermissions {}
+[debug] [2025-07-23T01:33:14.382Z] [iam] error while checking permissions, command may fail: Authorization failed. This account is missing the following required permissions on project venus-c8e41:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2025-07-23T01:33:14.383Z] Checked if tokens are valid: true, expires at: 1753237992303
+[debug] [2025-07-23T01:33:14.383Z] Checked if tokens are valid: true, expires at: 1753237992303
+[debug] [2025-07-23T01:33:14.384Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/venus-c8e41 [none]
+[debug] [2025-07-23T01:33:14.883Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/venus-c8e41 403
+[debug] [2025-07-23T01:33:14.883Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/venus-c8e41 {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-07-23T01:33:14.885Z] Request to https://firebase.googleapis.com/v1beta1/projects/venus-c8e41 had HTTP Error: 403, The caller does not have permission
+[debug] [2025-07-23T01:33:15.120Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/venus-c8e41 had HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\Veli\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:52:12)
+    at RetryOperation._fn (C:\Users\Veli\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project venus-c8e41. Please make sure the project exists and your account has permission to access it.
+[debug] [2025-07-23T01:37:39.775Z] ----------------------------------------------------------------------
+[debug] [2025-07-23T01:37:39.778Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Veli\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js use --add
+[debug] [2025-07-23T01:37:39.778Z] CLI Version:   14.9.0
+[debug] [2025-07-23T01:37:39.778Z] Platform:      win32
+[debug] [2025-07-23T01:37:39.778Z] Node Version:  v20.15.1
+[debug] [2025-07-23T01:37:39.778Z] Time:          Wed Jul 23 2025 04:37:39 GMT+0300 (GMT+03:00)
+[debug] [2025-07-23T01:37:39.778Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-23T01:37:39.921Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-23T01:37:39.922Z] > authorizing via signed-in user (vkursun6@gmail.com)
+[debug] [2025-07-23T01:37:39.922Z] Checked if tokens are valid: true, expires at: 1753237992303
+[debug] [2025-07-23T01:37:39.923Z] Checked if tokens are valid: true, expires at: 1753237992303
+[debug] [2025-07-23T01:37:39.924Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-07-23T01:37:40.575Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-07-23T01:37:40.575Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-07-23T01:37:53.191Z] Error: EPERM: operation not permitted, open 'C:\Users\Veli\Desktop\Develop\venus\.firebaserc'
+    at Object.writeFileSync (node:fs:2368:20)
+    at RC.save (C:\Users\Veli\AppData\Roaming\npm\node_modules\firebase-tools\lib\rc.js:157:16)
+    at RC.addProjectAlias (C:\Users\Veli\AppData\Roaming\npm\node_modules\firebase-tools\lib\rc.js:57:21)
+    at addAlias (C:\Users\Veli\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\use.js:98:16)
+[error] 
+[error] Error: An unexpected error has occurred.

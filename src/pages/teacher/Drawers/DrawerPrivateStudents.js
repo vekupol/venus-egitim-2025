@@ -14,7 +14,12 @@ import {
   query as firestoreQuery,
 } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, CustomLink, CustomLink2, DeleteButton } from "../../../components/buttons/Button.styled";
+import {
+  Button,
+  CustomLink,
+  CustomLink2,
+  DeleteButton,
+} from "../../../components/buttons/Button.styled";
 import {
   Unit,
   UnitName,
@@ -34,6 +39,7 @@ function DrawerPrivateStudents() {
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -44,7 +50,10 @@ function DrawerPrivateStudents() {
         try {
           const userDoc = await getDoc(doc(db, "users", currentUserUid));
           if (userDoc.exists()) {
-            const privateStudents = userDoc.data().privateStudents || [];
+            const userData = userDoc.data();
+            setIsPremium(userData.premium === true);
+
+            const privateStudents = userData.privateStudents || [];
             const studentUids = privateStudents.map((student) => student.uid);
 
             const studentPromises = studentUids.map(async (uid) => {
@@ -84,48 +93,71 @@ function DrawerPrivateStudents() {
 
         if (userDocSnap.exists()) {
           const userDocData = userDocSnap.data();
-          const activationCodes = userDocData.activationCodes || [];
           const addedActivationCodes = userDocData.addedActivationCodes || [];
 
-          if (addedActivationCodes.includes(activationCode)) {
-            setErrorMessage("Bu aktivasyon kodu zaten kullanılmış.");
-          } else if (activationCodes.includes(activationCode)) {
-            const q = query(
-              collection(db, "users"),
-              where("userData.email", "==", emailAddress)
-            );
-            const querySnapshot = await getDocs(q);
+          if (!userDocData.premium) {
+            const kodDurumuRef = doc(db, "kodlar", "kodlarDurumu");
+            const kodDurumuSnap = await getDoc(kodDurumuRef);
 
-            if (!querySnapshot.empty) {
-              const studentUid = querySnapshot.docs[0].data().uid;
+            if (kodDurumuSnap.exists()) {
+              const kodlar = kodDurumuSnap.data();
+
+              if (!kodlar[activationCode]) {
+                setErrorMessage(
+                  "Geçersiz aktivasyon kodu. Lütfen doğru kodu giriniz."
+                );
+                return;
+              }
+
+              if (addedActivationCodes.includes(activationCode)) {
+                setErrorMessage("Bu aktivasyon kodu zaten kullanılmış.");
+                return;
+              }
+
+              await updateDoc(kodDurumuRef, {
+                [activationCode]: false,
+              });
 
               await updateDoc(userDocRef, {
-                privateStudents: arrayUnion({
-                  uid: studentUid,
-                  messages: [],
-                  homeworks: [],
-                }),
                 addedActivationCodes: arrayUnion(activationCode),
+                premium: true,
               });
-
-              const teacherDocRef = doc(db, "users", studentUid);
-              await updateDoc(teacherDocRef, {
-                teachers: arrayUnion({
-                  uid: currentUserUid,
-                  messages: [],
-                  homeworks: [],
-                }),
-              });
-
-              window.location.reload();
             } else {
-              setErrorMessage("Kullanıcı bulunamadı.");
+              setErrorMessage("Kod veritabanına erişilemedi.");
+              return;
             }
-          } else {
-            setErrorMessage("Geçersiz aktivasyon kodu. Lütfen doğru kodu giriniz.");
           }
-        } else {
-          console.error("Kullanıcı belgesi bulunamadı.");
+
+          const q = query(
+            collection(db, "users"),
+            where("userData.email", "==", emailAddress)
+          );
+          const querySnapshot = await getDocs(q);
+
+          if (!querySnapshot.empty) {
+            const studentUid = querySnapshot.docs[0].data().uid;
+
+            await updateDoc(userDocRef, {
+              privateStudents: arrayUnion({
+                uid: studentUid,
+                messages: [],
+                homeworks: [],
+              }),
+            });
+
+            const teacherDocRef = doc(db, "users", studentUid);
+            await updateDoc(teacherDocRef, {
+              teachers: arrayUnion({
+                uid: currentUserUid,
+                messages: [],
+                homeworks: [],
+              }),
+            });
+
+            window.location.reload();
+          } else {
+            setErrorMessage("Kullanıcı bulunamadı.");
+          }
         }
       } catch (error) {
         console.error("Öğrenci ekleme hatası:", error);
@@ -159,11 +191,11 @@ function DrawerPrivateStudents() {
 
           const studentDocRef = doc(db, "users", studentUid);
           const studentData = (await getDoc(studentDocRef)).data();
-          const teacherUidToRemove = currentUserUid;
           const updatedTeachers = (studentData.teachers || []).filter(
-            (teacher) => teacher.uid !== teacherUidToRemove
+            (teacher) => teacher.uid !== currentUserUid
           );
           await updateDoc(studentDocRef, { teachers: updatedTeachers });
+
           setStudents(updatedStudents);
           window.location.reload();
         }
@@ -185,16 +217,19 @@ function DrawerPrivateStudents() {
           </UnitName>
           <UnitDescription
             style={{ color: "#674188", fontSize: "1.2rem", fontWeight: "bold" }}
-          ></UnitDescription>
-          <CustomLink2></CustomLink2>
+          />
+          <CustomLink2 />
         </Unit>
+
         {students.map((student) => (
           <Unit key={student.uid}>
             <UnitName>
               {student.userData && student.userData.displayName}
             </UnitName>
             <ButtonBlock>
-              <CustomLink to={`/ogretmen-ekrani/ogrenci-duzenle/${student.uid}`}>
+              <CustomLink
+                to={`/ogretmen-ekrani/ogrenci-duzenle/${student.uid}`}
+              >
                 <Button>Öğrenci Seç</Button>
               </CustomLink>
               <CustomLink to={`/mesaj-gonder/${student.uid}`}>
@@ -208,10 +243,12 @@ function DrawerPrivateStudents() {
             </ButtonBlock>
           </Unit>
         ))}
+
         <Form onSubmit={handleAddStudent}>
           <LabelSubtitle>
             Sayın öğretmenimiz öğrencinizi eklemek için aktivasyon kodu alınız.
-            Aktivasyon kodunu <Link to="/odeme-planlari">buraya</Link> tıklayarak temin edebilirsiniz. Herhangi bir hata durumunda{" "}
+            Aktivasyon kodunu <Link to="/odeme-planlari">buraya</Link>{" "}
+            tıklayarak temin edebilirsiniz. Herhangi bir hata durumunda{" "}
             <strong>0530 682 68 49</strong> numaralı iletişim hattını
             kullanabilirsiniz.
           </LabelSubtitle>
@@ -220,11 +257,13 @@ function DrawerPrivateStudents() {
             name="emailAddress"
             placeholder="Öğrencinizin mail adresini giriniz"
           />
-          <InputText
-            type="text"
-            name="activationCode"
-            placeholder="Aktivasyon Kodu"
-          />
+          {!isPremium && (
+            <InputText
+              type="text"
+              name="activationCode"
+              placeholder="Aktivasyon Kodu"
+            />
+          )}
           <InputSave type="submit" value="Öğrenci Ekle" />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </Form>

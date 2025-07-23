@@ -11,6 +11,9 @@ import Notifications from "../pages/mainPages/Notifications";
 import { Navigate } from "react-router-dom";
 import Supporters from "../components/sliderLogo/logos/Supporters";
 import Settings from "../pages/student/studentAyarlar";
+import OgrenciTanitim from "../pages/tanitimPages/OgrenciTanitim";
+import OgretmenTanitim from "../pages/tanitimPages/OgretmenTanitim";
+import VeliTanitim from "../pages/tanitimPages/VeliTanitim";
 
 export const MainRouter1 = [
   {
@@ -43,7 +46,7 @@ export const MainRouter1 = [
   },
   {
     path: "/destekcilerimiz",
-    element: <Supporters/>
+    element: <Supporters />,
   },
   {
     path: "/odeme-planlari",
@@ -60,7 +63,19 @@ export const MainRouter1 = [
   {
     path: "/ayarlar",
     element: <Settings />,
-  }
+  },
+  {
+    path: "/ogrenci-tanitim",
+    element: <OgrenciTanitim />,
+  },
+  {
+    path: "/ogretmen-tanitim",
+    element: <OgretmenTanitim />,
+  },
+  {
+    path: "/veli-tanitim",
+    element: <VeliTanitim />,
+  },
 ];
 
 export const MainRouter2 = [
@@ -94,7 +109,7 @@ export const MainRouter2 = [
   },
   {
     path: "/destekcilerimiz",
-    element: <Supporters/>
+    element: <Supporters />,
   },
   {
     path: "/odeme-planlari",
@@ -103,5 +118,17 @@ export const MainRouter2 = [
   {
     path: "/parolami-unuttum",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/ogrenci-tanitim",
+    element: <OgrenciTanitim />,
+  },
+  {
+    path: "/ogretmen-tanitim",
+    element: <OgretmenTanitim />,
+  },
+  {
+    path: "/veli-tanitim",
+    element: <VeliTanitim />,
   },
 ];

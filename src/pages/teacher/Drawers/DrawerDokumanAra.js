@@ -19,7 +19,6 @@ import { Button } from "../../../components/buttons/Button.styled";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
-
 const DrawerDokumanAra = () => {
   const [files, setFiles] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,23 +58,24 @@ const DrawerDokumanAra = () => {
         filesList.items.map(async (fileRef) => {
           try {
             const metadata = await getMetadata(fileRef);
-            if (metadata) {
-              return {
-                name: metadata.name || "N/A",
-                url: await getDownloadURL(fileRef),
-                class: metadata.customMetadata.class || "N/A",
-                unit: metadata.customMetadata.unit || "N/A",
-                tag: metadata.customMetadata.tag || "N/A",
-                created: metadata.timeCreated || "N/A",
-                contentType: metadata.contentType || "N/A",
-                fileType: getFileType(metadata.contentType || "N/A"),
-              };
-            } else {
-              console.error("Dosya metadata alınamıyor:", fileRef);
-              return null;
-            }
+            const url = await getDownloadURL(fileRef);
+
+            return {
+              name: metadata.name || "N/A",
+              url,
+              class: metadata.customMetadata?.class || "N/A",
+              unit: metadata.customMetadata?.unit || "N/A",
+              tag: metadata.customMetadata?.tag || "N/A",
+              created: metadata.timeCreated || "N/A",
+              contentType: metadata.contentType || "N/A",
+              fileType: getFileType(metadata.contentType || ""),
+            };
           } catch (error) {
-            console.error("Dosya referansı beklenen türde değil:", fileRef);
+            console.error(
+              "⛔ Dosya metadata alınamadı:",
+              fileRef.fullPath,
+              error.message
+            );
             return null;
           }
         })
@@ -246,62 +246,51 @@ const DrawerDokumanAra = () => {
   );
 };
 
-
 export const CTable = styled(Table)`
-border: 2px solid var(--main-color);
-border-radius: 5px;
-padding: 15px ;
+  border: 2px solid var(--main-color);
+  border-radius: 5px;
+  padding: 15px;
 
-
-@media screen and (max-width: 40em) {
-  border: none;
-}
-`
+  @media screen and (max-width: 40em) {
+    border: none;
+  }
+`;
 
 export const CTbody = styled(Tbody)`
-border:  none !important;
-border-radius: 5px;
-tr:nth-child(even) {
-  background-color: white;
-}
+  border: none !important;
+  border-radius: 5px;
+  tr:nth-child(even) {
+    background-color: white;
+  }
 
-tr:nth-child(odd) {
-  background-color: var(--third-color);
-}
-
-`
+  tr:nth-child(odd) {
+    background-color: var(--third-color);
+  }
+`;
 
 export const CThead = styled(Thead)`
-background-color: var(--main-color);
-
-
-`
+  background-color: var(--main-color);
+`;
 
 export const CTr = styled(Tr)`
-border: 2px solid var(--main-color) !important;
-margin-bottom: 12px; 
-
-
-`
+  border: 2px solid var(--main-color) !important;
+  margin-bottom: 12px;
+`;
 
 export const CTh = styled(Th)`
-padding: 10px 0px 10px 10px;
-color: white;
-font-size: 1.1em;
-text-align: left;
-font-family: "MyCustomFont", sans-serif; 
-`
+  padding: 10px 0px 10px 10px;
+  color: white;
+  font-size: 1.1em;
+  text-align: left;
+  font-family: "MyCustomFont", sans-serif;
+`;
 
 export const CTd = styled(Td)`
-padding: 10px 0px 10px 10px;
-@media screen and (max-width: 40em) {
-  font-size: .8em;
-}`
-
-
-
-
-
+  padding: 10px 0px 10px 10px;
+  @media screen and (max-width: 40em) {
+    font-size: 0.8em;
+  }
+`;
 
 export const DownloadIcon = styled(IoMdDownload)`
   color: var(--main-color);
