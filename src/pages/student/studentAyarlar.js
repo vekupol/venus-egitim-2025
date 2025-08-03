@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {  Title } from "./Drawers/studentDrawerKonularim";
+import { Title } from "./Drawers/studentDrawerKonularim";
 import {
   collection,
   query,
@@ -269,7 +269,15 @@ function Settings() {
     <Container>
       <SettingsContainer>
         <Title>
-          <p style={{fontSize:"2rem",marginBottom:"1rem",fontWeight:"bold"}}>Ayarlarım</p>
+          <p
+            style={{
+              fontSize: "2rem",
+              marginBottom: "1rem",
+              fontWeight: "bold",
+            }}
+          >
+            Ayarlarım
+          </p>
         </Title>
         <FormContainer>
           <FormGroup>
@@ -293,8 +301,8 @@ function Settings() {
           <FormGroup>
             <LabelTitle>Kendinizi Tanıtın</LabelTitle>
             <LabelSubtitle>
-              Siz ve diğer kullanıcılar
-              tarafından görüntülenecek açıklama alanıdır.
+              Siz ve diğer kullanıcılar tarafından görüntülenecek açıklama
+              alanıdır.
             </LabelSubtitle>
             <InputText
               type="text"
@@ -307,29 +315,32 @@ function Settings() {
               onClick={handleChangeSelfIntroduction}
             />
           </FormGroup>
-          <FormGroup>
-            <LabelTitle>Sınıfınız</LabelTitle>
-            <LabelSubtitle>
-              Seçili Sınıfınız : <span>{userData.class}. Sınıf</span>
-            </LabelSubtitle>
-            <InputSelect
-              name="class"
-              id="class"
-              value={selectedClass}
-              onChange={handleClassChange}
-            >
-              <option value="9">9.Sınıf</option>
-              <option value="10">10.Sınıf</option>
-              <option value="11">11.Sınıf</option>
-              <option value="12">12.Sınıf</option>
-              <option value="diger">Diğer</option>
-            </InputSelect>
-            <InputSave
-              type="submit"
-              value="Değişiklikleri Kaydet"
-              onClick={handleChangeUserClass}
-            />
-          </FormGroup>
+          {userData.defaultAccountType === "öğrenci" && (
+            <FormGroup>
+              <LabelTitle>Sınıfınız</LabelTitle>
+              <LabelSubtitle>
+                Seçili Sınıfınız : <span>{userData.class}. Sınıf</span>
+              </LabelSubtitle>
+              <InputSelect
+                name="class"
+                id="class"
+                value={selectedClass}
+                onChange={handleClassChange}
+              >
+                <option value="9">9.Sınıf</option>
+                <option value="10">10.Sınıf</option>
+                <option value="11">11.Sınıf</option>
+                <option value="12">12.Sınıf</option>
+                <option value="diger">Diğer</option>
+              </InputSelect>
+              <InputSave
+                type="submit"
+                value="Değişiklikleri Kaydet"
+                onClick={handleChangeUserClass}
+              />
+            </FormGroup>
+          )}
+
           <FormGroup>
             <LabelTitle>Doğum Tarihiniz</LabelTitle>
             <LabelSubtitle>
@@ -350,79 +361,30 @@ function Settings() {
               onClick={handleChangeBirthDate}
             />
           </FormGroup>
-          {/* <FormGroup>
-            <LabelTitle>Hesap Türü</LabelTitle>
-            <LabelSubtitle>
-              Dilediğiniz hesap türlerini seçebilirsiniz.
-            </LabelSubtitle>
-            <LabelSubtitle>
-              Mevcut Güncel
-              <br /> Durum Durum{" "}
-            </LabelSubtitle>
-            <DivFlex>
-              <InputCheckBox
-                type="checkbox"
-                id="student"
-                checked={accountType && accountType.includes("öğrenci")}
-              />
-              <InputCheckBox
-                type="checkbox"
-                id="student"
-                value="öğrenci"
-                onChange={handleCheckboxChange1}
-              />
-              <LabelCheckBox> Öğrenci </LabelCheckBox>
-            </DivFlex>
-            <DivFlex>
-              <InputCheckBox
-                type="checkbox"
-                id="teacher"
-                checked={accountType && accountType.includes("öğretmen")}
-              />
-              <InputCheckBox
-                type="checkbox"
-                id="teacher"
-                value="öğretmen"
-                onChange={handleCheckboxChange2}
-              />
-              <LabelCheckBox> Öğretmen</LabelCheckBox>
-            </DivFlex>
-            <DivFlex>
-              <InputCheckBox
-                type="checkbox"
-                id="parent"
-                checked={accountType && accountType.includes("veli")}
-              />
-              <InputCheckBox
-                type="checkbox"
-                id="parent"
-                value="veli"
-                onChange={handleCheckboxChange3}
-              />
-              <LabelCheckBox> Veli</LabelCheckBox>
-            </DivFlex>
-            <InputSave
-              type="submit"
-              value="Değişiklikleri Kaydet"
-              onClick={handleAccountChanges}
-            />
-          </FormGroup> */}
+
           <FormGroup>
             <LabelSubtitle>
               Anasayfanızda görünmesini istediğiniz hesap türünü seçiniz.
             </LabelSubtitle>
             <LabelSubtitle>
-              Seçili Anasayfanız : <span>{userData.defaultAccountType}</span>
+              Seçili Anasayfanız :{" "}
+              <span>
+                {userData.defaultAccountType
+                  ? userData.defaultAccountType.charAt(0).toUpperCase() +
+                    userData.defaultAccountType.slice(1)
+                  : ""}
+              </span>
             </LabelSubtitle>
+
             <InputSelect
               name="accounts"
               id="accounts"
               value={selectedDefaultAccount}
               onChange={handleDefaultChange}
             >
-              <option value="öğrenci">öğrenci </option>
-              <option value="öğretmen">öğretmen</option>
-              <option value="veli">veli</option>
+              <option value="öğrenci">Öğrenci </option>
+              <option value="öğretmen">Öğretmen</option>
+              <option value="veli">Veli</option>
             </InputSelect>
             <InputSave
               type="submit"
@@ -430,23 +392,7 @@ function Settings() {
               onClick={handleDefaultAccountChanges}
             />
           </FormGroup>
-          <FormGroup>
-            <LabelTitle>Sınıf Kodunuz</LabelTitle>
-            <LabelSubtitle>
-              Öğretmeninizin size vermiş olduğu sınıf kodunuz:{" "}
-              <span>{userData.classCode}</span>{" "}
-            </LabelSubtitle>
-            <InputText
-              type="text"
-              placeholder={userData.classCode}
-              onChange={handleClassCodeChange}
-            />
-            <InputSave
-              type="submit"
-              value="Değişiklikleri Kaydet"
-              onClick={handleChangeClassCode}
-            />
-          </FormGroup>
+
           <DeleteAccount />
         </FormContainer>
       </SettingsContainer>
@@ -457,7 +403,7 @@ function Settings() {
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   min-height: 100vh;
   justify-content: space-between;
   width: var(--main-width);
@@ -467,20 +413,21 @@ export const Container = styled.div`
 export const SettingsContainer = styled.div`
   width: 100%;
   margin-top: 1.5rem;
+  max-width: 600px;
 `;
 export const FormContainer = styled.div`
-width: 100%;`;
+  width: 100%;
+`;
 
 export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 4rem;
+  margin-bottom: 1.4rem;
 `;
 
 export const LabelTitle = styled.label`
   font-size: 1.2rem;
   font-weight: bold;
-  margin-left: 0.5rem;
   margin-bottom: 0.5rem;
 `;
 

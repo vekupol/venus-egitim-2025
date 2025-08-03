@@ -14,31 +14,62 @@ function DerslerStyle() {
 
 export const Container = styled.div`
   width: 100%;
-  max-width: var(--main-width);
-  min-height: 100vh;
+  max-width: inherit; /* ✅ main'e uyar */
   display: flex;
-  padding: 0rem 2rem;
+  flex-direction: row; /* ✅ Intro sayfaları dikey */
+  padding: 0 2rem;
+  box-sizing: border-box;
 
   @media screen and (max-width: 768px) {
+    flex-direction: column; /* Mobilde alt alta */
     padding: 0rem;
   }
 `;
 
+export const Main = styled.div`
+  flex: 1;
+  padding: 1rem 2rem;
+  height: auto;
+  width: 100%; /* ✅ Tam genişlik */
+  max-width: 100%;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem; /* ✅ Mobilde daha dar padding */
+  }
+`;
+
+/* ✅ Sidebar genişlik ve overflow fix */
 export const Sidebar = styled.div`
   width: 280px;
+  min-width: 250px;
   margin: 10px;
   border-radius: 5px;
   box-shadow: 0px 8px 8px 8px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+
+  @media screen and (max-width: 1024px) {
+    width: 220px; /* Tablet görünümü */
+  }
 
   @media screen and (max-width: 768px) {
-    display: none;
+    width: 100%; /* Mobilde tam genişlik */
+    min-width: unset;
+    margin: 0;
+    box-shadow: none;
+    display: block; /* Mobilde göstermek istersen */
+    order: 2; /* İçeriğin altına yerleşir */
   }
 `;
 
 export const CourseTitle = styled.div`
   background-color: var(--main-color);
-  padding: 1rem 0rem 1rem 0rem;
+  padding: 1rem 0rem;
   color: white;
+  min-height: 127px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 `;
 
 export const CourseName = styled.div`
@@ -75,11 +106,6 @@ export const UnitName = styled.div`
   }
 `;
 
-export const Main = styled.div`
-  flex: 1;
-  padding: 1rem 2rem;
-  height: auto;
-`;
 export const Icons = styled.div`
   display: flex;
   align-items: center;
@@ -182,12 +208,12 @@ export const CourseSubTitle = styled.div`
 
   border-bottom: 0.1px solid var(--main-color);
 `;
+
+/* ✅ Video thumbnail responsive */
 export const VideoImage = styled.div`
   width: 100%;
   aspect-ratio: 16/9;
-  height: 56%;
   border: 2px solid var(--main-color);
-
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -214,10 +240,7 @@ export const VideoImage = styled.div`
 export const PlayIcon = styled(FaRegCirclePlay)`
   color: var(--main-color);
   cursor: pointer;
-  overflow-y: hidden;
   font-size: 3.5rem;
-  overflow-y: hidden;
-  margin: 0rem 1rem;
 
   @media (max-width: 1000px) {
     font-size: 2rem;
@@ -237,8 +260,6 @@ export const ChangeLessonDiv = styled.div`
   @media screen and (max-width: 768px) {
     margin: 0px;
   }
-
-  
 `;
 
 export default DerslerStyle;

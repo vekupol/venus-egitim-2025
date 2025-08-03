@@ -6,19 +6,22 @@ import {
   UnitContainer,
   Parts,
   Unit,
-  Part,
   UnitsShadow,
   Icons,
-} from "../style/DerslerIntroStyle";
-import ProgressBarTable from "../../../components/progressBar/ProgressBarTable";
-import { CustomLink, CustomLinkLeft } from "../../../components/buttons/Button.styled";
+  Part,
+} from "../../courses/drawers/intro";
+
+import {
+  CustomLink,
+  CustomLinkLeft,
+} from "../../../components/buttons/Button.styled";
 import jsonData from "./MatematikLiseDokuz.json";
 
 function DokuzMatematikIntro() {
-  const [onMatematik, setOnMatematikData] = useState(null);
+  const [dokuzMatematik, setDokuzMatematikData] = useState(null);
 
   useEffect(() => {
-    setOnMatematikData(jsonData)
+    setDokuzMatematikData(jsonData);
   }, []);
 
   return (
@@ -33,25 +36,26 @@ function DokuzMatematikIntro() {
       <Title>
         <h1> 9. Sınıf Matematik </h1>
       </Title>
-      <ProgressBarTable progressArray={onMatematik?.units} />
-      <Title>
-        <h2>Üniteler</h2>
+      <Title style={{ color: "var(--main-color)" }}>
+        <h2>Temalar</h2>
       </Title>
       <UnitContainer>
-        {onMatematik &&
-          onMatematik.units &&
-          onMatematik.units.map((unit, index) => (
+        {dokuzMatematik &&
+          dokuzMatematik.temalar &&
+          dokuzMatematik.temalar.map((unit, index) => (
             <UnitsShadow key={index}>
-              <CustomLinkLeft to={`/matematik/10-sinif/${unit.link}/intro`}>
+              <CustomLinkLeft to={`/matematik/9-sinif/${unit.link}/intro`}>
                 <Unit>{unit.name}</Unit>
               </CustomLinkLeft>
               <Parts>
                 {unit.konular &&
                   unit.konular.map((konu) => (
-                    <CustomLinkLeft to={`/matematik/10-sinif/${unit.link}/${konu.link}/intro`} >
-                      <Part
-                        key={konu.konuId}
-                      > <BsArrowRightShort/>
+                    <CustomLinkLeft
+                      to={`/matematik/9-sinif/${unit.link}/${konu.link}/intro`}
+                    >
+                      <Part key={konu.konuId}>
+                        {" "}
+                        <BsArrowRightShort />
                         {konu.name}
                       </Part>
                     </CustomLinkLeft>

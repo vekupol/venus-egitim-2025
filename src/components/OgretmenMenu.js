@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import ellipse1 from "../images/ellipse1.svg";
-import teacher2 from "../images/teacher-2.svg";
-import teacher3 from "../images/teacher-3.svg";
-import teacher4 from "../images/teacher-4.svg";
+import teacher2 from "../images/airesim21.png";
+import teacher3 from "../images/airesim22.png";
+import teacher4 from "../images/airesim23.png";
 import { Btn } from "./buttons/ButtonStudent";
 import { Link } from "react-router-dom";
 import {
@@ -68,16 +68,37 @@ const Image = styled.img`
 const StudentImage1 = styled(StudentImage)`
   top: 3%;
   left: 6%;
+  border-radius: 70px;
+  transform: rotate(-6deg);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
 `;
 
 const StudentImage2 = styled(StudentImage)`
   left: 18%;
   bottom: 15%;
+  border-radius: 70px;
+  transform: rotate(8deg);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
 `;
 
 const StudentImage3 = styled(StudentImage)`
   left: 55%;
   bottom: 35%;
+  border-radius: 70px;
+  transform: rotate(-4deg);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
 `;
 
 const TextContainerLeft = styled(TextContainer)`

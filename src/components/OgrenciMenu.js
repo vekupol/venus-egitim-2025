@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import ellipse1 from "../images/ellipse1.svg";
-import student2 from "../images/student-2.svg";
-import student3 from "../images/student-3.svg";
-import student4 from "../images/student-4.svg";
+import student2 from "../images/airesim5.png";
+import student3 from "../images/airesim9.png";
+import student4 from "../images/airesim3.png";
 import { Btn } from "./buttons/ButtonStudent";
 import { Link } from "react-router-dom";
 
@@ -88,16 +88,37 @@ export const StudentImage = styled.img`
 const StudentImage1 = styled(StudentImage)`
   top: 1%;
   left: 8%;
+  border-radius: 70px;
+  transform: rotate(-6deg);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
 `;
 
 const StudentImage2 = styled(StudentImage)`
   left: 8%;
   bottom: 60px;
+  border-radius: 70px;
+  transform: rotate(8deg);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
 `;
 
 const StudentImage3 = styled(StudentImage)`
   left: 50%;
   bottom: 25%;
+  border-radius: 70px;
+  transform: rotate(-4deg);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
 `;
 
 export const TextContainer = styled.div`
@@ -119,6 +140,7 @@ export const Title = styled.p`
   margin-bottom: 2rem;
   @media (max-width: 768px) {
     margin-bottom: 0;
+    font-size: 30px;
   }
 `;
 export const Subtitle = styled.p`
@@ -128,6 +150,7 @@ export const Subtitle = styled.p`
   margin-bottom: 2rem;
   @media (max-width: 768px) {
     margin-bottom: 0;
+    font-size: 30px;
   }
 `;
 export const Description = styled.p`
@@ -138,6 +161,7 @@ export const Description = styled.p`
   margin-bottom: 2rem;
   @media (max-width: 768px) {
     margin-bottom: 1rem;
+    font-size: 20px;
   }
 `;
 

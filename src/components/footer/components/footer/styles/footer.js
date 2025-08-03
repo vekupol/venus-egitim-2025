@@ -4,13 +4,11 @@ export const Container = styled.footer`
   padding: 30px 0px;
   background-color: var(--main-color);
   width: 100%;
-  position: sticky;
-  bottom: 0;
+  position: relative; /* Sticky yerine relative kullanıldı */
+  margin-top: auto; /* Flex yapıda footer'ı alta iter */
 
   @media (max-width: 1000px) {
     padding: 20px 10px;
-    position: sticky;
-    bottom: 0;
   }
 `;
 
@@ -26,7 +24,6 @@ export const Column = styled.div`
   flex-direction: column;
   text-align: center;
   margin-left: 0px;
-
 `;
 
 export const Row = styled.div`
@@ -41,13 +38,16 @@ export const Row = styled.div`
 `;
 
 export const Link = styled.a`
-  color: #fff;
+  color: ${({ disabled }) => (disabled ? "#a1a1aa" : "#fff")};
   margin-bottom: 20px;
   font-size: 18px;
   text-decoration: none;
+  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   &:hover {
-    color: #ff9c00;
+    color: ${({ disabled }) => (disabled ? "#a1a1aa" : "#ff9c00")};
     transition: 200ms ease-in;
   }
 

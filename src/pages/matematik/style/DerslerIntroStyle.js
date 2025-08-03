@@ -1,14 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 function DerslerIntroStyle() {
-  return (
-    <div>
-      Intro style ları burada
-    </div>
-  )
+  return <div>Intro style ları burada</div>;
 }
-
 
 export const Container = styled.div``;
 
@@ -55,16 +50,15 @@ export const Description = styled.div`
 
 export const UnitContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   padding: 0rem 1rem 1rem 1rem;
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-
 `;
 
 export const Unit = styled.div`
@@ -83,15 +77,14 @@ export const Unit = styled.div`
   }
 `;
 
-export const Parts = styled.div`
-`;
+export const Parts = styled.div``;
 
 export const Part = styled.div`
   font-size: 1rem;
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
-  
+
   :hover {
     cursor: pointer;
     text-decoration: underline;
@@ -130,13 +123,13 @@ export const TotalProgress = styled.div`
 export const UnitsShadow = styled.div`
   padding: 1rem;
   margin-top: 1rem;
+  width: 46%;
   border-radius: 9px;
   box-shadow: 5px 5px 14px #666666, -5px -5px 14px #ffffff;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1280px) {
+    width: 100%;
   }
 `;
 
-
-
-export default DerslerIntroStyle
+export default DerslerIntroStyle;

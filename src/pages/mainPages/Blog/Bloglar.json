@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Matematik Çalışma İpuçları",
+    "date": "02 Ağustos 2025",
+    "image": "blog1.jpg",
+    "category": "Matematik",
+    "excerpt": "Matematik dersinde başarılı olmak için işte en etkili yöntemler...",
+    "content": "Matematikte başarılı olmanın yollarını keşfedin. Günlük tekrarlar, problem çözme teknikleri ve etkili not tutma yöntemleri hakkında detaylı bilgiler.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 2,
+    "title": "Fen Bilimlerinde Yeni Yaklaşımlar",
+    "date": "28 Temmuz 2025",
+    "image": "blog2.jpg",
+    "category": "Fen Bilimleri",
+    "excerpt": "Fen derslerinde yeni müfredatla birlikte yapılan değişiklikler...",
+    "content": "Fen bilimlerinde yapılan yeni müfredat değişiklikleri ile öğrencilere kazandırılmak istenen becerileri öğrenin.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 3,
+    "title": "Geometriyi Kolaylaştıran Yöntemler",
+    "date": "20 Temmuz 2025",
+    "image": "blog3.jpg",
+    "category": "Matematik",
+    "excerpt": "Geometri dersinde zorlananlar için pratik çözümler...",
+    "content": "Geometri konularında kullanılan temel kavramları ve problem çözme tekniklerini öğrenerek sınavlarda avantaj sağlayın.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 4,
+    "title": "Kimya Deneylerinde Güvenlik Kuralları",
+    "date": "15 Temmuz 2025",
+    "image": "blog4.jpg",
+    "category": "Fen Bilimleri",
+    "excerpt": "Kimya dersinde deney yaparken dikkat edilmesi gerekenler...",
+    "content": "Kimya laboratuvarında güvenlik için bilmeniz gereken temel kurallar ve önlemler hakkında detaylı bilgi.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 5,
+    "title": "Problemleri Hızlı Çözmenin Yolları",
+    "date": "10 Temmuz 2025",
+    "image": "blog5.jpg",
+    "category": "Matematik",
+    "excerpt": "Matematik problemlerini daha hızlı nasıl çözersiniz?",
+    "content": "Problemleri hızlı ve doğru çözmek için kullanılan kısa yollar ve formül ezberleme tekniklerini keşfedin.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 6,
+    "title": "Biyoloji Çalışırken Dikkat Edilmesi Gerekenler",
+    "date": "05 Temmuz 2025",
+    "image": "blog6.jpg",
+    "category": "Fen Bilimleri",
+    "excerpt": "Biyoloji konularını kolay öğrenmenin püf noktaları...",
+    "content": "Biyolojide ezberlenmesi gereken kavramları daha kolay öğrenmek için faydalı ipuçları.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 7,
+    "title": "Matematikte Formülleri Ezberleme Teknikleri",
+    "date": "01 Temmuz 2025",
+    "image": "blog7.jpg",
+    "category": "Matematik",
+    "excerpt": "Formülleri akılda kalıcı hale getirmek için öneriler...",
+    "content": "Matematik formüllerini kolayca ezberlemek için hafıza tekniklerini ve tekrar yöntemlerini öğrenin.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 8,
+    "title": "Fizik Sorularında En Sık Yapılan Hatalar",
+    "date": "25 Haziran 2025",
+    "image": "blog8.jpg",
+    "category": "Fen Bilimleri",
+    "excerpt": "Fizik dersinde dikkat edilmesi gereken en önemli noktalar...",
+    "content": "Fizik sınavlarında yapılan tipik hataları öğrenin ve bunlardan nasıl kaçınabileceğinizi keşfedin.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 9,
+    "title": "Matematikte Grafik Yorumlama Becerisi",
+    "date": "18 Haziran 2025",
+    "image": "blog9.jpg",
+    "category": "Matematik",
+    "excerpt": "Grafik sorularını daha kolay yorumlamanın yolları...",
+    "content": "Grafik sorularını çözmede kullanılan temel prensipler ve yorumlama teknikleri hakkında bilgi alın.\nİkinci paragraf burada yer alıyor."
+  },
+  {
+    "id": 10,
+    "title": "Fen Projeleri İçin Yaratıcı Fikirler",
+    "date": "10 Haziran 2025",
+    "image": "blog10.jpg",
+    "category": "Fen Bilimleri",
+    "excerpt": "Fen projelerinde kullanabileceğiniz yaratıcı ve kolay fikirler...",
+    "content": "Fen derslerinde proje hazırlarken kullanılabilecek basit ama etkili fikirler ve örnek projeler.\nİkinci paragraf burada yer alıyor."
+  }
+]

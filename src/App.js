@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { MainRouter1, MainRouter2 } from "./router/MainRouter";
 import { StudentRouter1, StudentRouter2 } from "./router/StudentRouter";
+import { ParentRouter1, ParentRouter2 } from "./router/ParentRouter";
 import MainLayout from "./layout/MainLayout";
 import NotFound from "./pages/mainPages/NotFound";
 import Loading from "./components/Loading";
@@ -16,6 +17,7 @@ import { Matematik12 } from "./router/Matematik12Router";
 import { MatematikTyt } from "./router/MatematikTytRouter";
 import { MatematikAyt } from "./router/MatematikAytRouter";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import "antd/dist/reset.css"; // Ant Design 5.x için
 
 const authInstance = getAuth();
 const db = getFirestore();
@@ -56,19 +58,22 @@ function App() {
           {isLoggedIn ? (
             <>
               <Route element={<MainLayout />}>
-                {accountType === "öğretmen" ? ( // Ternary operator kullanımı
-                  TeacherRouter1.map((item, index) => (
-                    <Route key={index} {...item} />
-                  ))
-                ) : (
-                  // "öğretmen değilse" koşulu
-                  <>
-                    {StudentRouter1.map((item, index) => (
+                {accountType === "öğretmen"
+                  ? TeacherRouter1.map((item, index) => (
+                      <Route key={index} {...item} />
+                    ))
+                  : accountType === "veli"
+                  ? ParentRouter1.map((item, index) => (
+                      <Route key={index} {...item} />
+                    ))
+                  : StudentRouter1.map((item, index) => (
                       <Route key={index} {...item} />
                     ))}
-                    {/* Buraya öğretmen olmayanlar için ek rotalar ekleyebilirsiniz */}
-                  </>
-                )}
+
+                {/* ✅ Blog rotalarını buraya ekle */}
+                {MainRouter1.map((item, index) => (
+                  <Route key={index} {...item} />
+                ))}
               </Route>
             </>
           ) : (
@@ -86,6 +91,7 @@ function App() {
               </Route>
             </>
           )}
+
           {/* Diğer routerlar */}
           <Route element={<MainLayout />}>
             {Matematik9.map((item, index) => (

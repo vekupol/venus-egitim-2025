@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   ClassContainer,
-  Container,
   Homeworks,
   Name,
   Students,
@@ -16,7 +15,7 @@ import {
   ButtonO,
 } from "./ClassEdit";
 import { useParams } from "react-router-dom";
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
 import {
   getDocs,
   addDoc,
@@ -31,17 +30,39 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 import PieChart from "../../components/graphs/PieChart";
 import BarChart from "../../components/graphs/BarChart";
+import {
+  ref,
+  listAll,
+  getDownloadURL,
+  deleteObject,
+  uploadBytes,
+} from "firebase/storage";
+import ReactTable from "../../components/tables/ReactTable";
 
 function StudentEdit() {
   const [teacherUser] = useAuthState(auth);
   const belirliKullaniciUID = teacherUser ? teacherUser.uid : null;
-
   const { studentUid } = useParams();
   const [user, setUser] = useState([]);
   const [userData, setUserData] = useState("");
   const [homework, setHomeworks] = useState([]);
   const [myHomework, setMyHomeworks] = useState([]);
-  console.log(homework);
+  const [fileMap, setFileMap] = useState({});
+  const [availableHomeworkFiles, setAvailableHomeworkFiles] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const data = myHomework.map((item, index) => ({
+    id: item.id,
+    no: index + 1,
+    className: item.className,
+    unit: item.unit,
+    kazanims: Array.isArray(item.kazanims)
+      ? item.kazanims.join(", ")
+      : item.kazanims,
+    startDate: item.startDate,
+    endDate: item.endDate,
+    durum: item.bittiMi === 1 ? "Tamamlandı" : "Tamamlanmadı",
+  }));
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -63,8 +84,6 @@ function StudentEdit() {
           setUserData(userData);
           setHomeworks(userHomework);
           setMyHomeworks(myFilteredHomework);
-        } else {
-          console.log("Sınıf belgesi bulunamadı!");
         }
       } catch (error) {
         console.error("Öğrenci getirme hatası:", error);
@@ -74,273 +93,243 @@ function StudentEdit() {
     fetchStudents();
   }, [studentUid, belirliKullaniciUID]);
 
-  const [formValues, setFormValues] = useState({
+  const [platformValues, setPlatformValues] = useState({
     className: "",
     unit: "",
-    kazanim: "",
-    konuTekrari: "",
+    kazanims: [],
     note: "",
     soruSayisi: "",
     startDate: "",
     endDate: "",
     bittiMi: 0,
-    // Diğer form alanları buraya eklenebilir
   });
 
-  const [formValues2, setFormValues2] = useState({
+  const [kitapValues, setKitapValues] = useState({
     className: "",
+    yayinevi: "",
+    kitapAdi: "",
     unit: "",
-    kazanim: "",
-    note2: "",
-    konuTekrari: "",
-    soruSayisi: "",
+    baslangic: "",
+    bitis: "",
     startDate: "",
     endDate: "",
+    note: "",
     bittiMi: 0,
-    // Diğer form alanları buraya eklenebilir
   });
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    // Form değerlerini al
-    const {
-      className,
-      unit,
-      kazanim,
-      note,
-      konuTekrari,
-      soruSayisi,
-      startDate,
-      endDate,
-    } = formValues;
+  const [fileValues, setFileValues] = useState({
+    note: "",
+    startDate: "",
+    endDate: "",
+  });
 
-    // Boş bir form kontrolü
-    if (
-      !className ||
-      !unit ||
-      !kazanim ||
-      !konuTekrari ||
-      !soruSayisi ||
-      !startDate ||
-      !endDate
-    ) {
-      alert("Lütfen tüm alanları doldurun.");
-      return; // Form boşsa işlemi durdur
+  const fetchStudentHomeworkFiles = async () => {
+    const map = {};
+    for (const item of myHomework) {
+      const uidPath = item.studentUid || studentUid;
+      const path = `homework-files/${uidPath}/${item.id}/`;
+      try {
+        const result = await listAll(ref(storage, path));
+        const files = await Promise.all(
+          result.items.map(async (fileRef) => ({
+            name: fileRef.name,
+            url: await getDownloadURL(fileRef),
+            ref: fileRef,
+          }))
+        );
+        map[item.id] = files;
+      } catch {
+        map[item.id] = [];
+      }
     }
+    setFileMap(map);
+  };
 
+  useEffect(() => {
+    if (myHomework.length > 0) {
+      fetchStudentHomeworkFiles();
+    }
+  }, [myHomework]);
+
+  const checkHomeworkFiles = async () => {
+    const available = {};
+    for (const item of myHomework) {
+      const folderPath = `homework-files/${item.studentUid}/${item.id}/`;
+      const folderRef = ref(storage, folderPath);
+      try {
+        const res = await listAll(folderRef);
+        available[item.id] = res.items.length > 0;
+      } catch {
+        available[item.id] = false;
+      }
+    }
+    setAvailableHomeworkFiles({ ...available });
+  };
+
+  useEffect(() => {
+    if (myHomework.length > 0) {
+      checkHomeworkFiles();
+    }
+  }, [myHomework]);
+
+  const handleDeleteStudentFile = async (fileRef, homeworkId) => {
     try {
-      // Form verilerini Firestore'a ekle
-      const reversedStartDate = startDate.split("-").reverse().join("-");
-      const reversedEndDate = endDate.split("-").reverse().join("-");
+      await deleteObject(fileRef);
+      fetchStudentHomeworkFiles();
+    } catch (err) {
+      console.error("Dosya silinemedi:", err);
+      alert("Dosya silinemedi.");
+    }
+  };
 
-      const homeworkData = {
-        className,
-        unit,
-        kazanim,
-        konuTekrari,
-        note,
-        soruSayisi,
-        startDate: reversedStartDate,
-        endDate: reversedEndDate,
-        bittiMi: 0,
-        studentUid: user.uid,
-        teacherUid: belirliKullaniciUID,
-      };
-
-      // Öğrenci belgesini al
-      const studentDocRef = doc(db, "users", user.uid);
-      const studentDocSnap = await getDoc(studentDocRef);
-
-      if (studentDocSnap.exists()) {
-        const studentData = studentDocSnap.data();
-
-        // Eski ödevler dizisi var mı kontrol et
-        const currentHomeworks = studentData.homeworks || [];
-
-        // Yeni ödevi ekle
-        const newHomeworkRef = await addDoc(collection(db, "homeworks"), {
-          ...homeworkData,
-          // Ödev verilerini eklerken aynı zamanda ID'sini al
-        });
-
-        const homeworkId = newHomeworkRef.id; // Yeni ödevin ID'si
-
-        const updatedHomeworks = [
-          ...currentHomeworks,
-          { ...homeworkData, id: homeworkId },
-        ];
-
-        // Öğrenci belgesini güncelle
-        await updateDoc(studentDocRef, { homeworks: updatedHomeworks });
-        window.location.reload();
-
-        setFormValues({
-          className: "",
-          unit: "",
-          kazanim: "",
-          note: "",
-          konuTekrari: "",
-          soruSayisi: "",
-          startDate: "",
-          endDate: "",
-          bittiMi: 0,
-          // Diğer form alanları sıfırlanabilir
-        });
+  const handleViewHomework = async (item) => {
+    const fileRefPath = `homework-files/${item.studentUid}/${item.id}/`;
+    const folderRef = ref(storage, fileRefPath);
+    try {
+      const result = await listAll(folderRef);
+      if (result.items.length > 0) {
+        const downloadURL = await getDownloadURL(result.items[0]);
+        window.open(downloadURL, "_blank");
       } else {
-        console.log("Öğrenci belgesi bulunamadı!");
+        setAvailableHomeworkFiles((prev) => ({ ...prev, [item.id]: false }));
+        alert("Dosya bulunamadı. Silinmiş olabilir.");
       }
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("Dosya alınamadı:", error);
     }
   };
 
-  const handleFormSubmit2 = async (event) => {
-    event.preventDefault();
-    // Form değerlerini al
-    const {
-      className2,
-      yayinevi,
-      note2,
-      kitapAdi,
-      unit2,
-      baslangic,
-      bitis,
-      startDate2,
-      endDate2,
-    } = formValues2;
+  const saveHomework = async (homeworkData) => {
+    const newHomeworkRef = await addDoc(
+      collection(db, "homeworks"),
+      homeworkData
+    );
+    const homeworkId = newHomeworkRef.id;
 
-    // Boş bir form kontrolü
-    if (
-      !className2 ||
-      !yayinevi ||
-      !kitapAdi ||
-      !unit2 ||
-      !baslangic ||
-      !bitis ||
-      !startDate2 ||
-      !endDate2
-    ) {
-      alert("Lütfen tüm alanları doldurun.");
-      return; // Form boşsa işlemi durdur
-    }
-
-    try {
-      const reversedStartDate = startDate2.split("-").reverse().join("-");
-      const reversedEndDate = endDate2.split("-").reverse().join("-");
-
-      const homeworkData = {
-        className: className2,
-        yayinevi,
-        kitapAdi,
-        unit: unit2,
-        baslangic,
-        bitis,
-        startDate: reversedStartDate,
-        endDate: reversedEndDate,
-        note: note2,
-        bittiMi: 0,
-        studentUid: user.uid,
-        teacherUid: belirliKullaniciUID,
-      };
-
-      // Öğrenci belgesini al
-      const studentDocRef = doc(db, "users", user.uid);
-      const studentDocSnap = await getDoc(studentDocRef);
-
-      if (studentDocSnap.exists()) {
-        const studentData = studentDocSnap.data();
-
-        // Eski ödevler dizisi var mı kontrol et
-        const currentHomeworks = studentData.homeworks || [];
-
-        // Yeni ödevi ekle
-        const newHomeworkRef = await addDoc(collection(db, "homeworks"), {
-          ...homeworkData,
-          // Ödev verilerini eklerken aynı zamanda ID'sini al
-        });
-
-        const homeworkId = newHomeworkRef.id; // Yeni ödevin ID'si
-
-        const updatedHomeworks = [
-          ...currentHomeworks,
-          { ...homeworkData, id: homeworkId },
-        ];
-
-        // Öğrenci belgesini güncelle
-        await updateDoc(studentDocRef, { homeworks: updatedHomeworks });
-        window.location.reload();
-
-        setFormValues2({
-          className2: "",
-          yayinevi: "",
-          kitapAdi: "",
-          unit2: "",
-          baslangic: "",
-          bitis: "",
-          startDate2: "",
-          endDate2: "",
-          note2: "",
-          bittiMi: 0,
-          // Diğer form alanları sıfırlanabilir
-        });
-      } else {
-        console.log("Öğrenci belgesi bulunamadı!");
-      }
-    } catch (error) {
-      console.error("Error adding document: ", error);
+    const studentDocRef = doc(db, "users", user.uid);
+    const studentDocSnap = await getDoc(studentDocRef);
+    if (studentDocSnap.exists()) {
+      const studentData = studentDocSnap.data();
+      const currentHomeworks = studentData.homeworks || [];
+      const updatedHomeworks = [
+        ...currentHomeworks,
+        { ...homeworkData, id: homeworkId },
+      ];
+      await updateDoc(studentDocRef, { homeworks: updatedHomeworks });
     }
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
+  const handlePlatformSubmit = async (e) => {
+    e.preventDefault();
+    const homeworkData = {
+      className: platformValues.className,
+      unit: platformValues.unit,
+      kazanims: platformValues.kazanims,
+      note: platformValues.note,
+      soruSayisi: platformValues.soruSayisi,
+      startDate: platformValues.startDate.split("-").reverse().join("-"),
+      endDate: platformValues.endDate.split("-").reverse().join("-"),
+      bittiMi: 0,
       studentUid: user.uid,
       teacherUid: belirliKullaniciUID,
-    });
+    };
+    await saveHomework(homeworkData);
+    window.location.reload();
   };
 
-  const handleInputChange2 = (event) => {
-    const { name, value } = event.target;
-    setFormValues2({
-      ...formValues2,
-      [name]: value,
+  const handleKitapSubmit = async (e) => {
+    e.preventDefault();
+    const homeworkData = {
+      className: kitapValues.className,
+      yayinevi: kitapValues.yayinevi,
+      kitapAdi: kitapValues.kitapAdi,
+      unit: kitapValues.unit,
+      baslangic: kitapValues.baslangic,
+      bitis: kitapValues.bitis,
+      startDate: kitapValues.startDate.split("-").reverse().join("-"),
+      endDate: kitapValues.endDate.split("-").reverse().join("-"),
+      note: kitapValues.note,
+      bittiMi: 0,
       studentUid: user.uid,
       teacherUid: belirliKullaniciUID,
-    });
+    };
+    await saveHomework(homeworkData);
+    window.location.reload();
+  };
+
+  const handleFileSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedFile) {
+      alert("Lütfen bir dosya seçin.");
+      return;
+    }
+
+    const homeworkData = {
+      note: fileValues.note,
+      startDate: fileValues.startDate.split("-").reverse().join("-"),
+      endDate: fileValues.endDate.split("-").reverse().join("-"),
+      studentUid: user.uid,
+      teacherUid: belirliKullaniciUID,
+      bittiMi: 0,
+    };
+
+    const newHomeworkRef = await addDoc(
+      collection(db, "homeworks"),
+      homeworkData
+    );
+    const homeworkId = newHomeworkRef.id;
+
+    const fileRef = ref(
+      storage,
+      `homework-files/${user.uid}/${homeworkId}/${selectedFile.name}`
+    );
+    await uploadBytes(fileRef, selectedFile);
+
+    const fileURL = await getDownloadURL(fileRef);
+    homeworkData.fileURL = fileURL;
+
+    const studentDocRef = doc(db, "users", user.uid);
+    const studentDocSnap = await getDoc(studentDocRef);
+    if (studentDocSnap.exists()) {
+      const studentData = studentDocSnap.data();
+      const currentHomeworks = studentData.homeworks || [];
+      await updateDoc(studentDocRef, {
+        homeworks: [...currentHomeworks, { ...homeworkData, id: homeworkId }],
+      });
+    }
+
+    window.location.reload();
   };
 
   const handleHomeworkDelete = async (event, itemId) => {
     event.preventDefault();
+    const studentDocRef = doc(db, "users", user.uid);
+    const studentDocSnap = await getDoc(studentDocRef);
+    if (studentDocSnap.exists()) {
+      const studentData = studentDocSnap.data();
+      const currentHomeworks = studentData.homeworks || [];
+      const deletedItem = currentHomeworks.find((h) => h.id === itemId);
+      const updatedHomeworks = currentHomeworks.filter((h) => h.id !== itemId);
+      await updateDoc(studentDocRef, { homeworks: updatedHomeworks });
 
-    try {
-      const studentDocRef = doc(db, "users", user.uid);
-      const studentDocSnap = await getDoc(studentDocRef);
-
-      if (studentDocSnap.exists()) {
-        const studentData = studentDocSnap.data();
-        const currentHomeworks = studentData.homeworks || [];
-
-        // Ödev ID'sine göre belgeyi bul ve sil
-        const updatedHomeworks = currentHomeworks.filter(
-          (homework) => homework.id !== itemId
+      if (deletedItem) {
+        const folderRef = ref(
+          storage,
+          `homework-files/${deletedItem.studentUid}/${deletedItem.id}/`
         );
-        await updateDoc(studentDocRef, { homeworks: updatedHomeworks });
-        setMyHomeworks(updatedHomeworks);
-      } else {
-        console.log("Öğrenci belgesi bulunamadı!");
+        const files = await listAll(folderRef);
+        for (const fileRef of files.items) {
+          await deleteObject(fileRef);
+        }
       }
-    } catch (error) {
-      console.error("Ödev silme hatası:", error);
+      setMyHomeworks(updatedHomeworks);
+      await checkHomeworkFiles();
     }
   };
 
-  // Verileri hazırla
   const tamamlandi = homework.filter((item) => item.bittiMi === 1).length;
   const tamamlanmadi = homework.filter((item) => item.bittiMi === 0).length;
 
-  // PieChart için veriler
   const PieData = [
     ["TamamlandıMı", "Adet"],
     ["Tamamlanan Ödev Sayısı", tamamlandi],
@@ -350,8 +339,8 @@ function StudentEdit() {
   const PieOptions = {
     title: "Ödevlerin Tamamlanma Durumu",
     is3D: true,
-    colors: ["#674188", "#c4302b", "#0000ff", "#ffff00", "#ff00ff"], // Özel renkler
-    chartArea: { width: "80%", height: "80%" }, // Grafik alanı boyutu
+    colors: ["#674188", "#c4302b", "#0000ff", "#ffff00", "#ff00ff"],
+    chartArea: { width: "80%", height: "80%" },
     pieSliceBorderColor: "transparent",
   };
 
@@ -375,312 +364,309 @@ function StudentEdit() {
 
   return (
     <ClassContainer>
-      <Name>{userData.displayName} </Name>
+      <Name>{userData.displayName}</Name>
       <Container>
-        <Students>
-          <Form onSubmit={handleFormSubmit}>
-            <h3>Platform Ödevi Verme Bölümü</h3>
-            <FormGroup>
-              <Label>Sınıf:</Label>
-              <Select
-                name="className"
-                value={formValues.className}
-                onChange={handleInputChange}
-              >
-                <Option>Bir sınıf seçiniz...</Option>
-                <Option>9.Sınıf</Option>
-                <Option>10.Sınıf</Option>
-                <Option>11.Sınıf</Option>
-                <Option>12.Sınıf</Option>
-                <Option>TYT Konuları</Option>
-                <Option>AYT Konuları</Option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Ünite:</Label>
-              <Select
-                name="unit"
-                value={formValues.unit}
-                onChange={handleInputChange}
-              >
-                <Option value="">Lütfen bir ünite seçiniz...</Option>
-                <Option>Mantık </Option>
-                <Option>Kümeler </Option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Kazanım:</Label>
-              <Select
-                name="kazanim"
-                value={formValues.kazanim}
-                onChange={handleInputChange}
-              >
-                <Option value="">Lütfen bir kazanım seçiniz...</Option>
-                <Option>1.1.1. Doğru önerme nedir? </Option>
-                <Option>1.1.2. Yanlış önerme nedir? </Option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Konu Tekrarı:</Label>
-              <Select
-                name="konuTekrari"
-                value={formValues.konutekrari}
-                onChange={handleInputChange}
-              >
-                <Option>Konu tekrar edilsin mi?</Option>
-                <Option>Evet</Option>
-                <Option>Hayır</Option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Soru Sayısı:</Label>
-              <Select
-                name="soruSayisi"
-                value={formValues.soruSayisi}
-                onChange={handleInputChange}
-              >
-                <Option>Soru Sayısı giriniz.</Option>
-                {[...Array(101).keys()].map((number) => (
-                  <Option key={number}>{number + 1}</Option>
-                ))}
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Başlangıç Tarihi:</Label>
-              <InputDate
-                type="date"
-                name="startDate"
-                value={formValues.startDate}
-                onChange={handleInputChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Bitiş Tarihi:</Label>
-              <InputDate
-                type="date"
-                name="endDate"
-                value={formValues.endDate}
-                onChange={handleInputChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Not Ekle:</Label>
-              <InputDate
-                type="text"
-                name="note"
-                value={formValues.note}
-                onChange={handleInputChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Ödev Ağırlığı:</Label>
-              <p>
-                Bu ödev yaklaşık <span>3 saat</span> sürmektedir.
-              </p>
-            </FormGroup>
-            <FormGroup>
-              <Label>Ödev Ağırlığı:</Label>
-              <p>
-                Bu ödevin puanı <span>100 puandır</span>.
-              </p>
-            </FormGroup>
-            <ButtonO type="submit">Ödev Gönder</ButtonO>
-          </Form>
-        </Students>
-        <Homeworks>
-          <Form onSubmit={handleFormSubmit2}>
-            <h3>Kitap Ödevi Verme Bölümü</h3>
-            <FormGroup>
-              <Label>Sınıf:</Label>
-              <Select
-                name="className2"
-                value={formValues2.className2}
-                onChange={handleInputChange2}
-              >
-                <Option>Bir sınıf seçiniz...</Option>
-                <Option>9.Sınıf</Option>
-                <Option>10.Sınıf</Option>
-                <Option>11.Sınıf</Option>
-                <Option>12.Sınıf</Option>
-                <Option>TYT Konuları</Option>
-                <Option>AYT Konuları</Option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Yayınevi:</Label>
-              <Select
-                name="yayinevi"
-                value={formValues2.yayinevi}
-                onChange={handleInputChange2}
-              >
-                <Option>Bir yayınevi seçiniz...</Option>
-                <Option>A Yayınları</Option>
-                <Option>B Yayınları</Option>
-                <Option>C Yayınları</Option>
-                <Option>D Yayınları</Option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Kitap Adı:</Label>
-              <Select
-                name="kitapAdi"
-                value={formValues2.kitapAdi}
-                onChange={handleInputChange2}
-              >
-                <Option>Konu tekrar edilsin mi?</Option>
-                <Option>Evet</Option>
-                <Option>Hayır</Option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Ünite:</Label>
-              <Select
-                name="unit2"
-                value={formValues2.unit2}
-                onChange={handleInputChange2}
-              >
-                <Option value="">Lütfen bir ünite seçiniz...</Option>
-                <Option>Mantık </Option>
-                <Option>Kümeler </Option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
-              <Label>Sayfa Başlangıç:</Label>
-              <input
-                type="number"
-                name="baslangic"
-                value={formValues2.baslangic}
-                onChange={handleInputChange2}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Sayfa Bitiş:</Label>
-              <input
-                type="number"
-                name="bitis"
-                value={formValues2.bitis}
-                onChange={handleInputChange2}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Başlangıç Tarihi:</Label>
-              <InputDate
-                type="date"
-                name="startDate2"
-                value={formValues2.startDate2}
-                onChange={handleInputChange2}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Bitiş Tarihi:</Label>
-              <InputDate
-                type="date"
-                name="endDate2"
-                value={formValues2.endDate2}
-                onChange={handleInputChange2}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Not Ekle:</Label>
-              <InputDate
-                type="text"
-                name="note2"
-                value={formValues2.note2}
-                onChange={handleInputChange2}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Ödev Ağırlığı:</Label>
-              <p>
-                Bu ödev yaklaşık <span>3 saat</span> sürmektedir.
-              </p>
-            </FormGroup>
-            <FormGroup>
-              <Label>Ödev Ağırlığı:</Label>
-              <p>
-                Bu ödevin puanı <span>100 puandır</span>.
-              </p>
-            </FormGroup>
-            <ButtonO type="submit">Ödev Gönder</ButtonO>
-          </Form>
-        </Homeworks>
-        <Homeworks>
-          <StyledTable>
-            <thead>
-              <TableRow>
-                <TableHeader>No</TableHeader>
-                <TableHeader>Ödev Kazanımı</TableHeader>
-                <TableHeader>Puanı</TableHeader>
-                <TableHeader>Veriliş Tarihi</TableHeader>
-                <TableHeader>Bitiş Tarihi</TableHeader>
-                <TableHeader>İlerleme Durumu</TableHeader>
-                <TableHeader></TableHeader>
-              </TableRow>
-            </thead>
-            <tbody>
-              {myHomework &&
-                myHomework.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>{item.kazanim}</TableCell>
-                    <TableCell>100</TableCell>
-                    <TableCell>{item.startDate}</TableCell>
-                    <TableCell>{item.endDate}</TableCell>
-                    <TableCell>
-                      {item.bittiMi === 1 ? "Tamamlandı" : "Tamamlanmadı"}
-                    </TableCell>
-                    <TableCell>
-                      <ButtonSil
-                        onClick={(event) =>
-                          handleHomeworkDelete(event, item.id)
-                        }
-                      >
-                        Ödevi Sil
-                      </ButtonSil>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </tbody>
-          </StyledTable>
-        </Homeworks>
-        <Homeworks>
-          <Students>
-            <MyStudents>Tüm Ödevleri</MyStudents>
-            <Aciklama>
-              Öğrencinize{" "}
-              <span>sizin ve platforma kayıtlı öğretmenlerimizin</span> verdiği
-              tüm ödevler bu alanda gözükür.
-            </Aciklama>
-            <StyledTable>
-              <thead>
-                <TableRow>
-                  <TableHeader>No</TableHeader>
-                  <TableHeader>Ödev Kazanımı</TableHeader>
-                  <TableHeader>Puanı</TableHeader>
-                  <TableHeader>Veriliş Tarihi</TableHeader>
-                  <TableHeader>Bitiş Tarihi</TableHeader>
-                  <TableHeader>İlerleme Durumu</TableHeader>
-                </TableRow>
-              </thead>
-              <tbody>
-                {homework &&
-                  homework.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>{item.kazanim}</TableCell>
-                      <TableCell>100</TableCell>
-                      <TableCell>{item.startDate}</TableCell>
-                      <TableCell>{item.endDate}</TableCell>
-                      <TableCell>
-                        {item.bittiMi === 1 ? "Tamamlandı" : "Tamamlanmadı"}
-                      </TableCell>
-                    </TableRow>
+        <ContainerFlex>
+          {/* Platform Ödevi */}
+          <ContainerBorder>
+            <Form onSubmit={handlePlatformSubmit}>
+              <h3>Venüs Eğitim'den Ödev Ver</h3>
+              <FormGroup>
+                <Label>Sınıf:</Label>
+                <Select
+                  name="className"
+                  value={platformValues.className}
+                  onChange={(e) =>
+                    setPlatformValues({
+                      ...platformValues,
+                      className: e.target.value,
+                    })
+                  }
+                >
+                  <Option>Bir sınıf seçiniz...</Option>
+                  <Option>9.Sınıf</Option>
+                  <Option>10.Sınıf</Option>
+                  <Option>11.Sınıf</Option>
+                  <Option>12.Sınıf</Option>
+                  <Option>TYT Konuları</Option>
+                  <Option>AYT Konuları</Option>
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Ünite:</Label>
+                <Select
+                  name="unit"
+                  value={platformValues.unit}
+                  onChange={(e) =>
+                    setPlatformValues({
+                      ...platformValues,
+                      unit: e.target.value,
+                    })
+                  }
+                >
+                  <Option>Mantık</Option>
+                  <Option>Kümeler</Option>
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Kazanımlar:</Label>
+                <Select
+                  multiple
+                  name="kazanims"
+                  value={platformValues.kazanims}
+                  onChange={(e) =>
+                    setPlatformValues({
+                      ...platformValues,
+                      kazanims: Array.from(
+                        e.target.selectedOptions,
+                        (opt) => opt.value
+                      ),
+                    })
+                  }
+                >
+                  <Option>1.1.1. Doğru önerme nedir?</Option>
+                  <Option>1.1.2. Yanlış önerme nedir?</Option>
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Soru Sayısı:</Label>
+                <Select
+                  name="soruSayisi"
+                  value={platformValues.soruSayisi}
+                  onChange={(e) =>
+                    setPlatformValues({
+                      ...platformValues,
+                      soruSayisi: e.target.value,
+                    })
+                  }
+                >
+                  <Option>Soru Sayısı giriniz</Option>
+                  {[...Array(101).keys()].map((n) => (
+                    <Option key={n}>{n + 1}</Option>
                   ))}
-              </tbody>
-            </StyledTable>
-          </Students>
-        </Homeworks>
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Başlangıç Tarihi:</Label>
+                <InputDate
+                  type="date"
+                  name="startDate"
+                  value={platformValues.startDate}
+                  onChange={(e) =>
+                    setPlatformValues({
+                      ...platformValues,
+                      startDate: e.target.value,
+                    })
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Bitiş Tarihi:</Label>
+                <InputDate
+                  type="date"
+                  name="endDate"
+                  value={platformValues.endDate}
+                  onChange={(e) =>
+                    setPlatformValues({
+                      ...platformValues,
+                      endDate: e.target.value,
+                    })
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Not:</Label>
+                <InputDate
+                  type="text"
+                  name="note"
+                  value={platformValues.note}
+                  onChange={(e) =>
+                    setPlatformValues({
+                      ...platformValues,
+                      note: e.target.value,
+                    })
+                  }
+                />
+              </FormGroup>
+              <ButtonO type="submit">Ödev Gönder</ButtonO>
+            </Form>
+          </ContainerBorder>
+
+          {/* Kitap Ödevi */}
+          <ContainerBorder>
+            <Form onSubmit={handleKitapSubmit}>
+              <h3>Soru Bankalarından Ödev Ver</h3>
+              <FormGroup>
+                <Label>Sınıf:</Label>
+                <Select
+                  name="className"
+                  value={kitapValues.className}
+                  onChange={(e) =>
+                    setKitapValues({
+                      ...kitapValues,
+                      className: e.target.value,
+                    })
+                  }
+                >
+                  <Option>9.Sınıf</Option>
+                  <Option>10.Sınıf</Option>
+                  <Option>11.Sınıf</Option>
+                  <Option>12.Sınıf</Option>
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Yayınevi:</Label>
+                <Select
+                  name="yayinevi"
+                  value={kitapValues.yayinevi}
+                  onChange={(e) =>
+                    setKitapValues({ ...kitapValues, yayinevi: e.target.value })
+                  }
+                >
+                  <Option>A Yayınları</Option>
+                  <Option>B Yayınları</Option>
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Kitap Adı:</Label>
+                <Select
+                  name="kitapAdi"
+                  value={kitapValues.kitapAdi}
+                  onChange={(e) =>
+                    setKitapValues({ ...kitapValues, kitapAdi: e.target.value })
+                  }
+                >
+                  <Option>Matematik Soru Bankası</Option>
+                  <Option>Fizik Test Kitabı</Option>
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Ünite:</Label>
+                <Select
+                  name="unit"
+                  value={kitapValues.unit}
+                  onChange={(e) =>
+                    setKitapValues({ ...kitapValues, unit: e.target.value })
+                  }
+                >
+                  <Option>Mantık</Option>
+                  <Option>Kümeler</Option>
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Sayfa Başlangıç:</Label>
+                <InputDate
+                  type="number"
+                  value={kitapValues.baslangic}
+                  onChange={(e) =>
+                    setKitapValues({
+                      ...kitapValues,
+                      baslangic: e.target.value,
+                    })
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Sayfa Bitiş:</Label>
+                <InputDate
+                  type="number"
+                  value={kitapValues.bitis}
+                  onChange={(e) =>
+                    setKitapValues({ ...kitapValues, bitis: e.target.value })
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Başlangıç Tarihi:</Label>
+                <InputDate
+                  type="date"
+                  value={kitapValues.startDate}
+                  onChange={(e) =>
+                    setKitapValues({
+                      ...kitapValues,
+                      startDate: e.target.value,
+                    })
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Bitiş Tarihi:</Label>
+                <InputDate
+                  type="date"
+                  value={kitapValues.endDate}
+                  onChange={(e) =>
+                    setKitapValues({ ...kitapValues, endDate: e.target.value })
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Not:</Label>
+                <InputDate
+                  type="text"
+                  value={kitapValues.note}
+                  onChange={(e) =>
+                    setKitapValues({ ...kitapValues, note: e.target.value })
+                  }
+                />
+              </FormGroup>
+              <ButtonO type="submit">Ödev Gönder</ButtonO>
+            </Form>
+          </ContainerBorder>
+
+          {/* Dosya Ödevi */}
+          <ContainerBorder>
+            <Form onSubmit={handleFileSubmit}>
+              <h3>Dosya Formatında Ödev Ver</h3>
+              <FormGroup>
+                <Label>Dosya Yükle:</Label>
+                <input
+                  type="file"
+                  onChange={(e) => setSelectedFile(e.target.files[0])}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Başlangıç Tarihi:</Label>
+                <InputDate
+                  type="date"
+                  value={fileValues.startDate}
+                  onChange={(e) =>
+                    setFileValues({ ...fileValues, startDate: e.target.value })
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Bitiş Tarihi:</Label>
+                <InputDate
+                  type="date"
+                  value={fileValues.endDate}
+                  onChange={(e) =>
+                    setFileValues({ ...fileValues, endDate: e.target.value })
+                  }
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Not:</Label>
+                <InputDate
+                  type="text"
+                  value={fileValues.note}
+                  onChange={(e) =>
+                    setFileValues({ ...fileValues, note: e.target.value })
+                  }
+                />
+              </FormGroup>
+              <ButtonO type="submit">Ödev Gönder</ButtonO>
+            </Form>
+          </ContainerBorder>
+        </ContainerFlex>
+
+        <ContainerBorder>
+          <ReactTable
+            data={data}
+            fileMap={fileMap}
+            handleHomeworkDelete={handleHomeworkDelete}
+            handleDeleteStudentFile={handleDeleteStudentFile}
+          />
+        </ContainerBorder>
       </Container>
       <PieChart PieData={PieData} PieOptions={PieOptions} />
       <BarChart BarData={BarData} BarOptions={BarOptions} />
@@ -698,7 +684,6 @@ export const Form = styled.form`
     text-decoration: underline;
   }
 `;
-
 export const FormGroup = styled.div`
   display: flex;
   margin-bottom: 10px;
@@ -711,22 +696,73 @@ export const FormGroup = styled.div`
     width: 70%;
   }
 `;
-
 export const Label = styled.div`
   width: 30%;
   text-align: right;
   margin-right: 10px;
   font-weight: bold;
 `;
-
 export const Select = styled.select`
   width: 70%;
 `;
-
 export const Option = styled.option``;
-
 export const InputDate = styled.input`
   width: 70%;
+`;
+export const ButtonGor = styled.button`
+  background-color: #1d4ed8;
+  color: white;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: #2563eb;
+  }
+  &:disabled {
+    background-color: #a1a1aa;
+    color: #e4e4e7;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+`;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--main-width);
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    padding: 0rem;
+  }
+`;
+export const ContainerFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  max-width: var(--main-width);
+  gap: 20px;
+  margin-bottom: 20px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+export const ContainerBorder = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 5px solid #e4e4e7;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  @media screen and (max-width: 768px) {
+    padding: 0rem;
+  }
 `;
 
 export default StudentEdit;

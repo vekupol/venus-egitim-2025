@@ -14,11 +14,19 @@ import { BiLogoGoogle } from "react-icons/bi";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc,getDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+} from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const db = getFirestore();
 
 function SignupCom() {
+  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [accountType, setAccountType] = useState("");
   const [name, setName] = useState("");
@@ -40,9 +48,7 @@ function SignupCom() {
     (e) => {
       e.preventDefault();
 
-      if (!email || !password) {
-        return;
-      }
+      if (!email || !password) return;
 
       let newUser = null;
 
@@ -67,7 +73,7 @@ function SignupCom() {
               district: "",
               school: "",
               birthDate: "",
-              accountType: accountType,
+              accountType: accountType, // ✅ burası kayıt oluyor
               defaultAccountType: accountType,
               createdAt: "",
               avatar: "1",
@@ -88,6 +94,9 @@ function SignupCom() {
           }
           return null;
         })
+        .then(() => {
+          window.location.href = "/";
+        })
         .catch((error) => {
           if (error.code === "auth/email-already-in-use") {
             alert("Bu e-posta adresi zaten kullanımda!");
@@ -96,29 +105,46 @@ function SignupCom() {
           }
         });
     },
-    [email, password, name, accountType]
+    [email, password, name, accountType, navigate]
   );
 
   // google ile giriş yapma
   const handleGoogleSignup = async () => {
+    if (!accountType) {
+      alert("Lütfen önce Öğrenci, Öğretmen veya Veli seçiniz.");
+      return;
+    }
+
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
 
       const { displayName, email, uid } = result.user;
-
-      // Kullanıcının Firestore'da zaten var olup olmadığını kontrol et
       const userDocRef = doc(collection(db, "users"), uid);
       const userDoc = await getDoc(userDocRef);
 
-      if (!userDoc.exists()) {
-        // Kullanıcı Firestore'da yoksa oluştur
+      if (userDoc.exists()) {
+        const existingData = userDoc.data();
+        if (!existingData.userData?.accountType) {
+          await setDoc(
+            userDocRef,
+            {
+              userData: {
+                ...existingData.userData,
+                accountType,
+                defaultAccountType: accountType,
+              },
+            },
+            { merge: true }
+          );
+        }
+      } else {
         await setDoc(userDocRef, {
           uid: uid,
           totalPoint: 0,
           userData: {
-            displayName: displayName,
-            email: email,
+            displayName,
+            email,
             selfIntroduction:
               "Burası senin alanın arkadaşlarının ve öğretmenlerinin görmesini istediğin her şeyi yazabilirsin...",
             class: "",
@@ -128,11 +154,13 @@ function SignupCom() {
             birthDate: "",
             accountType: accountType,
             defaultAccountType: accountType,
-            createdAt: new Date().toISOString(), 
+            createdAt: new Date().toISOString(),
             avatar: "1",
           },
         });
       }
+
+      window.location.href = "/";
     } catch (error) {
       console.error("Google ile kayıt olma başarısız:", error);
     }
@@ -219,6 +247,7 @@ function SignupCom() {
                 placeholder="Parola"
                 value={password}
                 onChange={(e) => setPassword(e.currentTarget.value)}
+                autoComplete="current-password"
               />
               <button type="submit">Kayıt Ol</button>
             </EmailForm>

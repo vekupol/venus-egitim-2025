@@ -1,27 +1,31 @@
-import React from 'react';
-import styled from 'styled-components';
-import 'katex/dist/katex.min.css';
-import { BlockMath, InlineMath } from 'react-katex';
-import QuestionSingleAnswer from './QuestionSingleAnswer';
-import QuestionMultipleAnswer from './QuestionMultipleAnswer';
-
+import React from "react";
+import styled from "styled-components";
+import "katex/dist/katex.min.css";
+import { BlockMath, InlineMath } from "react-katex";
+import QuestionSingleAnswer from "./QuestionSingleAnswer";
+import QuestionMultipleAnswer from "./QuestionMultipleAnswer";
 
 function ArticleLesson() {
   return (
-    <FormulasContainer className='formulas'>
+    <FormulasContainer className="formulas">
       <ArticleContainer>
         <Title>Önerme Nedir?</Title>
         <SubTitle>Alt Başlık</SubTitle>
         <Paragraph>
-          Doğruluğu veya yanlışlığı kesin hüküm bildiren ifadelere önerme denir. Önermeler kişiden kişiye değişmeyen ve kanıtlanabilen ifadelerdir. Soru, istek ve emir cümleleri önerme olamaz.
+          Doğruluğu veya yanlışlığı kesin hüküm bildiren ifadelere önerme denir.
+          Önermeler kişiden kişiye değişmeyen ve kanıtlanabilen ifadelerdir.
+          Soru, istek ve emir cümleleri önerme olamaz.
         </Paragraph>
         <Paragraph>
-          Örneğin;
-          “2’nin karesi 4’tür” cümlesi bir önermedir, çünkü doğruluğu anıtlayabiliyoruz.
-        </Paragraph>  
-        <Paragraph>        
-          This is an in-line expression <InlineMath math={'f\\left(x^{\\smash{2}}\\right)'} /> passed as <code>math prop</code>. This
-          is an in-line <InlineMath math={'\\int_0^\\infty x^2 dx'} /> expression passed as <code>children prop</code>.
+          Örneğin; “2’nin karesi 4’tür” cümlesi bir önermedir, çünkü doğruluğu
+          anıtlayabiliyoruz.
+        </Paragraph>
+        <Paragraph>
+          This is an in-line expression{" "}
+          <InlineMath math={"f\\left(x^{\\smash{2}}\\right)"} /> passed as{" "}
+          <code>math prop</code>. This is an in-line{" "}
+          <InlineMath math={"\\int_0^\\infty x^2 dx"} /> expression passed as{" "}
+          <code>children prop</code>.
         </Paragraph>
         <List>
           <ListItem> merhaba</ListItem>
@@ -30,64 +34,69 @@ function ArticleLesson() {
         </List>
 
         <ListNumbers>
-          <ListItemNumbers><Numbers></Numbers> merhaba</ListItemNumbers>
-          <ListItemNumbers> <Numbers></Numbers> merhaba</ListItemNumbers>
-          <ListItemNumbers><Numbers></Numbers>  merhaba</ListItemNumbers>
-          <ListItemNumbers><Numbers></Numbers>  merhaba</ListItemNumbers>
+          <ListItemNumbers>
+            <Numbers></Numbers> merhaba
+          </ListItemNumbers>
+          <ListItemNumbers>
+            {" "}
+            <Numbers></Numbers> merhaba
+          </ListItemNumbers>
+          <ListItemNumbers>
+            <Numbers></Numbers> merhaba
+          </ListItemNumbers>
+          <ListItemNumbers>
+            <Numbers></Numbers> merhaba
+          </ListItemNumbers>
         </ListNumbers>
 
-        <QuestionSingleAnswer/>
+        <QuestionSingleAnswer />
 
-        <QuestionMultipleAnswer/>
-
-        
-
-
-
+        <QuestionMultipleAnswer />
       </ArticleContainer>
     </FormulasContainer>
-    
   );
 }
 
 export const FormulasContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
- `
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const ArticleContainer = styled.div`
   display: block;
   margin: 10px 0px;
-  width: 595px; //A4 genişliği khanda da böyle  
+  width: 595px; //A4 genişliği khanda da böyle
   min-height: min-content;
   padding-bottom: 500px;
-`
+`;
 
 export const Title = styled.div`
-text-align: center;
-font-weight: bold;
-font-size: 22px;
-margin-bottom: 10px;`
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 10px;
+`;
 
 export const SubTitle = styled.div`
-font-weight: bold;
-font-size: 14px;
-margin-bottom: 18px;
-text-indent: 2em;`
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 18px;
+  text-indent: 2em;
+`;
 
 export const Paragraph = styled.div`
-font-size: 14px;
-margin-bottom: 18px;
-text-indent: 2em;
-text-align: justify;`
+  font-size: 14px;
+  margin-bottom: 18px;
+  text-indent: 2em;
+  text-align: justify;
+`;
 
 export const List = styled.ol`
   font-size: 14px;
   margin-bottom: 18px;
   text-indent: 5em;
   text-align: justify;
-  
 `;
 
 export const ListItem = styled.li`
@@ -112,27 +121,24 @@ export const ListNumbers = styled.ul`
 
 export const ListItemNumbers = styled.li`
   font-size: 14px;
-  margin-bottom: 12px; 
-  
+  margin-bottom: 12px;
 `;
 
 export const Numbers = styled.span`
-margin-right: 3px;
-  
-     ::before {
+  margin-right: 3px;
+
+  ::before {
     border-radius: 5px;
     padding: 2px 6px;
-    width: 20px;    background-color: var(--main-color);
+    width: 20px;
+    background-color: var(--main-color);
     color: white;
     content: counter(listItemCounter); /* Counter ile artan sayıları kullan */
     counter-increment: listItemCounter; /* Counter'ı artır */
-    
   }
-`
+`;
 
-export const BlockFormula = styled(BlockMath)``
-export const InlineFormula = styled(InlineMath)``
-
-
+export const BlockFormula = styled(BlockMath)``;
+export const InlineFormula = styled(InlineMath)``;
 
 export default ArticleLesson;

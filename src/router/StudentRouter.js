@@ -15,7 +15,7 @@ import ForgotPassword from "../pages/mainPages/ForgotPassword";
 import Notifications from "../pages/mainPages/Notifications";
 import Supporters from "../components/sliderLogo/logos/Supporters";
 import Settings from "../pages/student/studentAyarlar";
-
+import Blog from "../pages/mainPages/Blog/Blog";
 
 export const StudentRouter1 = [
   {
@@ -48,7 +48,7 @@ export const StudentRouter1 = [
   },
   {
     path: "/destekcilerimiz",
-    element: <Supporters/>
+    element: <Supporters />,
   },
   {
     path: "/odeme-planlari",
@@ -57,6 +57,10 @@ export const StudentRouter1 = [
   {
     path: "/parolami-unuttum",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/blog",
+    element: <Blog />,
   },
   {
     path: "/bildirimlerim",
@@ -77,7 +81,7 @@ export const StudentRouter1 = [
   {
     path: "/ogrenci-ekrani/derslerimi-duzenle",
     element: <EditLessons />,
-  }
+  },
 ];
 
 export const StudentRouter2 = [

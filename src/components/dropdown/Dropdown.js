@@ -12,52 +12,42 @@ function DropdownMenu() {
   return (
     <Dropdown>
       <Box1>
-        <CustomLinkLeft to="/matematik/tyt">
-          <ColumnTitle>TYT Matematik</ColumnTitle>{" "}
-        </CustomLinkLeft>
+        <ColumnTitle>TYT Matematik</ColumnTitle>
         {Tyt.map((item) => (
-          <Li key={item.id}>
-            <CustomLinkLeft to="/matematik/10-sinif/sayma-ve-olasilik">{item.title}</CustomLinkLeft>
+          <Li key={item.id} className="passive">
+            <span>{item.title}</span>
           </Li>
         ))}
       </Box1>
       <Box2>
-        <CustomLinkLeft to="/matematik/ayt">
-          <ColumnTitle to="/matematik/ayt">AYT Matematik</ColumnTitle>{" "}
-        </CustomLinkLeft>
+        <ColumnTitle>AYT Matematik</ColumnTitle>
         {Ayt.map((item) => (
-          <Li key={item.id}>
-            <CustomLinkLeft to="/matematik/10-sinif/sayma-ve-olasilik">{item.title}</CustomLinkLeft>
+          <Li key={item.id} className="passive">
+            <span>{item.title}</span>
           </Li>
         ))}
       </Box2>
       <Box3>
-        <CustomLinkLeft to="/matematik/12-sinif">
-          <ColumnTitle>12. Sınıf</ColumnTitle>
-        </CustomLinkLeft>
+        <ColumnTitle>12. Sınıf</ColumnTitle>
         {OnIki.map((item) => (
-          <Li key={item.id}>
-            <CustomLinkLeft to="/matematik/10-sinif/sayma-ve-olasilik">{item.title}</CustomLinkLeft>
+          <Li key={item.id} className="passive">
+            <span>{item.title}</span>
           </Li>
         ))}
       </Box3>
       <Box4>
-        <CustomLinkLeft to="/matematik/11-sinif">
-          <ColumnTitle>11. Sınıf</ColumnTitle>
-        </CustomLinkLeft>
+        <ColumnTitle>11. Sınıf</ColumnTitle>
         {OnBir.map((item) => (
-          <Li key={item.id}>
-            <CustomLinkLeft to="/matematik/10-sinif/sayma-ve-olasilik">{item.title}</CustomLinkLeft>
+          <Li key={item.id} className="passive">
+            <span>{item.title}</span>
           </Li>
         ))}
       </Box4>
       <Box5>
-        <CustomLinkLeft to="/matematik/10-sinif">
-          <ColumnTitle>10. Sınıf</ColumnTitle>
-        </CustomLinkLeft>
+        <ColumnTitle>10. Sınıf</ColumnTitle>
         {On.map((item) => (
-          <Li key={item.id}>
-            <CustomLinkLeft to="/matematik/10-sinif/sayma-ve-olasilik">{item.title}</CustomLinkLeft>
+          <Li key={item.id} className="passive">
+            <span>{item.title}</span>
           </Li>
         ))}
       </Box5>
@@ -67,7 +57,7 @@ function DropdownMenu() {
         </CustomLinkLeft>
         {Dokuz.map((item) => (
           <Li key={item.id}>
-            <CustomLinkLeft to="/matematik/10-sinif/sayma-ve-olasilik">{item.title}</CustomLinkLeft>
+            <CustomLinkLeft to={item.url}>{item.title}</CustomLinkLeft>
           </Li>
         ))}
       </Box6>
@@ -147,6 +137,21 @@ const ColumnTitle = styled.div`
     font-size: 16px;
   }
 `;
+// Aktif hale gelince bu olacak
+{
+  /* const Li = styled.li`
+  list-style-type: circle;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  :hover {
+    font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;*/
+}
 
 const Li = styled.li`
   list-style-type: circle;
@@ -158,6 +163,12 @@ const Li = styled.li`
   }
   @media (max-width: 768px) {
     font-size: 12px;
+  }
+
+  &.passive {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
   }
 `;
 

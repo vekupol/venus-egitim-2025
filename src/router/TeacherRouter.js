@@ -16,6 +16,7 @@ import ForgotPassword from "../pages/mainPages/ForgotPassword";
 import Notifications from "../pages/mainPages/Notifications";
 import Supporters from "../components/sliderLogo/logos/Supporters";
 import Settings from "../pages/student/studentAyarlar";
+import Blog from "../pages/mainPages/Blog/Blog";
 
 export const TeacherRouter1 = [
   {
@@ -35,6 +36,10 @@ export const TeacherRouter1 = [
     element: <Donate />,
   },
   {
+    path: "/blog",
+    element: <Blog />,
+  },
+  {
     path: "/arama-sonuclari",
     element: <SearchResults />,
   },
@@ -48,7 +53,7 @@ export const TeacherRouter1 = [
   },
   {
     path: "/destekcilerimiz",
-    element: <Supporters/>
+    element: <Supporters />,
   },
   {
     path: "/odeme-planlari",
@@ -70,7 +75,7 @@ export const TeacherRouter1 = [
     path: "/ogretmen-ekrani",
     element: <TeacherPaneli />,
   },
-  { 
+  {
     path: "/ogretmen-ekrani/sinif-duzenle/:classUid",
     element: <ClassEdit />,
   },
@@ -87,9 +92,6 @@ export const TeacherRouter1 = [
     element: <HomeworkDetail />,
   },
 ];
-
-
-
 
 export const TeacherRouter2 = [
   {

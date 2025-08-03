@@ -13,6 +13,7 @@ import {
 import backgroundImg from "./Drawers/images/a.png";
 import HomeworkList from "./HomeworkList";
 import { Button, DeleteButton } from "../../components/buttons/Button.styled";
+import ClassRanking from "./Drawers/ClassRanking";
 
 function ClassEdit() {
   const navigate = useNavigate();
@@ -85,10 +86,10 @@ function ClassEdit() {
           );
 
           if (!isStudentAlreadyAdded) {
-            const newStudent = { displayName, uid };
+            const newStudent = { displayName, uid, point: 0 }; // ✅ point eklendi
             studentsArray.push(newStudent);
             await updateDoc(classDoc.ref, { students: studentsArray });
-            setStudents([...studentsArray]); // Yeni öğrenci eklenmiş halde state güncelleniyor
+            setStudents([...studentsArray]); // State güncellenir
           } else {
             alert("Öğrenci zaten eklenmiş!");
             // İstenilen işlem yapılabilir, mesela bir hata mesajı gösterilebilir
@@ -263,14 +264,19 @@ function ClassEdit() {
               </tbody>
             </StyledTable>
           </Students>
+
+          <Homeworks>
+            <MyStudents>Sınıf Sıralaması</MyStudents>
+            <ClassRanking classUid={paramsUid} />
+          </Homeworks>
           <Homeworks>
             <MyStudents>Ödevler</MyStudents>
             <Aciklama>
               Sınıfın tamamına ödev vermek için <span>Ödev Ekle </span>
               butonuna tıklayın.
             </Aciklama>
-            <Button 
-            width="100%"
+            <Button
+              width="100%"
               onClick={() => handleAddClassHomework(classAdded.classUid)}
             >
               Ödev Ekle
@@ -293,13 +299,19 @@ function ClassEdit() {
                 value={newClassName}
                 onChange={(e) => setNewClassName(e.target.value)}
               />
-              <Button width="100%" type="submit">Sınıf İsmini Değiştir</Button>
+              <Button width="100%" type="submit">
+                Sınıf İsmini Değiştir
+              </Button>
             </Form>
           </Homeworks>
           <Homeworks>
             <Form>
               <Aciklama>Sınıfı silmek için butona tıklayınız.</Aciklama>
-              <DeleteButton width="100%" type="submit" onClick={handleClassDelete}>
+              <DeleteButton
+                width="100%"
+                type="submit"
+                onClick={handleClassDelete}
+              >
                 Sınıfı Kalıcı Olarak Sil
               </DeleteButton>
             </Form>

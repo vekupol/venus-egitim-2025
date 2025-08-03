@@ -19,39 +19,35 @@ import { Button } from "../../../components/buttons/Button.styled";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
+const ITEMS_PER_PAGE = 10;
+
 const DrawerDokumanAra = () => {
   const [files, setFiles] = useState([]);
+  const [allFiles, setAllFiles] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchFiles();
   }, []);
 
   const getFileType = (contentType) => {
-    if (contentType.includes("pdf")) {
-      return "Pdf";
-    } else if (contentType.includes("spreadsheetml.sheet")) {
-      return "Excel";
-    } else if (contentType.includes("wordprocessingml.document")) {
-      return "Word";
-    } else if (
+    if (contentType.includes("pdf")) return "Pdf";
+    else if (contentType.includes("spreadsheetml.sheet")) return "Excel";
+    else if (contentType.includes("wordprocessingml.document")) return "Word";
+    else if (
       contentType.includes("image/jpeg") ||
       contentType.includes("image/jpg")
-    ) {
+    )
       return "Jpeg";
-    } else if (contentType.includes("image/png")) {
-      return "Png";
-    } else if (contentType.includes("zip")) {
-      return "Rar";
-    } else {
-      return "Diğer";
-    }
+    else if (contentType.includes("image/png")) return "Png";
+    else if (contentType.includes("zip")) return "Rar";
+    else return "Diğer";
   };
 
   const fetchFiles = async () => {
     const storage = getStorage();
     const storageRef = ref(storage, "documents");
-
     try {
       const filesList = await listAll(storageRef);
       const filesData = await Promise.all(
@@ -59,7 +55,6 @@ const DrawerDokumanAra = () => {
           try {
             const metadata = await getMetadata(fileRef);
             const url = await getDownloadURL(fileRef);
-
             return {
               name: metadata.name || "N/A",
               url,
@@ -70,18 +65,14 @@ const DrawerDokumanAra = () => {
               contentType: metadata.contentType || "N/A",
               fileType: getFileType(metadata.contentType || ""),
             };
-          } catch (error) {
-            console.error(
-              "⛔ Dosya metadata alınamadı:",
-              fileRef.fullPath,
-              error.message
-            );
+          } catch {
             return null;
           }
         })
       );
-
-      setFiles(filesData);
+      const validFiles = filesData.filter((f) => f !== null);
+      setFiles(validFiles);
+      setAllFiles(validFiles);
     } catch (error) {
       console.error("Dosyaları çekerken bir hata oluştu:", error.message);
     }
@@ -101,73 +92,26 @@ const DrawerDokumanAra = () => {
     anchor.click();
   };
 
-  const handleSearch = async () => {
-    if (!searchTerm) {
-      return; // Boş arama yapılmasını engelle
-    }
-    const storage = getStorage();
-    const storageRef = ref(storage, "documents");
-
-    try {
-      const filesList = await listAll(storageRef);
-      const filesData = await Promise.all(
-        filesList.items.map(async (fileRef) => {
-          try {
-            const metadata = await getMetadata(fileRef);
-            if (metadata) {
-              const data = {
-                name: metadata.name || "N/A",
-                url: await getDownloadURL(fileRef),
-                class: metadata.customMetadata.class || "N/A",
-                unit: metadata.customMetadata.unit || "N/A",
-                tag: metadata.customMetadata.tag || "N/A",
-                created: metadata.timeCreated || "N/A",
-                contentType: metadata.contentType || "N/A",
-                fileType: getFileType(metadata.contentType || "N/A"),
-              };
-              if (
-                data.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                data.class.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                data.unit.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                data.tag.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                data.fileType
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase()) ||
-                (data.created &&
-                  data.created
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase())) ||
-                (data.contentType &&
-                  data.contentType
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase()))
-              ) {
-                return data;
-              } else {
-                return null;
-              }
-            } else {
-              console.error("Dosya metadata alınamıyor:", fileRef);
-              return null;
-            }
-          } catch (error) {
-            console.error("Dosya referansı beklenen türde değil:", fileRef);
-            return null;
-          }
-        })
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
+    setCurrentPage(1); // Yeni aramada ilk sayfaya dön
+    if (value.trim() === "") {
+      setFiles(allFiles);
+    } else {
+      const filtered = allFiles.filter((file) =>
+        [file.name, file.class, file.unit, file.tag, file.fileType]
+          .join(" ")
+          .toLowerCase()
+          .includes(value.toLowerCase())
       );
-
-      // Filtrelenmiş dosyaları ayıklama
-      const filteredFiles = filesData.filter((file) => file !== null);
-      setFiles(filteredFiles);
-    } catch (error) {
-      console.error("Dosyaları çekerken bir hata oluştu:", error.message);
+      setFiles(filtered);
     }
   };
 
-  const handleReset = async () => {
+  const handleReset = () => {
     setSearchTerm("");
-    fetchFiles();
+    setFiles(allFiles);
+    setCurrentPage(1);
   };
 
   const highlightSearchTerm = (text) => {
@@ -187,6 +131,11 @@ const DrawerDokumanAra = () => {
     }
   };
 
+  // Pagination hesaplama
+  const totalPages = Math.ceil(files.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedFiles = files.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
   return (
     <Container>
       <Title>
@@ -198,10 +147,8 @@ const DrawerDokumanAra = () => {
             type="text"
             placeholder="Doküman Adı İle Ara"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => handleSearchChange(e.target.value)}
           />
-
-          <Button onClick={handleSearch}>Ara</Button>
           <Button onClick={handleReset}>Sıfırla</Button>
         </div>
         <CTable>
@@ -216,11 +163,11 @@ const DrawerDokumanAra = () => {
             </CTr>
           </CThead>
           <CTbody>
-            {files.map(
+            {paginatedFiles.map(
               (file, index) =>
                 file && (
                   <CTr key={index}>
-                    <CTd>{index + 1}</CTd>
+                    <CTd>{startIndex + index + 1}</CTd>
                     <CTd style={{ textAlign: "left", paddingLeft: "15px" }}>
                       {highlightSearchTerm(file.name || "N/A")}
                     </CTd>
@@ -241,16 +188,68 @@ const DrawerDokumanAra = () => {
             )}
           </CTbody>
         </CTable>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <PaginationContainer>
+            <Button
+              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              Önceki
+            </Button>
+
+            {[...Array(totalPages)].map((_, idx) => (
+              <PageButton
+                key={idx}
+                active={currentPage === idx + 1}
+                onClick={() => setCurrentPage(idx + 1)}
+              >
+                {idx + 1}
+              </PageButton>
+            ))}
+
+            <Button
+              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              Sonraki
+            </Button>
+          </PaginationContainer>
+        )}
       </Main>
     </Container>
   );
 };
 
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 8px;
+  font-size: 1.1em;
+  flex-wrap: wrap;
+`;
+
+export const PageButton = styled.button`
+  background: ${({ active }) => (active ? "var(--main-color)" : "#f0f0f0")};
+  color: ${({ active }) => (active ? "#fff" : "#000")};
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    background: ${({ active }) => (active ? "var(--main-color)" : "#e0e0e0")};
+  }
+`;
+
 export const CTable = styled(Table)`
   border: 2px solid var(--main-color);
   border-radius: 5px;
   padding: 15px;
-
   @media screen and (max-width: 40em) {
     border: none;
   }
@@ -262,7 +261,6 @@ export const CTbody = styled(Tbody)`
   tr:nth-child(even) {
     background-color: white;
   }
-
   tr:nth-child(odd) {
     background-color: var(--third-color);
   }

@@ -3,6 +3,17 @@ import { Container } from "./Login";
 import styled from "styled-components";
 
 function PricingPlans() {
+  const whatsappNumber = "905306826849"; // Başında 0 olmadan, ülke koduyla
+  const message =
+    "Merhaba, Venüs Eğitim üyelik paketleri hakkında bilgi almak istiyorum.";
+
+  const handleWhatsApp = () => {
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+      "_blank"
+    );
+  };
+
   return (
     <Container>
       <Plans>
@@ -12,54 +23,34 @@ function PricingPlans() {
             1.000 TL <span>/ yıl</span>
           </Price>
           <Description>
-            Hesabınıza özel, 1 tane aktivasyon kodu içerir. Bununla 1 bağlantı (
-            öğrenci veya sınıf ) kurabilirsiniz. <br /> <span>.</span>
+            Hesabınıza özel, 1 tane aktivasyon kodu içerir. Bununla artık
+            dilediğiniz kadar sınıf ve öğrenci ekleyebilirsiniz <br />{" "}
+            <span>.</span>
           </Description>
           <List>
             <li>Günlük, haftalık ve aylık raporlar</li>
             <li>Sınırsız ödevlendirme</li>
             <li>Sınırsız soru ve döküman gönderme</li>
-            <li>Sınırsız bildirimler</li>
-            <li>Otomatik hatırlatmalar</li>
           </List>
-          <Button>Satın Al</Button>
+          <Button onClick={handleWhatsApp}>Satın Al</Button>
         </Plan>
-        <Plan>
-          <Title>Eğitim Koçu</Title>
-          <Price>
-            7.500 TL <span>/ yıl</span>
-          </Price>
-          <Description>
-            Hesabınıza özel, 10 tane aktivasyon kodu içerir. Bununla 10 bağlantı
-            ( öğrenci veya sınıf ) kurabilirsiniz. <br /> <span>.</span>
-          </Description>
-          <List>
-            <li>Günlük, haftalık ve aylık raporlar</li>
-            <li>Sınırsız ödevlendirme</li>
-            <li>Sınırsız soru ve döküman gönderme</li>
-            <li>Sınırsız bildirimler</li>
-            <li>Otomatik hatırlatmalar</li>
-          </List>
-          <Button>Satın Al</Button>
-        </Plan>
+
         <Plan>
           <Title>Kurumlar İçin</Title>
           <Price>
-            10.000 TL <span>/ yıl başlayan fiyatlar </span>
+            10.000 TL'den <span>/ yıl başlayan fiyatlar</span>
           </Price>
           <Description>
             Hesaplarınıza özel, dilediğiniz sayıda aktivasyon kodu içerir.
-            Bununla dilediğiniz kadar bağlantı ( öğrenci veya sınıf )
+            Bununla dilediğiniz kadar bağlantı (öğrenci veya sınıf)
             kurabilirsiniz.
           </Description>
           <List>
             <li>Günlük, haftalık ve aylık raporlar</li>
             <li>Sınırsız ödevlendirme</li>
             <li>Sınırsız soru ve döküman gönderme</li>
-            <li>Sınırsız bildirimler</li>
-            <li>Otomatik hatırlatmalar</li>
           </List>
-          <Button>Satın Al</Button>
+          <Button onClick={handleWhatsApp}>Satın Al</Button>
         </Plan>
       </Plans>
     </Container>
@@ -67,7 +58,6 @@ function PricingPlans() {
 }
 
 const Plans = styled.div`
-  border: 1px solid black;
   width: 100%;
   height: 100%;
   padding: 1rem;
@@ -117,6 +107,7 @@ const Button = styled.button`
   border: 0.1rem solid var(--third-color);
   font-weight: bold;
   border-radius: 0px 0px 9px 9px;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--main-color);

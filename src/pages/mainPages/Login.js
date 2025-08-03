@@ -4,9 +4,16 @@ import { BiLogoFacebook, BiLogoGoogle, BiLogoApple } from "react-icons/bi";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc, getDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+} from "firebase/firestore";
 import { Helmet } from "react-helmet";
 import { CustomLink } from "../../components/buttons/Button.styled";
+import { useNavigate } from "react-router-dom";
 
 const db = getFirestore();
 
@@ -16,19 +23,30 @@ function LoginCom() {
   const [showFacebook, setShowFacebook] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
+      if (!email || !password) return;
 
-      if (!email || !password) {
-        return;
-      }
-      signInWithEmailAndPassword(auth, email, password).catch((e) => {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        const userData = userSnap.data();
+        const role = userData?.userData?.accountType;
+
+        if (role === "öğrenci") navigate("/ogrenci-ekrani");
+        else if (role === "öğretmen") navigate("/ogretmen-ekrani");
+        else if (role === "veli") navigate("/veli-ekrani");
+        else navigate("/");
+      } catch (err) {
         alert("Kullanıcı Bulunamadı.");
-      });
+      }
     },
-    [email, password]
+    [email, password, navigate]
   );
 
   const handleGoogleSignup = async () => {
@@ -37,30 +55,37 @@ function LoginCom() {
       const result = await signInWithPopup(auth, provider);
 
       const { displayName, email, uid } = result.user;
-
-      // Kullanıcının Firestore'da zaten var olup olmadığını kontrol et
       const userDocRef = doc(collection(db, "users"), uid);
       const userDoc = await getDoc(userDocRef);
 
       if (!userDoc.exists()) {
-        // Kullanıcı Firestore'da yoksa oluştur
         await setDoc(userDocRef, {
-          uid: uid,
+          uid,
           totalPoint: 0,
           userData: {
-            displayName: displayName,
-            email: email,
-            selfIntroduction:
-              "Burası senin alanın arkadaşlarının ve öğretmenlerinin görmesini istediğin her şeyi yazabilirsin...",
+            displayName,
+            email,
+            selfIntroduction: "Burası senin alanın...",
             class: "",
             city: "",
             district: "",
             school: "",
             birthDate: "",
-            createdAt: "",
+            accountType: "öğrenci", // varsayılan rol atanabilir
+            defaultAccountType: "öğrenci",
+            createdAt: new Date().toISOString(),
             avatar: "1",
           },
         });
+
+        // yeni kayıtsa default olarak öğrenci yönlendirmesi
+        navigate("/ogrenci-ekrani");
+      } else {
+        const role = userDoc.data()?.userData?.accountType;
+        if (role === "öğrenci") navigate("/ogrenci-ekrani");
+        else if (role === "öğretmen") navigate("/ogretmen-ekrani");
+        else if (role === "veli") navigate("/veli-ekrani");
+        else navigate("/");
       }
     } catch (error) {
       console.error("Google ile kayıt olma başarısız:", error);

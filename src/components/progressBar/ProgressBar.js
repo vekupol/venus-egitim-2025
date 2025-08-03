@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
 const progressAnimation = keyframes`
   0% {
@@ -21,19 +21,32 @@ const ContainerUp = styled.div`
 const Container = styled.div`
   width: 150px;
   text-align: center;
+  padding: 5px;
+
+  @media (max-width: 1150px) {
+    width: 100px;
+  }
+  @media (max-width: 768px) {
+    width: 100px;
+  }
 `;
 
 const Progress2 = styled.div`
   padding: 3px 3px;
   border-radius: 9px;
   background: rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
+    0 1px rgba(255, 255, 255, 0.08);
 `;
 
 const ProgressBar2 = styled.div`
   height: 18px;
   border-radius: 6px;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
   transition: 0.4s linear;
   transition-property: width;
   width: ${(props) => props.progressValue}%;
@@ -43,8 +56,8 @@ const ProgressBar2 = styled.div`
 
 const ProgressBar = ({ totalPeople, donePeople }) => {
   const progressValue = ((donePeople / totalPeople) * 100 || 0).toFixed(0);
-  const mainColor = 'var(--main-color)'; // Ana renk tanımını buraya ekledim
-  const secondColor = 'var(--second-color)'; // İkincil renk tanımını buraya ekledim
+  const mainColor = "var(--main-color)"; // Ana renk tanımını buraya ekledim
+  const secondColor = "var(--second-color)"; // İkincil renk tanımını buraya ekledim
 
   const yuzde = ((donePeople / totalPeople) * 100).toFixed(0); // yuzde hesaplamasını düzelttim
 
@@ -60,7 +73,9 @@ const ProgressBar = ({ totalPeople, donePeople }) => {
           />
         </Progress2>
       </Container>
-     <div style={{ whiteSpace: "nowrap", minWidth: "min-content"}}>% {yuzde} </div> 
+      <div style={{ whiteSpace: "nowrap", minWidth: "min-content" }}>
+        % {yuzde}{" "}
+      </div>
     </ContainerUp>
   );
 };

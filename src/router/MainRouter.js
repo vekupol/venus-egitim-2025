@@ -14,6 +14,8 @@ import Settings from "../pages/student/studentAyarlar";
 import OgrenciTanitim from "../pages/tanitimPages/OgrenciTanitim";
 import OgretmenTanitim from "../pages/tanitimPages/OgretmenTanitim";
 import VeliTanitim from "../pages/tanitimPages/VeliTanitim";
+import Blog from "../pages/mainPages/Blog/Blog";
+import BlogRead from "../pages/mainPages/Blog/BlogRead";
 
 export const MainRouter1 = [
   {
@@ -56,13 +58,21 @@ export const MainRouter1 = [
     path: "/parolami-unuttum",
     element: <ForgotPassword />,
   },
-  {
-    path: "/bildirimlerim",
-    element: <Notifications />,
-  },
+  // {
+  //   path: "/bildirimlerim",
+  //   element: <Notifications />,
+  // },
   {
     path: "/ayarlar",
     element: <Settings />,
+  },
+  {
+    path: "/blog",
+    element: <Blog />,
+  },
+  {
+    path: "/blog/:id", // ✅ Dinamik blog detayı
+    element: <BlogRead />,
   },
   {
     path: "/ogrenci-tanitim",
@@ -94,6 +104,14 @@ export const MainRouter2 = [
   {
     path: "/giris-yap",
     element: <Login />,
+  },
+  {
+    path: "/blog",
+    element: <Blog />,
+  },
+  {
+    path: "/blog/1", // ✅ Dinamik blog detayı
+    element: <BlogRead />,
   },
   {
     path: "/arama-sonuclari",

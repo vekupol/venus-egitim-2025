@@ -21,7 +21,6 @@ import jsonData from "../../MatematikLiseOn.json";
 function SiralamaVeSecmeIntro() {
   const [unit, setUnit] = useState([]);
 
-
   // üniteNumarasi ve konuNumarasi değerlerini doğrudan yaz 1 ,2 gibi. Bu sayfada başka bir şey değiştirme.
 
   const uniteNumarasi = 1;
@@ -29,7 +28,6 @@ function SiralamaVeSecmeIntro() {
 
   const uniteNo = uniteNumarasi - 1;
   const konuNo = konuNumarasi - 1;
-
 
   useEffect(() => {
     if (jsonData.units && jsonData.units.length > 0) {
@@ -61,19 +59,25 @@ function SiralamaVeSecmeIntro() {
           <h1>{unit.konular[konuNo].name}</h1>
         )}
       </Title>
-      {unit.konular && unit.konular.length > 0 && unit.konular[konuNo]?.bolumler && (
-        <ProgressBarTableLessons progressArray={unit.konular[konuNo]?.dersler} />
-      )}
+      {unit.konular &&
+        unit.konular.length > 0 &&
+        unit.konular[konuNo]?.bolumler && (
+          <ProgressBarTableLessons
+            progressArray={unit.konular[konuNo]?.dersler}
+          />
+        )}
 
       <Title>
         <h2>Konular</h2>
-        {unit.konular && unit.konular.length > 0 && unit.konular[konuNo]?.bolumler && (
-          <CustomLink
-            to={`/matematik/10-sinif/sayma-ve-olasilik/${unit.konular[konuNo].link}/${unit.konular[konuNo]?.bolumler[0].link}`}
-          >
-            <Button> Konuya Git</Button>
-          </CustomLink>
-        )}
+        {unit.konular &&
+          unit.konular.length > 0 &&
+          unit.konular[konuNo]?.bolumler && (
+            <CustomLink
+              to={`/matematik/10-sinif/sayma-ve-olasilik/${unit.konular[konuNo].link}/${unit.konular[konuNo]?.bolumler[0].link}`}
+            >
+              <Button> Konuya Git</Button>
+            </CustomLink>
+          )}
       </Title>
       <UnitContainer>
         <LessonsShadow>
@@ -85,7 +89,9 @@ function SiralamaVeSecmeIntro() {
               unit.konular.length > 0 &&
               unit.konular[konuNo]?.bolumler &&
               unit.konular[konuNo].bolumler.map((bolum) => (
-                <CustomLinkLeft to={`/matematik/10-sinif/sayma-ve-olasilik/${unit.konular[konuNo].link}/${bolum.link}`}>
+                <CustomLinkLeft
+                  to={`/matematik/10-sinif/sayma-ve-olasilik/${unit.konular[konuNo].link}/${bolum.link}`}
+                >
                   <Part key={bolum.kazanimId}>
                     <li>{bolum.name}</li>
                   </Part>
@@ -107,4 +113,3 @@ export const LessonsShadow = styled.div`
 `;
 
 export default SiralamaVeSecmeIntro;
-

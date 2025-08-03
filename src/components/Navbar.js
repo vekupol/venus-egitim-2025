@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../style/global/index.css";
+import { useNavigate } from "react-router-dom";
 
 import { TriangleDown } from "@styled-icons/entypo/TriangleDown";
 import { TriangleUp } from "@styled-icons/entypo/TriangleUp";
@@ -18,6 +19,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [undisplay, setUndisplay] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -44,8 +46,10 @@ function Navbar() {
   };
 
   const handleSignOut = useCallback(() => {
-    signOut(auth);
-  }, []);
+    signOut(auth).then(() => {
+      navigate("/"); // ✅ Çıkıştan sonra anasayfaya yönlendir
+    });
+  }, [navigate]);
   return (
     <Header>
       <Nav>
@@ -84,25 +88,34 @@ function Navbar() {
 
           {!isLoggedIn && (
             <Buttons>
+              <Link to="/blog">
+                <MenuLink>Blog</MenuLink>
+              </Link>
+              <Link to="/destek-ol">
+                <MenuLink>Destek Ol</MenuLink>
+              </Link>
               <Link to="/giris-yap">
                 <MenuLink>Giriş Yap</MenuLink>
               </Link>
               <Link to="/kayit-ol">
                 <MenuLink>Kayıt Ol</MenuLink>
               </Link>
-              <Link to="/destek-ol">
-                <MenuLink>Destek Ol</MenuLink>
-              </Link>
             </Buttons>
           )}
+
           {isLoggedIn && (
             <Buttons>
-              <Link to="/bildirimlerim" style={{ position: "relative" }}>
+              {/* <Link to="/bildirimlerim">
                 <MenuLink>Bildirimler</MenuLink>
-                <Circle></Circle>
+              </Link> */}
+              <Link to="/blog">
+                <MenuLink>Blog</MenuLink>
               </Link>
               <Link to="/ayarlar">
                 <MenuLink>Ayarlar</MenuLink>
+              </Link>
+              <Link to="/destek-ol">
+                <MenuLink>Destek Ol</MenuLink>
               </Link>
               <Link to="/">
                 <MenuLinkExit onClick={() => handleSignOut()}>
@@ -130,6 +143,7 @@ const Header = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden; /* X scroll engellendi */
 `;
 const DropdownMenuContainer = styled.div`
   display: ${({ undisplay }) => (undisplay ? "flex" : "none")};
@@ -141,18 +155,20 @@ const DropdownMenuContainer = styled.div`
 `;
 
 const Nav = styled.div`
-  width: 96%;
+  width: 100%;
+  max-width: var(--main-width); /* Ortalamak için sınır koy */
   background-color: transparent;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Taşmayı engeller */
   align-items: center;
-  overflow-y: hidden;
   justify-content: space-between;
-  max-width: var(--main-width);
-  margin: 20px 10px;
+  padding: 10px 20px; /* Margin yerine padding kullan */
+  box-sizing: border-box;
+  overflow: hidden; /* Scroll'u tamamen kapatır */
 
   @media (max-width: 768px) {
     flex-direction: column;
+    padding: 10px;
   }
 `;
 
@@ -181,15 +197,15 @@ const Hamburger = styled.div`
 `;
 
 const SearchBar = styled.div`
-  padding: 0.3rem 1rem;
+  flex: 1;
   display: flex;
   justify-content: center;
-  margin: 0px 20px;
-  flex: 1;
+  margin: 0 10px;
+  min-width: 0; /* Flex taşmasını engeller */
 
   @media (max-width: 768px) {
     width: 100%;
-    padding: 0.3rem 0rem;
+    margin: 10px 0;
   }
 `;
 
@@ -290,7 +306,7 @@ const Logo = styled.a`
   text-decoration: none;
   font-family: "MyCustomFont", sans-serif;
   font-weight: bold;
-  line-height: 1.4;
+  line-height: 1.3;
 `;
 const Menu = styled.div`
   display: flex;
@@ -321,7 +337,7 @@ const Buttons = styled.div`
   }
 `;
 const MenuLink = styled.button`
-  width: 120px;
+  width: 96px;
   background-color: var(--main-color);
   border: none;
   border-radius: 5px;
@@ -331,7 +347,7 @@ const MenuLink = styled.button`
   font-family: "MyCustomFont", sans-serif;
   font-weight: 300;
   font-size: 1rem;
-  margin-right: 0.7rem;
+  margin-right: 0.2rem;
 
   &:hover {
     background-color: transparent;
@@ -353,7 +369,7 @@ const MenuLink = styled.button`
   }
 `;
 const MenuLinkExit = styled.button`
-  width: 120px;
+  width: 96px;
   background-color: var(--delete-color);
   border: none;
   border-radius: 5px;

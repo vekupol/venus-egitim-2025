@@ -1,3 +1,11 @@
+// Tema İntro Javascriptidir.
+// Her temada olur SayilarIntro.js şeklinde temaismi ıntro şeklinde olmalıdır
+// Değiştirilecek yerler.
+// 1 . Dosya ve fonksiyon ismi
+// 2.jsonData sınıfı kontrol et
+// 3. uniteNumarsi tema numarasını gir
+// 4
+
 import React, { useEffect, useState } from "react";
 import jsonData from "../MatematikLiseOn.json";
 import {
@@ -17,7 +25,6 @@ import {
 } from "../../../../components/buttons/Button.styled";
 import { IoHomeSharp } from "react-icons/io5";
 import { BsArrowRightShort } from "react-icons/bs";
-
 
 function SaymaVeOlasilikIntro() {
   const [unit, setUnit] = useState(null);
@@ -41,8 +48,8 @@ function SaymaVeOlasilikIntro() {
           <IoHomeSharp style={{ color: "var(--main-color)" }} />
         </CustomLink>
         <BsArrowRightShort style={{ color: "var(--main-color)" }} />
-        <CustomLink to="/matematik/10-sinif">
-          <div> 10. Sınıf Matematik </div>
+        <CustomLink to="/matematik/9-sinif">
+          <div> 9. Sınıf Matematik </div>
         </CustomLink>
         <BsArrowRightShort style={{ color: "var(--main-color)" }} />
         <div> {unit?.name} </div>
@@ -50,7 +57,7 @@ function SaymaVeOlasilikIntro() {
       <Title>
         <h1> {unit?.name} </h1>
         {unit && (
-          <CustomLink to={`/matematik/10-sinif/${unit.link}`}>
+          <CustomLink to={`/matematik/9-sinif/${unit.link}`}>
             <Button>Üniteye Git</Button>
           </CustomLink>
         )}
@@ -68,10 +75,10 @@ function SaymaVeOlasilikIntro() {
               <Parts>
                 {konu.bolumler &&
                   konu.bolumler.map((bolum, bolumIndex) => (
-                    <CustomLinkLeft to={`/matematik/10-sinif/sayma-ve-olasilik/${konu.link}/${bolum.link}`}>
-                      <Part
-                        key={bolumIndex} 
-                      >
+                    <CustomLinkLeft
+                      to={`/matematik/9-sinif/sayma-ve-olasilik/${konu.link}/${bolum.link}`}
+                    >
+                      <Part key={bolumIndex}>
                         <li>{bolum.name} </li>
                       </Part>
                     </CustomLinkLeft>

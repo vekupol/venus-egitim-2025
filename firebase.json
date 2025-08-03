@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "venus-2-cdd18",
     "public": "build",
     "ignore": [
       "firebase.json",

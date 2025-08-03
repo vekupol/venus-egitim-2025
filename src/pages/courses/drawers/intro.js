@@ -4,7 +4,7 @@ import { BsArrowRightShort } from "react-icons/bs";
 import { IoHomeSharp } from "react-icons/io5";
 import ProgressBar from "../../../components/progressBar/ProgressBar";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { collection, getFirestore} from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const authInstance = getAuth();
@@ -150,15 +150,11 @@ export const Icons = styled.div`
 `;
 
 export const Title = styled.div`
-  margin-bottom: 1rem;
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
   max-width: 1000px;
-  h2 {
-    margin-top: 1rem;
-  }
 `;
 
 export const ProgressTable = styled.div`
@@ -187,7 +183,6 @@ export const UnitContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 1rem;
   max-width: 1000px;
 `;
 
@@ -207,16 +202,14 @@ export const Unit = styled.div`
   }
 `;
 
-export const Parts = styled.div`
-`;
+export const Parts = styled.div``;
 
 export const Part = styled.div`
   font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  
-  
+
   :hover {
     cursor: pointer;
     text-decoration: underline;
@@ -255,9 +248,13 @@ export const TotalProgress = styled.div`
 export const UnitsShadow = styled.div`
   padding: 1rem;
   margin-top: 1rem;
-  width: 46%;
+  width: 44%;
   border-radius: 9px;
   box-shadow: 5px 5px 14px #666666, -5px -5px 14px #ffffff;
+
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+  }
 `;
 
 export default Intro;

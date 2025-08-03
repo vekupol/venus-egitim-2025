@@ -52,6 +52,12 @@ function EditLessons() {
     if (currentUserUid) {
       try {
         const userDocRef = doc(db, "users", currentUserUid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (!userDoc.exists() || !Array.isArray(userDoc.data().lessons)) {
+          await updateDoc(userDocRef, { lessons: [] });
+        }
+
         await updateDoc(userDocRef, {
           lessons: arrayUnion({
             id: item.id,
@@ -59,6 +65,7 @@ function EditLessons() {
             url: item.url,
           }),
         });
+
         const updatedDoc = await getDoc(userDocRef);
         if (updatedDoc.exists()) {
           const updatedLessons = updatedDoc.data().lessons || [];
@@ -112,16 +119,14 @@ function EditLessons() {
               </ProgressDiv>
               <Buttons>
                 <CustomLink to={`${item.url}`}>
-                  <Button width={"100%"}>Konuya Git </Button>
+                  <Button width={"100%"}>Konuya Git</Button>
                 </CustomLink>
-                <CustomLink>
-                  <DeleteButton
-                    onClick={() => handleKonuSil(item)}
-                    width={"100%"}
-                  >
-                    Konu Sil
-                  </DeleteButton>
-                </CustomLink>
+                <DeleteButton
+                  onClick={() => handleKonuSil(item)}
+                  width={"100%"}
+                >
+                  Konu Sil
+                </DeleteButton>
               </Buttons>
             </KonuDiv>
           ))}
@@ -134,6 +139,7 @@ function EditLessons() {
   );
 }
 
+/* --- STYLED COMPONENTS --- */
 const Container = styled.div`
   width: var(--main-width);
 `;
@@ -161,9 +167,8 @@ const Konular = styled.div`
 const KonuDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.7rem;
-  display: flex;
   align-items: center;
+  margin-bottom: 0.7rem;
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -173,7 +178,7 @@ const KonuDiv = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: left;
+    align-items: flex-start;
   }
 `;
 
@@ -185,12 +190,11 @@ const KonuAdi = styled.div`
 `;
 
 const KonuAciklama = styled.p`
-  min-width: min-content;
+  font-size: 1.2rem;
 `;
 
 const Metin = styled.div`
   width: 50%;
-
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -198,21 +202,21 @@ const Metin = styled.div`
 
 const Buttons = styled.div`
   width: 20%;
-
   @media (max-width: 768px) {
     width: 100%;
+    margin-top: 1rem;
   }
 `;
 
 const ProgressDiv = styled.div`
   width: 20%;
-
   @media (max-width: 768px) {
     width: 100%;
-    margin: 1rem 0rem;
+    margin: 1rem 0;
   }
 `;
 
+/* --- MODAL --- */
 const KonuEkleModal = ({ onClose, handleKonuEkle }) => {
   return (
     <ModalOverlay>
@@ -221,13 +225,12 @@ const KonuEkleModal = ({ onClose, handleKonuEkle }) => {
         <DeleteButton width={"100%"} onClick={onClose}>
           Kapat
         </DeleteButton>
-
         <AllKonular>
           {konularJson.map((item) => (
-            <KonuDiv key={item.id} >
-              <KonuAciklama style={{fontSize:"1.2rem"}}>{item.title}</KonuAciklama>
+            <KonuDivModal key={item.id}>
+              <KonuAciklama>{item.title}</KonuAciklama>
               <Button onClick={() => handleKonuEkle(item)}>Ekle</Button>
-            </KonuDiv>
+            </KonuDivModal>
           ))}
         </AllKonular>
       </ModalContent>
@@ -252,7 +255,8 @@ const ModalContent = styled.div`
   padding: 2rem;
   border-radius: 8px;
   margin-top: 100px;
-  height: 50%;
+  max-height: 80vh;
+  overflow-y: auto;
 
   h2 {
     padding-left: 1rem;
@@ -266,10 +270,20 @@ const AllKonular = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 30px;
 
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
     grid-column-gap: 10px;
   }
+`;
+
+const KonuDivModal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
 `;
 
 export default EditLessons;

@@ -2,32 +2,29 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { db, auth } from "../../../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { CustomLink,CustomLink2, Button } from "../../../components/buttons/Button.styled";
+import { CustomLink2, Button } from "../../../components/buttons/Button.styled";
 
 function DrawerKonularim() {
-  const [lessons, setLessons] = useState([]);
+  const [derslerim, setDerslerim] = useState({});
 
   useEffect(() => {
-    const fetchLessons = async () => {
+    const fetchDerslerim = async () => {
       const currentUser = auth.currentUser;
-      const currentUserUid = currentUser ? currentUser.uid : null;
+      if (!currentUser) return;
 
-      if (currentUserUid) {
-        try {
-          // currentUser'ın privateStudents dizisinden öğrenci UID'lerini al
-          const userDoc = await getDoc(doc(db, "users", currentUserUid));
-          if (userDoc.exists()) {
-            const lessons = userDoc.data().lessons || [];
-            setLessons(lessons);
-          } else {
-            console.error("Kullanıcı belgesi bulunamadı.");
-          }
-        } catch (error) {
-          console.error("Öğrenci bilgilerini alma hatası:", error);
+      try {
+        const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          setDerslerim(data.derslerim || {}); // Firestore'daki "derslerim" map'i çekiliyor
+        } else {
+          console.error("Kullanıcı belgesi bulunamadı.");
         }
+      } catch (error) {
+        console.error("Derslerim bilgilerini alma hatası:", error);
       }
     };
-    fetchLessons();
+    fetchDerslerim();
   }, []);
 
   return (
@@ -36,24 +33,26 @@ function DrawerKonularim() {
         <Text>Konularım</Text>
       </Title>
       <Main>
-        <CustomLink to="/ogrenci-ekrani/derslerimi-duzenle">
-          <Button width={"100%"}>Derslerimi Düzenle </Button>
-        </CustomLink>
-        <Unit>
-          <UnitName style={{color:"#674188", fontSize:"1.5rem"}}>Ünite Adı</UnitName>
-          <UnitDescription style={{color:"#674188", fontSize:"1.2rem",fontWeight:"bold"}}>Ünite Açıklaması</UnitDescription>
-          <CustomLink2 ></CustomLink2>
-        </Unit>
-        {lessons &&
-          lessons.map((lesson) => (
-            <Unit key={lesson.id}>
+        {Object.entries(derslerim).length === 0 ? (
+          <Unit>
+            <UnitName style={{ color: "#674188", fontSize: "1.5rem" }}>
+              Henüz eklenmiş ders bulunmuyor.
+            </UnitName>
+          </Unit>
+        ) : (
+          Object.entries(derslerim).map(([key, lesson]) => (
+            <Unit key={key}>
               <UnitName>{lesson.name}</UnitName>
-              <UnitDescription>{lesson.aciklama}</UnitDescription>
-              <CustomLink2 to={`${lesson.url}`}>
+              <UnitDescription>
+                {lesson.dersSayisi} Ders - Çözülen:{" "}
+                {lesson.dersler?.reduce((a, b) => a + b, 0) || 0}
+              </UnitDescription>
+              <CustomLink2 to={`/matematik/9-sinif/${key}`}>
                 <Button width={"100%"}>Devam Et</Button>
               </CustomLink2>
             </Unit>
-          ))}
+          ))
+        )}
       </Main>
     </Container>
   );
@@ -74,7 +73,6 @@ export const Text = styled.p`
 `;
 
 export const Main = styled.div``;
-
 
 export const Unit = styled.div`
   margin-top: 1rem;
@@ -104,7 +102,7 @@ export const UnitName = styled.div`
 `;
 
 export const UnitDescription = styled.div`
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   width: 50%;
   display: flex;
   align-items: center;

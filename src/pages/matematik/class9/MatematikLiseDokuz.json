@@ -1,292 +1,2070 @@
 {
   "name": "matematikLiseDokuz",
-  "units": [
+  "temalar": [
     {
-      "comment": "Trigonometri",
-      "aboutUnit": "Öğrencilere temel olasılık kavramlarını ve olayların sayılmasını öğretir. Öğrenciler, farklı olayların olasılıklarını hesaplamayı ve olasılık problemlerini çözmeyi öğrenirler. Bu ünite, gerçek hayattaki olayların olasılığını tahmin etme becerisini geliştirir ve istatistiksel düşünme yeteneğini artırır.",
-      "dersSayisi": 40,
-      "done": 100,
+      "name": "Sayılar",
+      "aboutUnit": "Sayılar teması, öğrencilerin ilgili kavramları anlaması ve uygulaması için yapılandırılmıştır.",
+      "dersSayisi": 48,
+      "done": 0,
+      "total": 48,
+      "link": "sayilar",
       "konular": [
         {
-          "comment": "Sıralama ve Seçme Konusu ",
-          "bolumler": [
-            {
-              "comment": "Bölüm 1",
-              "dersler": [
-                {
-                  "link": "toplama-ve-carpma-yontemlerini-kullanarak-sayma/ders-1",
-                  "name": "Toplama yöntemi kullanarak sayma",
-                  "type": "v",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "toplama-ve-carpma-yontemlerini-kullanarak-sayma/ders-2",
-                  "name": "Alıştırma 1",
-                  "type": "e",
-                  "done": 1,
-                  "total": 12
-                }
-              ],
-              "link": "toplama-ve-carpma-yontemlerini-kullanarak-sayma/ders-1",
-              "name": "Toplama ve Çarpma Yöntemlerini Kullanarak Sayma"
-            },
-            {
-              "comment": "Bölüm 2",
-              "dersler": [
-                {
-                  "link": "permutasyon/ders-1",
-                  "name": "Permütasyon nedir?",
-                  "type": "v",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "permutasyon/ders-2",
-                  "name": "Alıştırma 1",
-                  "type": "e",
-                  "done": 1,
-                  "total": 12
-                }
-              ],
-              "link": "permutasyon/ders-1",
-              "name": "Permütasyon (Sıralama)"
-            }
-          ],
-
-          "done": 12,
+          "name": "Gerçel sayıların üslü ve köklü gösterimleri ile yapılan işlemler",
+          "comment": "Gerçel sayıların üslü ve köklü gösterimleri ile yapılan işlemler konusunun temel bilgilerini içerir.",
           "kazanimlar": [
             {
-              "name": "Olayların gerçekleşme sayısını toplama ve çarpma yöntemlerini kullanarak hesaplar."
-            },
-            {
-              "name": "n çeşit nesne ile oluşturulabilecek r li dizilişlerin (permütasyonların) kaç farklı şekilde yapılabileceğini hesaplar."
-            },
-            {
-              "name": "Sınırlı sayıda tekrarlayan nesnelerin dizilişlerini (permütasyonlarını) açıklayarak problemler çözer."
-            },
-            {
-              "name": "n elemanlı bir kümenin r tane elemanının kaç farklı şekilde seçilebileceğini hesaplar."
-            },
-            {
-              "name": "Pascal üçgenini açıklar."
-            },
-            {
-              "name": "Binom açılımını yapar."
+              "name": "Gercel sayilarin uslu ve koklu gosterimleri ile yapilan islemler kazanimi"
             }
           ],
-          "link": "siralama-ve-secme",
-          "name": "Sıralama ve Seçme",
-          "total": 20
+          "bolumler": [
+            {
+              "name": "Gercel sayilarin uslu ve koklu gosterimleri ile yapilan islemler dersi",
+              "comment": "Gercel sayilarin uslu ve koklu gosterimleri ile yapilan islemler konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler"
+            }
+          ],
+          "link": "gercel-sayilarin-uslu-ve-koklu-gosterimleri-ile-yapilan-islemler",
+          "done": 0,
+          "total": 12
         },
         {
-          "comment": "Basit Olayların Olasılıkları Konusu",
-          "bolumler": [
-            {
-              "comment": "Bölüm 1",
-              "dersler": [
-                {
-                  "link": "terimler-ve-kavramlar/ders-1",
-                  "name": "Örnek uzay, deney, çıktı, bir olayın tümleyeni, kesin olay, imkânsız olay, ayrık olay ve ayrık olmayan olay ",
-                  "type": "v",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "terimler-ve-kavramlar/ders-2",
-                  "name": "Alıştırma 1",
-                  "type": "e",
-                  "done": 10,
-                  "total": 14
-                }
-              ],
-              "link": "terimler-ve-kavramlar/ders-1",
-              "name": "Terimler ve Kavramlar"
-            },
-            {
-              "dersler": [
-                {
-                  "link": "olasilik-kavrami-ile-ilgili-uygulamalar/ders-1",
-                  "name": "Olasılık nedir?",
-                  "type": "a",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "olasilik-kavrami-ile-ilgili-uygulamalar/ders-2",
-                  "name": "Alıştırma 1",
-                  "type": "e",
-                  "done": 10,
-                  "total": 14
-                }
-              ],
-              "link": "olasilik-kavrami-ile-ilgili-uygulamalar/ders-1",
-              "name": "Olasılık Kavramı İle İlgili Uygulamalar"
-            }
-          ],
-          "done": 10,
+          "name": "Gerçel sayı aralıklarının gösteriminde ve aralıklarla ilgili işlemlerde küme sembol ve işlemleri",
+          "comment": "Gercel sayi araliklarinin gosteriminde ve araliklarla ilgili islemlerde kume sembol ve islemleri konusunun temel bilgilerini icerir.",
           "kazanimlar": [
             {
-              "name": "Örnek uzay, deney, çıktı, bir olayın tümleyeni, kesin olay, imkânsız olay, ayrık olay ve ayrık olmayan olay kavramlarını açıklar."
-            },
-            {
-              "name": "Olasılık kavramı ile ilgili uygulamalar yapar."
+              "name": "Gercel sayi araliklarinin gosteriminde ve araliklarla ilgili islemlerde kume sembol ve islemleri kazanimi"
             }
           ],
-          "link": "basit-olaylarin-olasiliklari",
-          "name": "Basit Olayların Olasılıkları",
-          "total": 40
+          "bolumler": [
+            {
+              "name": "Gercel sayi araliklarinin gosteriminde ve araliklarla ilgili islemlerde kume sembol ve islemleri dersi",
+              "comment": "Gercel sayi araliklarinin gosteriminde ve araliklarla ilgili islemlerde kume sembol ve islemleri konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri"
+            }
+          ],
+          "link": "gercel-sayi-araliklarinin-gosteriminde-ve-araliklarla-ilgili-islemlerde-kume-sembol-ve-islemleri",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Sayı kümelerinin özellikleri",
+          "comment": "Sayi kumelerinin ozellikleri konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Sayi kumelerinin ozellikleri kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Sayi kumelerinin ozellikleri dersi",
+              "comment": "Sayi kumelerinin ozellikleri konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "sayi-kumelerinin-ozellikleri/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "sayi-kumelerinin-ozellikleri"
+            }
+          ],
+          "link": "sayi-kumelerinin-ozellikleri",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Gerçel sayıların işlem özellikleri",
+          "comment": "Gercel sayilarin islem ozellikleri konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Gercel sayilarin islem ozellikleri kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Gercel sayilarin islem ozellikleri dersi",
+              "comment": "Gercel sayilarin islem ozellikleri konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "gercel-sayilarin-islem-ozellikleri/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "gercel-sayilarin-islem-ozellikleri"
+            }
+          ],
+          "link": "gercel-sayilarin-islem-ozellikleri",
+          "done": 0,
+          "total": 12
         }
-      ],
-      "link": "sayma-ve-olasilik",
-      "name": "Mantık",
-      "total": 150
+      ]
     },
     {
-      "comment": "Analitik Geometri",
-      "aboutUnit": "Fonksiyonlar öğretilir.",
-      "dersSayisi": 45,
-      "done": 50,
+      "name": "Nicelikler ve Değişimler",
+      "aboutUnit": "Nicelikler ve Degisimler temasi, ogrencilerin ilgili kavramlari anlamasi ve uygulamasi icin yapilandirilmistir.",
+      "dersSayisi": 12,
+      "done": 0,
+      "total": 36,
+      "link": "nicelikler-ve-degisimler",
       "konular": [
         {
-          "comment": "Sıralama ve Seçme Konusu ",
-          "bolumler": [
-            {
-              "dersler": [
-                {
-                  "link": "a-bolumu/ders-1",
-                  "name": "ders 1 çok geride tatlı bir an çok geri de güneşsiz günler",
-                  "type": "v",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "a-bolumu/ders-2",
-                  "name": "ders 2",
-                  "type": "e",
-                  "done": 10,
-                  "total": 14
-                }
-              ],
-              "link": "a-bolumu/ders-1",
-              "name": "E Bölümü"
-            },
-            {
-              "dersler": [
-                {
-                  "link": "b-bolumu/ders-1",
-                  "name": "ders 14",
-                  "type": "a",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "b-bolumu/ders-2",
-                  "name": "ders 12",
-                  "type": "e",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "b-bolumu/ders-3",
-                  "name": "ders 1212",
-                  "type": "e",
-                  "done": 10,
-                  "total": 14
-                }
-              ],
-              "link": "b-bolumu/ders-1",
-              "name": "F Bölümü"
-            }
-          ],
-          "done": 80,
+          "name": "Gerçel sayılarda tanımlı doğrusal fonksiyonlar ve nitel özellikleri",
+          "comment": "Gercel sayilarda tanimli dogrusal fonksiyonlar ve nitel ozellikleri konusunun temel bilgilerini icerir.",
           "kazanimlar": [
             {
-              "name": "Fonksiyonlarla ilgili problemler çözer."
-            },
-            {
-              "name": "Fonksiyonların grafiklerini çizer."
-            },
-            {
-              "name": "Fonksiyonların grafiklerini yorumlar."
-            },
-            {
-              "name": "Gerçek hayat durumlarından doğrusal fonksiyonlarla ifade edilebilenlerin grafik gösterimlerini yapar."
+              "name": "Gercel sayilarda tanimli dogrusal fonksiyonlar ve nitel ozellikleri kazanimi"
             }
           ],
-          "name": "Fonksiyon Kavramı ve Gösterimi",
-          "total": 100
+          "bolumler": [
+            {
+              "name": "Gercel sayilarda tanimli dogrusal fonksiyonlar ve nitel ozellikleri dersi",
+              "comment": "Gercel sayilarda tanimli dogrusal fonksiyonlar ve nitel ozellikleri konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri"
+            }
+          ],
+          "link": "gercel-sayilarda-tanimli-dogrusal-fonksiyonlar-ve-nitel-ozellikleri",
+          "done": 0,
+          "total": 12
         },
         {
-          "comment": "Sıralama ve Seçme Konusu ",
-          "bolumler": [
-            {
-              "dersler": [
-                {
-                  "link": "a-bolumu/ders-1",
-                  "name": "ders 1 çok geride tatlı bir an çok geri de güneşsiz günler",
-                  "type": "v",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "a-bolumu/ders-2",
-                  "name": "ders 2",
-                  "type": "e",
-                  "done": 10,
-                  "total": 14
-                }
-              ],
-              "link": "a-bolumu/ders-1",
-              "name": "G Bölümü"
-            },
-            {
-              "dersler": [
-                {
-                  "link": "b-bolumu/ders-1",
-                  "name": "ders 14",
-                  "type": "a",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "b-bolumu/ders-2",
-                  "name": "ders 12",
-                  "type": "e",
-                  "done": 10,
-                  "total": 14
-                },
-                {
-                  "link": "b-bolumu/ders-3",
-                  "name": "ders 1212",
-                  "type": "e",
-                  "done": 10,
-                  "total": 14
-                }
-              ],
-              "link": "b-bolumu/ders-1",
-              "name": "H Bölümü"
-            }
-          ],
-          "done": 150,
+          "name": "Gerçel sayılarda mutlak değer fonksiyonlari ve nitel özellikleri",
+          "comment": "Gercel sayilarda mutlak deger fonksiyonlari ve nitel ozellikleri konusunun temel bilgilerini icerir.",
           "kazanimlar": [
             {
-              "name": "Bire bir ve örten fonksiyonlar ile ilgili uygulamalar yapar."
-            },
-            {
-              "name": "Fonksiyonlarda bileşke işlemiyle ilgili işlemler yapar."
-            },
-            {
-              "name": "Verilen bir fonksiyonun tersini bulur."
+              "name": "Gercel sayilarda mutlak deger fonksiyonlari ve nitel ozellikleri kazanimi"
             }
           ],
-          "name": "İki Fonksiyonun Bileşkesi ve Bir Fonksiyonun Tersi",
-          "total": 200
+          "bolumler": [
+            {
+              "name": "Gercel sayilarda mutlak deger fonksiyonlari ve nitel ozellikleri dersi",
+              "comment": "Gercel sayilarda mutlak deger fonksiyonlari ve nitel ozellikleri konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri"
+            }
+          ],
+          "link": "gercel-sayilarda-mutlak-deger-fonksiyonlari-ve-nitel-ozellikleri",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Doğrusal fonksiyonlarla ifade edilen denklemler ve eşitsizlikler içeren problemler",
+          "comment": "Dogrusal fonksiyonlarla ifade edilen denklemler ve esitsizlikler iceren problemler konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Dogrusal fonksiyonlarla ifade edilen denklemler ve esitsizlikler iceren problemler kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Dogrusal fonksiyonlarla ifade edilen denklemler ve esitsizlikler iceren problemler dersi",
+              "comment": "Dogrusal fonksiyonlarla ifade edilen denklemler ve esitsizlikler iceren problemler konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler"
+            }
+          ],
+          "link": "dogrusal-fonksiyonlarla-ifade-edilen-denklemler-ve-esitsizlikler-iceren-problemler",
+          "done": 0,
+          "total": 12
         }
-      ],
-      "link": "fonksiyonlar",
-      "name": "Kümeler",
-      "total": 200
+      ]
+    },
+    {
+      "name": "Geometrik Şekiller",
+      "aboutUnit": "Geometrik Sekiller temasi, ogrencilerin ilgili kavramlari anlamasi ve uygulamasi icin yapilandirilmistir.",
+      "dersSayisi": 12,
+      "done": 0,
+      "total": 12,
+      "link": "geometrik-sekiller",
+      "konular": [
+        {
+          "name": "Üçgende açı ve kenarlarla ilgili özellikler",
+          "comment": "Ucgende aci ve kenarlarla ilgili ozellikler konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Ucgende aci ve kenarlarla ilgili ozellikler kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Ucgende aci ve kenarlarla ilgili ozellikler dersi",
+              "comment": "Ucgende aci ve kenarlarla ilgili ozellikler konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler"
+            }
+          ],
+          "link": "ucgende-aci-ve-kenarlarla-ilgili-ozellikler",
+          "done": 0,
+          "total": 12
+        }
+      ]
+    },
+    {
+      "name": "Eşlik ve Benzerlik",
+      "aboutUnit": "Eslik ve Benzerlik temasi, ogrencilerin ilgili kavramlari anlamasi ve uygulamasi icin yapilandirilmistir.",
+      "dersSayisi": 12,
+      "done": 0,
+      "total": 48,
+      "link": "eslik-ve-benzerlik",
+      "konular": [
+        {
+          "name": "Geometrik dönüşümler",
+          "comment": "Geometrik donusumler konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Geometrik donusumler kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Geometrik donusumler dersi",
+              "comment": "Geometrik donusumler konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "geometrik-donusumler/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "geometrik-donusumler"
+            }
+          ],
+          "link": "geometrik-donusumler",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "İki üçgenin eş ve benzer olması için gerekli olan asgari koşullar",
+          "comment": "Iki ucgenin es ve benzer olmasi icin gerekli olan asgari kosullar konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Iki ucgenin es ve benzer olmasi icin gerekli olan asgari kosullar kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Iki ucgenin es ve benzer olmasi icin gerekli olan asgari kosullar dersi",
+              "comment": "Iki ucgenin es ve benzer olmasi icin gerekli olan asgari kosullar konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar"
+            }
+          ],
+          "link": "iki-ucgenin-es-ve-benzer-olmasi-icin-gerekli-olan-asgari-kosullar",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Tales, Öklid ve Pisagor teoremleri",
+          "comment": "Tales, Oklid ve Pisagor teoremleri konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Tales, Oklid ve Pisagor teoremleri kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Tales, Oklid ve Pisagor teoremleri dersi",
+              "comment": "Tales, Oklid ve Pisagor teoremleri konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "tales-oklid-ve-pisagor-teoremleri/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "tales-oklid-ve-pisagor-teoremleri"
+            }
+          ],
+          "link": "tales-oklid-ve-pisagor-teoremleri",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Eşlik ve benzerlikle ilgili problemler",
+          "comment": "Eslik ve benzerlikle ilgili problemler konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Eslik ve benzerlikle ilgili problemler kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Eslik ve benzerlikle ilgili problemler dersi",
+              "comment": "Eslik ve benzerlikle ilgili problemler konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "eslik-ve-benzerlikle-ilgili-problemler/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "eslik-ve-benzerlikle-ilgili-problemler"
+            }
+          ],
+          "link": "eslik-ve-benzerlikle-ilgili-problemler",
+          "done": 0,
+          "total": 12
+        }
+      ]
+    },
+    {
+      "name": "Algoritma ve Bilişim",
+      "aboutUnit": "Algoritma ve Bilisim temasi, ogrencilerin ilgili kavramlari anlamasi ve uygulamasi icin yapilandirilmistir.",
+      "dersSayisi": 12,
+      "done": 0,
+      "total": 36,
+      "link": "algoritma-ve-bilisim",
+      "konular": [
+        {
+          "name": "Algoritma temelli yaklaşımlarla problem çözme",
+          "comment": "Algoritma temelli yaklasimlarla problem cozme konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Algoritma temelli yaklasimlarla problem cozme kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Algoritma temelli yaklasimlarla problem cozme dersi",
+              "comment": "Algoritma temelli yaklasimlarla problem cozme konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "algoritma-temelli-yaklasimlarla-problem-cozme/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "algoritma-temelli-yaklasimlarla-problem-cozme"
+            }
+          ],
+          "link": "algoritma-temelli-yaklasimlarla-problem-cozme",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Algoritmik yapılar içerisindeki mantık bağlaçları ve niceleyiciler",
+          "comment": "Algoritmik yapilar icerisindeki mantik baglaclari ve niceleyiciler konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Algoritmik yapilar icerisindeki mantik baglaclari ve niceleyiciler kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Algoritmik yapilar icerisindeki mantik baglaclari ve niceleyiciler dersi",
+              "comment": "Algoritmik yapilar icerisindeki mantik baglaclari ve niceleyiciler konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler"
+            }
+          ],
+          "link": "algoritmik-yapilar-icerisindeki-mantik-baglaclari-ve-niceleyiciler",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Algoritmalarda ve matematiksel ispatlarda mantık bağlaçları ve niceleyiciler",
+          "comment": "Algoritmalarda ve matematiksel ispatlarda mantik baglaclari ve niceleyiciler konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Algoritmalarda ve matematiksel ispatlarda mantik baglaclari ve niceleyiciler kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Algoritmalarda ve matematiksel ispatlarda mantik baglaclari ve niceleyiciler dersi",
+              "comment": "Algoritmalarda ve matematiksel ispatlarda mantik baglaclari ve niceleyiciler konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler"
+            }
+          ],
+          "link": "algoritmalarda-ve-matematiksel-ispatlarda-mantik-baglaclari-ve-niceleyiciler",
+          "done": 0,
+          "total": 12
+        }
+      ]
+    },
+    {
+      "name": "İstatistiksel Arastırma Süreci",
+      "aboutUnit": "Istatistiksel Arastirma Sureci temasi, ogrencilerin ilgili kavramlari anlamasi ve uygulamasi icin yapilandirilmistir.",
+      "dersSayisi": 12,
+      "done": 0,
+      "total": 24,
+      "link": "istatistiksel-arastirma-sureci",
+      "konular": [
+        {
+          "name": "Tek nicel değişkenli veri dağılımları ile calışma ve veriye dayalı karar verme",
+          "comment": "Tek nicel degiskenli veri dagilimlari ile calisma ve veriye dayali karar verme konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Tek nicel degiskenli veri dagilimlari ile calisma ve veriye dayali karar verme kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Tek nicel degiskenli veri dagilimlari ile calisma ve veriye dayali karar verme dersi",
+              "comment": "Tek nicel degiskenli veri dagilimlari ile calisma ve veriye dayali karar verme konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme"
+            }
+          ],
+          "link": "tek-nicel-degiskenli-veri-dagilimlari-ile-calisma-ve-veriye-dayali-karar-verme",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Başkaları tarafından oluşturulan tek nicel degişkenli veri dağılımlarına dayalı sonuç ve yorumları tartışabilme",
+          "comment": "Baskalari tarafindan olusturulan tek nicel degiskenli veri dagilimlarina dayali sonuc ve yorumlari tartisabilme konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Baskalari tarafindan olusturulan tek nicel degiskenli veri dagilimlarina dayali sonuc ve yorumlari tartisabilme kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Baskalari tarafindan olusturulan tek nicel degiskenli veri dagilimlarina dayali sonuc ve yorumlari tartisabilme dersi",
+              "comment": "Baskalari tarafindan olusturulan tek nicel degiskenli veri dagilimlarina dayali sonuc ve yorumlari tartisabilme konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme"
+            }
+          ],
+          "link": "baskalari-tarafindan-olusturulan-tek-nicel-degiskenli-veri-dagilimlarina-dayali-sonuc-ve-yorumlari-tartisabilme",
+          "done": 0,
+          "total": 12
+        }
+      ]
+    },
+    {
+      "name": "Veriden Olasılığa",
+      "aboutUnit": "Veriden Olasiliga temasi, ogrencilerin ilgili kavramlari anlamasi ve uygulamasi icin yapilandirilmistir.",
+      "dersSayisi": 12,
+      "done": 0,
+      "total": 24,
+      "link": "veriden-olasiliga",
+      "konular": [
+        {
+          "name": "Olayların olasılığını gözleme dayalı tahmin etme",
+          "comment": "Olaylarin olasiligini gozleme dayali tahmin etme konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Olaylarin olasiligini gozleme dayali tahmin etme kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Olaylarin olasiligini gozleme dayali tahmin etme dersi",
+              "comment": "Olaylarin olasiligini gozleme dayali tahmin etme konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme"
+            }
+          ],
+          "link": "olaylarin-olasiligini-gozleme-dayali-tahmin-etme",
+          "done": 0,
+          "total": 12
+        },
+        {
+          "name": "Olayların olasılığına ilişkin tümevarımsal akıl yürütme",
+          "comment": "Olaylarin olasiligina iliskin tumevarimsal akil yurutme konusunun temel bilgilerini icerir.",
+          "kazanimlar": [
+            {
+              "name": "Olaylarin olasiligina iliskin tumevarimsal akil yurutme kazanimi"
+            }
+          ],
+          "bolumler": [
+            {
+              "name": "Olaylarin olasiligina iliskin tumevarimsal akil yurutme dersi",
+              "comment": "Olaylarin olasiligina iliskin tumevarimsal akil yurutme konusunda temel anlatim",
+              "dersler": [
+                {
+                  "name": "Ders 1",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-1",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 2",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-2",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 3",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-3",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 4",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-4",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 5",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-5",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 6",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-6",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 7",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-7",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 8",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-8",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 9",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-9",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 10",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-10",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 11",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-11",
+                  "done": 0,
+                  "total": 1
+                },
+                {
+                  "name": "Ders 12",
+                  "type": "v",
+                  "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme/ders-12",
+                  "done": 0,
+                  "total": 1
+                }
+              ],
+              "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme"
+            }
+          ],
+          "link": "olaylarin-olasiligina-iliskin-tumevarimsal-akil-yurutme",
+          "done": 0,
+          "total": 12
+        }
+      ]
     }
   ]
 }

@@ -248,7 +248,6 @@ function HomeworkList({ paramsUid }) {
             <CTh>
               Bitiş Tarihi <FaSort />
             </CTh>
-            <CTh>Teslim Durumu</CTh>
             <CTh></CTh>
             <CTh></CTh>
           </CTr>
@@ -261,11 +260,6 @@ function HomeworkList({ paramsUid }) {
               <CTd>{item.puan}</CTd>
               <CTd>{item.startDate}</CTd>
               <CTd>{item.endDate}</CTd>
-              <CTd>
-                {item.doneStudent === item.totalStudent
-                  ? "Tamamlandı"
-                  : `Öğrenci: ${item.doneStudent} / ${item.totalStudent}`}
-              </CTd>
               <CTd>
                 <DeleteButton
                   width={"90%"}
@@ -297,12 +291,10 @@ function HomeworkList({ paramsUid }) {
 }
 
 const CustomInputSelect = styled(InputSelect)`
-padding: 8px;
-margin-bottom: 0rem;
-width: 90%;
-font-size: .8rem;
+  padding: 8px;
+  margin-bottom: 0rem;
+  width: 90%;
+  font-size: 0.8rem;
 `;
-
-
 
 export default HomeworkList;

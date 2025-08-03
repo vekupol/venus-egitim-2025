@@ -29,8 +29,8 @@ function Donate() {
               bize yardımcı olabilir.
             </li>
             <li style={{ listStyleType: "none", fontWeight: "bold" }}>
-              İletişim için; <br /> Mail adresimiz iletisim@venusegitim.com{" "}
-              <br /> WhatsApp hattımız 0530 682 68 49{" "}
+              İletişim için; <br /> Mail adresimiz vkursun6@gmail.com <br />{" "}
+              WhatsApp hattımız 0530 682 68 49{" "}
             </li>
           </Div>
         </MainBox>
@@ -39,12 +39,10 @@ function Donate() {
   );
 }
 
-
 const Div = styled.div`
-
-@media (max-width:768px){
-  color: white;
-}
-`
+  @media (max-width: 768px) {
+    color: white;
+  }
+`;
 
 export default Donate;

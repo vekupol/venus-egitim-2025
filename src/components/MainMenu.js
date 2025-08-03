@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ChangingText from "./ChangingText";
-import mainPicture from "../images/anaresim11.svg";
+import mainPicture from "../images/airesim20.png";
 import { Container } from "./OgrenciMenu";
 
 function MainMenu({ scrollToOgrenci, scrollToOgretmen, scrollToVeli }) {
@@ -13,16 +13,26 @@ function MainMenu({ scrollToOgrenci, scrollToOgretmen, scrollToVeli }) {
           <div>
             <ChangingText />
           </div>
-          <div>Ücretsiz Eğitim</div>
-          <div>Platformu</div>
+          <TurkiyeDiv>Ücretsiz Eğitim</TurkiyeDiv>
+          <TurkiyeDiv>Platformu</TurkiyeDiv>
           <Text2>
             Her öğrencinin eğitime ulaşma hakkı olduğu fikri ile çıktığımız bu
             yolda bize katıl.
           </Text2>
           <BtnGroup>
-            <Btn onClick={scrollToOgrenci}>Öğrenciler</Btn>
+            <Btn
+              style={{ borderRadius: "15px 0 0 15px" }}
+              onClick={scrollToOgrenci}
+            >
+              Öğrenciler
+            </Btn>
             <Btn onClick={scrollToOgretmen}>Öğretmenler</Btn>
-            <Btn onClick={scrollToVeli}>Veliler</Btn>
+            <Btn
+              style={{ borderRadius: "0 15px 15px 0" }}
+              onClick={scrollToVeli}
+            >
+              Veliler
+            </Btn>
           </BtnGroup>
         </Text>
 
@@ -37,6 +47,9 @@ function MainMenu({ scrollToOgrenci, scrollToOgretmen, scrollToVeli }) {
 export default MainMenu;
 
 const TurkiyeDiv = styled.div`
+  display: inline-block;
+  background-color: white;
+  padding: 0 0.2rem;
   margin-bottom: -0.3rem;
 
   @media (max-width: 768px) {
@@ -102,6 +115,7 @@ const Text = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     font-size: 35px;
+    margin-top: -10rem;
   }
 `;
 
@@ -111,6 +125,7 @@ const Text2 = styled.div`
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 2rem;
+
   @media (max-width: 768px) {
     margin-bottom: 1rem;
     margin-top: 1rem;
