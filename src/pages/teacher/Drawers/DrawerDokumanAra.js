@@ -158,6 +158,7 @@ const DrawerDokumanAra = () => {
               <CTh style={{ textAlign: "left", paddingLeft: "15px" }}>İsim</CTh>
               <CTh style={{ maxWidth: "50px" }}>Sınıf</CTh>
               <CTh>Türü</CTh>
+              <CTh>Etiket</CTh>
               <CTh>Eklenme Tarihi</CTh>
               <CTh>İndir</CTh>
             </CTr>
@@ -173,6 +174,7 @@ const DrawerDokumanAra = () => {
                     </CTd>
                     <CTd>{highlightSearchTerm(file.class || "N/A")}</CTd>
                     <CTd>{highlightSearchTerm(file.fileType || "N/A")}</CTd>
+                    <CTd>{highlightSearchTerm(file.tag || "N/A")}</CTd>
                     <CTd>
                       {highlightSearchTerm(
                         file.created ? formatCreatedDate(file.created) : "N/A"

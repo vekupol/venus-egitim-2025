@@ -28,8 +28,6 @@ import {
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
-import PieChart from "../../components/graphs/PieChart";
-import BarChart from "../../components/graphs/BarChart";
 import {
   ref,
   listAll,
@@ -38,6 +36,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import ReactTable from "../../components/tables/ReactTable";
+import ApexChartsComponent from "../../components/charts/ApexChartsComponent";
 
 function StudentEdit() {
   const [teacherUser] = useAuthState(auth);
@@ -50,6 +49,7 @@ function StudentEdit() {
   const [fileMap, setFileMap] = useState({});
   const [availableHomeworkFiles, setAvailableHomeworkFiles] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
+  const [activeTab, setActiveTab] = useState("istatistik");
 
   const data = myHomework.map((item, index) => ({
     id: item.id,
@@ -301,8 +301,7 @@ function StudentEdit() {
     window.location.reload();
   };
 
-  const handleHomeworkDelete = async (event, itemId) => {
-    event.preventDefault();
+  const handleHomeworkDelete = async (itemId) => {
     const studentDocRef = doc(db, "users", user.uid);
     const studentDocSnap = await getDoc(studentDocRef);
     if (studentDocSnap.exists()) {
@@ -330,360 +329,370 @@ function StudentEdit() {
   const tamamlandi = homework.filter((item) => item.bittiMi === 1).length;
   const tamamlanmadi = homework.filter((item) => item.bittiMi === 0).length;
 
-  const PieData = [
-    ["TamamlandıMı", "Adet"],
-    ["Tamamlanan Ödev Sayısı", tamamlandi],
-    ["Tamamlanmayan Ödev Sayısı", tamamlanmadi],
-  ];
-
-  const PieOptions = {
-    title: "Ödevlerin Tamamlanma Durumu",
-    is3D: true,
-    colors: ["#674188", "#c4302b", "#0000ff", "#ffff00", "#ff00ff"],
-    chartArea: { width: "80%", height: "80%" },
-    pieSliceBorderColor: "transparent",
-  };
-
-  const BarData = [
-    ["Sorular", "Çözülen Soru Sayısı", "Doğru Sayısı", "Yanlış Sayısı"],
-    ["Pazartesi", 80, 70, 10],
-    ["Salı", 37, 36, 1],
-    ["Çarşamba", 26, 21, 5],
-    ["Perşembe", 20, 19, 1],
-    ["Cuma", 15, 15, 0],
-    ["Cumartesi", 15, 15, 0],
-    ["Pazar", 15, 15, 0],
-  ];
-
-  const BarOptions = {
-    chart: {
-      title: "Haftalık Performans",
-      subtitle: "Bu hafta çözülen sorularda gösterdiği performansı",
-    },
-  };
-
   return (
     <ClassContainer>
-      <Name>{userData.displayName}</Name>
-      <Container>
-        <ContainerFlex>
-          {/* Platform Ödevi */}
-          <ContainerBorder>
-            <Form onSubmit={handlePlatformSubmit}>
-              <h3>Venüs Eğitim'den Ödev Ver</h3>
-              <FormGroup>
-                <Label>Sınıf:</Label>
-                <Select
-                  name="className"
-                  value={platformValues.className}
-                  onChange={(e) =>
-                    setPlatformValues({
-                      ...platformValues,
-                      className: e.target.value,
-                    })
-                  }
-                >
-                  <Option>Bir sınıf seçiniz...</Option>
-                  <Option>9.Sınıf</Option>
-                  <Option>10.Sınıf</Option>
-                  <Option>11.Sınıf</Option>
-                  <Option>12.Sınıf</Option>
-                  <Option>TYT Konuları</Option>
-                  <Option>AYT Konuları</Option>
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label>Ünite:</Label>
-                <Select
-                  name="unit"
-                  value={platformValues.unit}
-                  onChange={(e) =>
-                    setPlatformValues({
-                      ...platformValues,
-                      unit: e.target.value,
-                    })
-                  }
-                >
-                  <Option>Mantık</Option>
-                  <Option>Kümeler</Option>
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label>Kazanımlar:</Label>
-                <Select
-                  multiple
-                  name="kazanims"
-                  value={platformValues.kazanims}
-                  onChange={(e) =>
-                    setPlatformValues({
-                      ...platformValues,
-                      kazanims: Array.from(
-                        e.target.selectedOptions,
-                        (opt) => opt.value
-                      ),
-                    })
-                  }
-                >
-                  <Option>1.1.1. Doğru önerme nedir?</Option>
-                  <Option>1.1.2. Yanlış önerme nedir?</Option>
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label>Soru Sayısı:</Label>
-                <Select
-                  name="soruSayisi"
-                  value={platformValues.soruSayisi}
-                  onChange={(e) =>
-                    setPlatformValues({
-                      ...platformValues,
-                      soruSayisi: e.target.value,
-                    })
-                  }
-                >
-                  <Option>Soru Sayısı giriniz</Option>
-                  {[...Array(101).keys()].map((n) => (
-                    <Option key={n}>{n + 1}</Option>
-                  ))}
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label>Başlangıç Tarihi:</Label>
-                <InputDate
-                  type="date"
-                  name="startDate"
-                  value={platformValues.startDate}
-                  onChange={(e) =>
-                    setPlatformValues({
-                      ...platformValues,
-                      startDate: e.target.value,
-                    })
-                  }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Bitiş Tarihi:</Label>
-                <InputDate
-                  type="date"
-                  name="endDate"
-                  value={platformValues.endDate}
-                  onChange={(e) =>
-                    setPlatformValues({
-                      ...platformValues,
-                      endDate: e.target.value,
-                    })
-                  }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Not:</Label>
-                <InputDate
-                  type="text"
-                  name="note"
-                  value={platformValues.note}
-                  onChange={(e) =>
-                    setPlatformValues({
-                      ...platformValues,
-                      note: e.target.value,
-                    })
-                  }
-                />
-              </FormGroup>
-              <ButtonO type="submit">Ödev Gönder</ButtonO>
-            </Form>
-          </ContainerBorder>
-
-          {/* Kitap Ödevi */}
-          <ContainerBorder>
-            <Form onSubmit={handleKitapSubmit}>
-              <h3>Soru Bankalarından Ödev Ver</h3>
-              <FormGroup>
-                <Label>Sınıf:</Label>
-                <Select
-                  name="className"
-                  value={kitapValues.className}
-                  onChange={(e) =>
-                    setKitapValues({
-                      ...kitapValues,
-                      className: e.target.value,
-                    })
-                  }
-                >
-                  <Option>9.Sınıf</Option>
-                  <Option>10.Sınıf</Option>
-                  <Option>11.Sınıf</Option>
-                  <Option>12.Sınıf</Option>
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label>Yayınevi:</Label>
-                <Select
-                  name="yayinevi"
-                  value={kitapValues.yayinevi}
-                  onChange={(e) =>
-                    setKitapValues({ ...kitapValues, yayinevi: e.target.value })
-                  }
-                >
-                  <Option>A Yayınları</Option>
-                  <Option>B Yayınları</Option>
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label>Kitap Adı:</Label>
-                <Select
-                  name="kitapAdi"
-                  value={kitapValues.kitapAdi}
-                  onChange={(e) =>
-                    setKitapValues({ ...kitapValues, kitapAdi: e.target.value })
-                  }
-                >
-                  <Option>Matematik Soru Bankası</Option>
-                  <Option>Fizik Test Kitabı</Option>
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label>Ünite:</Label>
-                <Select
-                  name="unit"
-                  value={kitapValues.unit}
-                  onChange={(e) =>
-                    setKitapValues({ ...kitapValues, unit: e.target.value })
-                  }
-                >
-                  <Option>Mantık</Option>
-                  <Option>Kümeler</Option>
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label>Sayfa Başlangıç:</Label>
-                <InputDate
-                  type="number"
-                  value={kitapValues.baslangic}
-                  onChange={(e) =>
-                    setKitapValues({
-                      ...kitapValues,
-                      baslangic: e.target.value,
-                    })
-                  }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Sayfa Bitiş:</Label>
-                <InputDate
-                  type="number"
-                  value={kitapValues.bitis}
-                  onChange={(e) =>
-                    setKitapValues({ ...kitapValues, bitis: e.target.value })
-                  }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Başlangıç Tarihi:</Label>
-                <InputDate
-                  type="date"
-                  value={kitapValues.startDate}
-                  onChange={(e) =>
-                    setKitapValues({
-                      ...kitapValues,
-                      startDate: e.target.value,
-                    })
-                  }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Bitiş Tarihi:</Label>
-                <InputDate
-                  type="date"
-                  value={kitapValues.endDate}
-                  onChange={(e) =>
-                    setKitapValues({ ...kitapValues, endDate: e.target.value })
-                  }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Not:</Label>
-                <InputDate
-                  type="text"
-                  value={kitapValues.note}
-                  onChange={(e) =>
-                    setKitapValues({ ...kitapValues, note: e.target.value })
-                  }
-                />
-              </FormGroup>
-              <ButtonO type="submit">Ödev Gönder</ButtonO>
-            </Form>
-          </ContainerBorder>
-
-          {/* Dosya Ödevi */}
-          <ContainerBorder>
-            <Form onSubmit={handleFileSubmit}>
-              <h3>Dosya Formatında Ödev Ver</h3>
-              <FormGroup>
-                <Label>Dosya Yükle:</Label>
-                <input
-                  type="file"
-                  onChange={(e) => setSelectedFile(e.target.files[0])}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Başlangıç Tarihi:</Label>
-                <InputDate
-                  type="date"
-                  value={fileValues.startDate}
-                  onChange={(e) =>
-                    setFileValues({ ...fileValues, startDate: e.target.value })
-                  }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Bitiş Tarihi:</Label>
-                <InputDate
-                  type="date"
-                  value={fileValues.endDate}
-                  onChange={(e) =>
-                    setFileValues({ ...fileValues, endDate: e.target.value })
-                  }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Not:</Label>
-                <InputDate
-                  type="text"
-                  value={fileValues.note}
-                  onChange={(e) =>
-                    setFileValues({ ...fileValues, note: e.target.value })
-                  }
-                />
-              </FormGroup>
-              <ButtonO type="submit">Ödev Gönder</ButtonO>
-            </Form>
-          </ContainerBorder>
-        </ContainerFlex>
-
-        <ContainerBorder>
+      {/* Öğrenci Profil Kartı */}
+      <ProfileCard>
+        <h2>{userData.displayName || "Öğrenci Adı"}</h2>
+        <p>
+          Takip ettiğiniz öğrencinin detaylı durumunu buradan izleyebilirsiniz.
+        </p>
+      </ProfileCard>
+      <TabMenu>
+        <TabButton
+          active={activeTab === "istatistik"}
+          onClick={() => setActiveTab("istatistik")}
+        >
+          📊 İstatistik
+        </TabButton>
+        <TabButton
+          active={activeTab === "tablo"}
+          onClick={() => setActiveTab("tablo")}
+        >
+          📋 Ödev Tablosu
+        </TabButton>
+        <TabButton
+          active={activeTab === "venus"}
+          onClick={() => setActiveTab("venus")}
+        >
+          🪐 Venüs Ödevi
+        </TabButton>
+        <TabButton
+          active={activeTab === "kitap"}
+          onClick={() => setActiveTab("kitap")}
+        >
+          📚 Kitap Ödevi
+        </TabButton>
+        <TabButton
+          active={activeTab === "dosya"}
+          onClick={() => setActiveTab("dosya")}
+        >
+          📂 Dosya Ödevi
+        </TabButton>
+      </TabMenu>
+      <TabContent>
+        {activeTab === "istatistik" && (
+          <ApexChartsComponent
+            tamamlandi={tamamlandi}
+            tamamlanmadi={tamamlanmadi}
+          />
+        )}
+        {activeTab === "tablo" && (
           <ReactTable
             data={data}
             fileMap={fileMap}
-            handleHomeworkDelete={handleHomeworkDelete}
             handleDeleteStudentFile={handleDeleteStudentFile}
+            handleHomeworkDelete={handleHomeworkDelete}
           />
-        </ContainerBorder>
-      </Container>
-      <PieChart PieData={PieData} PieOptions={PieOptions} />
-      <BarChart BarData={BarData} BarOptions={BarOptions} />
+        )}
+
+        {activeTab === "venus" && (
+          <Form onSubmit={handlePlatformSubmit}>
+            <h2 style={{ textAlign: "center" }}>Venüs Eğitim'den Ödev Ver</h2>
+            <FormGroup>
+              <Label>Sınıf:</Label>
+              <Select
+                name="className"
+                value={platformValues.className}
+                onChange={(e) =>
+                  setPlatformValues({
+                    ...platformValues,
+                    className: e.target.value,
+                  })
+                }
+              >
+                <Option>Bir sınıf seçiniz...</Option>
+                <Option>9.Sınıf</Option>
+                <Option>10.Sınıf</Option>
+                <Option>11.Sınıf</Option>
+                <Option>12.Sınıf</Option>
+                <Option>TYT Konuları</Option>
+                <Option>AYT Konuları</Option>
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Ünite:</Label>
+              <Select
+                name="unit"
+                value={platformValues.unit}
+                onChange={(e) =>
+                  setPlatformValues({
+                    ...platformValues,
+                    unit: e.target.value,
+                  })
+                }
+              >
+                <Option>Mantık</Option>
+                <Option>Kümeler</Option>
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Kazanımlar:</Label>
+              <Select
+                multiple
+                name="kazanims"
+                value={platformValues.kazanims}
+                onChange={(e) =>
+                  setPlatformValues({
+                    ...platformValues,
+                    kazanims: Array.from(
+                      e.target.selectedOptions,
+                      (opt) => opt.value
+                    ),
+                  })
+                }
+              >
+                <Option>1.1.1. Doğru önerme nedir?</Option>
+                <Option>1.1.2. Yanlış önerme nedir?</Option>
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Soru Sayısı:</Label>
+              <Select
+                name="soruSayisi"
+                value={platformValues.soruSayisi}
+                onChange={(e) =>
+                  setPlatformValues({
+                    ...platformValues,
+                    soruSayisi: e.target.value,
+                  })
+                }
+              >
+                <Option>Soru Sayısı giriniz</Option>
+                {[...Array(101).keys()].map((n) => (
+                  <Option key={n}>{n + 1}</Option>
+                ))}
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Başlangıç Tarihi:</Label>
+              <InputDate
+                type="date"
+                name="startDate"
+                value={platformValues.startDate}
+                onChange={(e) =>
+                  setPlatformValues({
+                    ...platformValues,
+                    startDate: e.target.value,
+                  })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Bitiş Tarihi:</Label>
+              <InputDate
+                type="date"
+                name="endDate"
+                value={platformValues.endDate}
+                onChange={(e) =>
+                  setPlatformValues({
+                    ...platformValues,
+                    endDate: e.target.value,
+                  })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Not:</Label>
+              <InputDate
+                type="text"
+                name="note"
+                value={platformValues.note}
+                onChange={(e) =>
+                  setPlatformValues({
+                    ...platformValues,
+                    note: e.target.value,
+                  })
+                }
+              />
+            </FormGroup>
+            <ButtonO type="submit">Ödev Gönder</ButtonO>
+          </Form>
+        )}
+        {activeTab === "kitap" && (
+          <Form onSubmit={handleKitapSubmit}>
+            <h2 style={{ textAlign: "center" }}>Soru Bankalarından Ödev Ver</h2>
+            <FormGroup>
+              <Label>Sınıf:</Label>
+              <Select
+                name="className"
+                value={kitapValues.className}
+                onChange={(e) =>
+                  setKitapValues({
+                    ...kitapValues,
+                    className: e.target.value,
+                  })
+                }
+              >
+                <Option>9.Sınıf</Option>
+                <Option>10.Sınıf</Option>
+                <Option>11.Sınıf</Option>
+                <Option>12.Sınıf</Option>
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Yayınevi:</Label>
+              <Select
+                name="yayinevi"
+                value={kitapValues.yayinevi}
+                onChange={(e) =>
+                  setKitapValues({ ...kitapValues, yayinevi: e.target.value })
+                }
+              >
+                <Option>A Yayınları</Option>
+                <Option>B Yayınları</Option>
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Kitap Adı:</Label>
+              <Select
+                name="kitapAdi"
+                value={kitapValues.kitapAdi}
+                onChange={(e) =>
+                  setKitapValues({ ...kitapValues, kitapAdi: e.target.value })
+                }
+              >
+                <Option>Matematik Soru Bankası</Option>
+                <Option>Fizik Test Kitabı</Option>
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Ünite:</Label>
+              <Select
+                name="unit"
+                value={kitapValues.unit}
+                onChange={(e) =>
+                  setKitapValues({ ...kitapValues, unit: e.target.value })
+                }
+              >
+                <Option>Mantık</Option>
+                <Option>Kümeler</Option>
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Sayfa Başlangıç:</Label>
+              <InputDate
+                type="number"
+                value={kitapValues.baslangic}
+                onChange={(e) =>
+                  setKitapValues({
+                    ...kitapValues,
+                    baslangic: e.target.value,
+                  })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Sayfa Bitiş:</Label>
+              <InputDate
+                type="number"
+                value={kitapValues.bitis}
+                onChange={(e) =>
+                  setKitapValues({ ...kitapValues, bitis: e.target.value })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Başlangıç Tarihi:</Label>
+              <InputDate
+                type="date"
+                value={kitapValues.startDate}
+                onChange={(e) =>
+                  setKitapValues({
+                    ...kitapValues,
+                    startDate: e.target.value,
+                  })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Bitiş Tarihi:</Label>
+              <InputDate
+                type="date"
+                value={kitapValues.endDate}
+                onChange={(e) =>
+                  setKitapValues({ ...kitapValues, endDate: e.target.value })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Not:</Label>
+              <InputDate
+                type="text"
+                value={kitapValues.note}
+                onChange={(e) =>
+                  setKitapValues({ ...kitapValues, note: e.target.value })
+                }
+              />
+            </FormGroup>
+            <ButtonO type="submit">Ödev Gönder</ButtonO>
+          </Form>
+        )}
+        {activeTab === "dosya" && (
+          <Form onSubmit={handleFileSubmit}>
+            <h2 style={{ textAlign: "center" }}>Dosya Formatında Ödev Ver</h2>
+            <FormGroup>
+              <Label>Dosya Yükle:</Label>
+              <input
+                type="file"
+                onChange={(e) => setSelectedFile(e.target.files[0])}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Başlangıç Tarihi:</Label>
+              <InputDate
+                type="date"
+                value={fileValues.startDate}
+                onChange={(e) =>
+                  setFileValues({ ...fileValues, startDate: e.target.value })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Bitiş Tarihi:</Label>
+              <InputDate
+                type="date"
+                value={fileValues.endDate}
+                onChange={(e) =>
+                  setFileValues({ ...fileValues, endDate: e.target.value })
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Not:</Label>
+              <InputDate
+                type="text"
+                value={fileValues.note}
+                onChange={(e) =>
+                  setFileValues({ ...fileValues, note: e.target.value })
+                }
+              />
+            </FormGroup>
+            <ButtonO type="submit">Ödev Gönder</ButtonO>
+          </Form>
+        )}
+      </TabContent>
     </ClassContainer>
   );
 }
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  padding: 0.1em 0.5em 0.5em;
-  h3 {
-    margin-bottom: 10px;
-    text-decoration: underline;
+export const DashboardGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
   }
 `;
+
+export const DashboardItem = styled.div`
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+`;
+
 export const FormGroup = styled.div`
   display: flex;
   margin-bottom: 10px;
@@ -763,6 +772,51 @@ export const ContainerBorder = styled.div`
   @media screen and (max-width: 768px) {
     padding: 0rem;
   }
+`;
+
+export const ProfileCard = styled.div`
+  text-align: center;
+  padding: 20px;
+  background: var(--main-color);
+  width: 100%;
+  margin-bottom: 20px;
+  color: #fff;
+`;
+export const TabMenu = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+`;
+export const TabButton = styled.button`
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: ${(props) =>
+    props.active ? "var(--main-color)" : "var(--accent-color)"};
+  color: ${(props) => (props.active ? "white" : "var(--main-color)")};
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: ${(props) => (props.active ? "#4b2f66" : "var(--third-color)")};
+  }
+`;
+
+export const TabContent = styled.div`
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export default StudentEdit;

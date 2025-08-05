@@ -24,28 +24,30 @@ const Icon = styled(IoCloudUploadOutline)`
   cursor: pointer;
 `;
 
+const FileName = styled.p`
+  font-size: 0.9rem;
+  color: gray;
+  margin-top: 5px;
+  font-style: italic;
+`;
+
 const DrawerDokumanEkle = () => {
   const [file, setFile] = useState(null);
+  const [selectedFileName, setSelectedFileName] = useState("");
   const [classValue, setClassValue] = useState("");
   const [unitValue, setUnitValue] = useState("");
   const [tagValue, setTagValue] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selected = e.target.files[0];
+    setFile(selected);
+    setSelectedFileName(selected ? selected.name : ""); // ✅ Dosya adı kaydediliyor
   };
 
-  const handleClassChange = (e) => {
-    setClassValue(e.target.value);
-  };
-
-  const handleUnitChange = (e) => {
-    setUnitValue(e.target.value);
-  };
-
-  const handleTagChange = (e) => {
-    setTagValue(e.target.value);
-  };
+  const handleClassChange = (e) => setClassValue(e.target.value);
+  const handleUnitChange = (e) => setUnitValue(e.target.value);
+  const handleTagChange = (e) => setTagValue(e.target.value);
 
   const handleUpload = async () => {
     if (file && classValue && unitValue && tagValue) {
@@ -62,8 +64,8 @@ const DrawerDokumanEkle = () => {
 
       try {
         await uploadBytes(storageRef, file, metadata);
-        const url = await getDownloadURL(storageRef);
-        setUploadSuccess(true); // Yükleme başarılı olduğunda durumu true yap
+        await getDownloadURL(storageRef);
+        setUploadSuccess(true);
       } catch (error) {
         console.error("Dosya yüklenirken bir hata oluştu:", error.message);
       }
@@ -73,17 +75,20 @@ const DrawerDokumanEkle = () => {
   };
 
   return (
-    <Container>
+    <Container style={{ maxWidth: "600px" }}>
       <Title>
         <Text>Doküman Ekleme Bölümü</Text>
       </Title>
       <Main>
         <Form>
+          {/* Dosya Yükleme Alanı */}
           <div
             style={{
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              gap: "10px",
             }}
           >
             <label htmlFor="fileInput">
@@ -96,13 +101,20 @@ const DrawerDokumanEkle = () => {
               style={{ display: "none" }}
             />
             <LabelTitle>Dosya Yükle</LabelTitle>
+
+            {/* ✅ Seçilen dosya adını anında göster */}
+            {selectedFileName && (
+              <FileName>Seçilen Dosya: {selectedFileName}</FileName>
+            )}
           </div>
 
+          {/* Form Alanları */}
           <InputSelect value={classValue} onChange={handleClassChange}>
             <option value="">Sınıf Seçiniz</option>
             <option value="class1">Sınıf 1</option>
             <option value="class2">Sınıf 2</option>
           </InputSelect>
+
           <InputSelect value={unitValue} onChange={handleUnitChange}>
             <option value="">Ünite Seçiniz</option>
             <option value="unit1">Ünite 1</option>
@@ -115,11 +127,12 @@ const DrawerDokumanEkle = () => {
             value={tagValue}
             onChange={handleTagChange}
           />
+
           <Button type="button" onClick={handleUpload}>
             Dosyayı Yükle
           </Button>
 
-          {uploadSuccess && <p>Dosya başarıyla yüklendi.</p>}
+          {uploadSuccess && <p>✅ Dosya başarıyla yüklendi.</p>}
         </Form>
       </Main>
     </Container>

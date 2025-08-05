@@ -84,11 +84,13 @@ const TableWrapper = styled.div`
 /* 🎨 Masaüstü Tablo */
 const StyledTable = styled(Table)`
   width: 100%;
-  border-collapse: collapse;
   font-size: 0.95rem;
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
+    color: var(--main-color);
+    border: 4px solid var(--main-color);
+    border-radius: 20px;
   }
 `;
 

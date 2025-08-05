@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Text, Title, Container, Main } from "./studentDrawerKonularim";
-import BasariSiralamasi from "./bolumler/BasariSiralamasi";
-import PlatformRankingTable from "./bolumler/PlatformRankingTable";
 import { db, auth } from "../../../firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import CarouselMedals from "../../../components/carousel/CarouselMedals";
@@ -12,7 +10,6 @@ function DrawerBasarilarim() {
   const [totalPoint, setTotalPoint] = useState(0);
   const [classes, setClasses] = useState([]);
   const [selectedClassStudents, setSelectedClassStudents] = useState([]);
-  const [activeTab, setActiveTab] = useState("platform"); // ✅ Tab kontrolü
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -105,70 +102,50 @@ function DrawerBasarilarim() {
             <MyPointsList>{totalPoint}</MyPointsList>
           </MyPoints>
 
-          {/* Sıralamalar */}
+          {/* Sınıf Sıralamaları */}
           <MyRank>
-            <SubTitle>Sıralamalar</SubTitle>
-            <TabButtons>
-              <TabButton
-                active={activeTab === "platform"}
-                onClick={() => setActiveTab("platform")}
-              >
-                Platform
-              </TabButton>
-              <TabButton
-                active={activeTab === "class"}
-                onClick={() => setActiveTab("class")}
-              >
-                Sınıf
-              </TabButton>
-            </TabButtons>
+            <SubTitle>Sınıf Sıralaması</SubTitle>
 
-            {activeTab === "platform" && <PlatformRankingTable />}
+            <ClassSelect>
+              <label>Sınıf Seç: </label>
+              <select
+                onChange={(e) => fetchClassRanking(e.target.value)}
+                defaultValue={classes[0]?.id || ""}
+              >
+                {classes.map((cls) => (
+                  <option key={cls.id} value={cls.id}>
+                    {cls.className}
+                  </option>
+                ))}
+              </select>
+            </ClassSelect>
 
-            {activeTab === "class" && (
-              <>
-                <ClassSelect>
-                  <label>Sınıf Seç: </label>
-                  <select
-                    onChange={(e) => fetchClassRanking(e.target.value)}
-                    defaultValue={classes[0]?.id || ""}
+            <RankingTable>
+              <thead>
+                <tr>
+                  <th>Sıra</th>
+                  <th>Öğrenci</th>
+                  <th>Puan</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedClassStudents.map((student, index) => (
+                  <tr
+                    key={student.uid}
+                    style={{
+                      backgroundColor:
+                        student.uid === auth.currentUser?.uid
+                          ? "#e8f5e9"
+                          : "transparent",
+                    }}
                   >
-                    {classes.map((cls) => (
-                      <option key={cls.id} value={cls.id}>
-                        {cls.className}
-                      </option>
-                    ))}
-                  </select>
-                </ClassSelect>
-
-                <RankingTable>
-                  <thead>
-                    <tr>
-                      <th>Sıra</th>
-                      <th>Öğrenci</th>
-                      <th>Puan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedClassStudents.map((student, index) => (
-                      <tr
-                        key={student.uid}
-                        style={{
-                          backgroundColor:
-                            student.uid === auth.currentUser?.uid
-                              ? "#e8f5e9"
-                              : "transparent",
-                        }}
-                      >
-                        <td>{index + 1}</td>
-                        <td>{student.name}</td>
-                        <td>{student.totalPoint}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </RankingTable>
-              </>
-            )}
+                    <td>{index + 1}</td>
+                    <td>{student.name}</td>
+                    <td>{student.totalPoint}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </RankingTable>
           </MyRank>
         </GridArea>
       </Main>
@@ -226,23 +203,6 @@ const SubTitle = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
   width: 100%;
-`;
-
-const TabButtons = styled.div`
-  display: flex;
-  gap: 10px;
-  margin: 0 0 1rem 1rem;
-`;
-
-const TabButton = styled.button`
-  padding: 8px 16px;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  background-color: ${({ active }) =>
-    active ? "var(--main-color)" : "#f1f1f1"};
-  color: ${({ active }) => (active ? "white" : "black")};
-  border-radius: 6px;
 `;
 
 const ClassSelect = styled.div`
